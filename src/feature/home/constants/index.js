@@ -164,7 +164,7 @@ export const FEATURED_PROJECTS_CONTENT = {
       location: "HYDERABAD",
       size: "300,000 SQ. FT.",
       duration: "36 WEEKS",
-      image: "/office_building_dusk.png",
+      image: "/microsoft_office.png",
       isLarge: false,
     },
     {
@@ -173,7 +173,7 @@ export const FEATURED_PROJECTS_CONTENT = {
       location: "PUNE",
       size: "150,000 SQ. FT.",
       duration: "26 WEEKS",
-      image: "/office_building_dusk.png",
+      image: "/mastercard_office.png",
       isLarge: false,
     },
     {
@@ -182,7 +182,7 @@ export const FEATURED_PROJECTS_CONTENT = {
       location: "MUMBAI",
       size: "120,000 SQ. FT.",
       duration: "24 WEEKS",
-      image: "/office_building_dusk.png",
+      image: "/gsk_office.png",
       isLarge: false,
     },
     {
@@ -191,7 +191,7 @@ export const FEATURED_PROJECTS_CONTENT = {
       location: "GURUGRAM",
       size: "100,000 SQ. FT.",
       duration: "26 WEEKS",
-      image: "/office_building_dusk.png",
+      image: "/nestle_office.png",
       isLarge: false,
     },
   ],

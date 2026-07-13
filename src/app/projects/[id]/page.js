@@ -135,173 +135,158 @@ export default async function ProjectDetailPage({ params }) {
   }
 
   return (
-    <div className="w-full bg-[#f7f8fa] text-slate-800 pb-16">
+    <div className="w-full bg-[#f8fafc] text-[#0a1f44] pb-24">
       
-      {/* HEADER BANNER */}
-      <section className="w-full bg-[#0a1f44] text-white py-16 lg:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+      {/* 1. HERO HEADER BANNER */}
+      <section className="w-full bg-[#0a1f44] text-white py-24 relative overflow-hidden">
+        {/* Glowing Ambient Lights */}
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
         
         {/* Background Image on the right */}
-        <div className="absolute inset-y-0 right-0 w-[50%] z-0 hidden md:block">
+        <div className="absolute inset-y-0 right-0 w-[55%] z-0 hidden md:block">
           <Image
             src={project.image}
             alt={project.client}
             fill
             priority
-            className="object-cover object-right opacity-30"
+            className="object-cover object-center opacity-25"
           />
         </div>
 
-        {/* Horizontal Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f44] via-[#0a1f44]/90 to-transparent z-10 pointer-events-none" />
+        {/* Gradient Transition Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f44] via-[#0a1f44]/95 to-transparent z-10 pointer-events-none" />
 
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 relative z-20">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 relative z-20">
           <Link 
             href="/projects" 
-            className="inline-flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest mb-6 hover:text-blue-300 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest mb-8 hover:text-blue-300 transition-colors font-mono"
           >
-            <ArrowLeft size={14} />
-            Back to Projects
+            <ArrowLeft size={13} />
+            // Back to Portfolio
           </Link>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3 block">
+          <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full mb-4 inline-block font-mono">
             {project.category}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight font-serif max-w-2xl leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight font-serif max-w-3xl leading-tight">
             {project.client}
           </h1>
-          <p className="text-slate-400 text-xs sm:text-sm mt-4 max-w-xl leading-relaxed">
+          <p className="text-slate-300 text-xs sm:text-sm mt-6 max-w-2xl leading-relaxed font-light">
             {project.intro}
           </p>
         </div>
       </section>
 
-      {/* METADATA HORIZONTAL STRIPE */}
-      <section className="bg-white border-b border-slate-200 py-6">
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-              <MapPin className="w-5 h-5 text-blue-600" />
+      {/* 2. STATS & PARAMETERS STRIPE */}
+      <section className="bg-white border-b border-slate-200 py-8 relative z-20 shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { label: "Site Location", val: project.location, icon: <MapPin className="w-5 h-5 text-blue-600" /> },
+            { label: "Built-up Footprint", val: project.size, icon: <Layout className="w-5 h-5 text-blue-600" /> },
+            { label: "Execution Timeline", val: project.duration, icon: <Calendar className="w-5 h-5 text-blue-600" /> },
+            { label: "ICC Advisory Scope", val: project.scope, icon: <Award className="w-5 h-5 text-blue-600" /> }
+          ].map((stat, idx) => (
+            <div key={idx} className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                {stat.icon}
+              </div>
+              <div className="min-w-0">
+                <p className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest font-mono">{stat.label}</p>
+                <p className="text-xs font-bold text-[#0a1f44] mt-0.5 truncate" title={stat.val}>{stat.val}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Location</p>
-              <p className="text-xs font-bold text-[#0a1f44]">{project.location}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-              <Layout className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Project Size</p>
-              <p className="text-xs font-bold text-[#0a1f44]">{project.size}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-              <Calendar className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
-              <p className="text-xs font-bold text-[#0a1f44]">{project.duration}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-              <Award className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Service Scope</p>
-              <p className="text-xs font-bold text-[#0a1f44] truncate max-w-[150px]" title={project.scope}>
-                {project.scope}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* CORE CASE STUDY DETAILS */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+      {/* 3. CASE STUDY BRIEF & METRICS */}
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 py-16">
+        <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
           
-          {/* LEFT COLUMN: NARRATIVE */}
-          <div className="flex-grow space-y-10">
+          {/* Narrative Block (Left Column) */}
+          <div className="flex-grow space-y-12">
             
             {/* The Challenge */}
-            <div>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
-                The Objective
+            <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
+              <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
+                // PROJECT CHALLENGE
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
-                The Project Challenge
+                The Site Challenge
               </h2>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-light">
                 {project.challenge}
               </p>
             </div>
 
             {/* Advisory Solution */}
-            <div>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
-                Advisory Approach
+            <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
+              <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
+                // ADVISORY STRATEGY
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
-                ICC Strategy & Solutions
+                Solutions & Execution Framework
               </h2>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-light">
                 {project.advisory}
               </p>
             </div>
 
-            {/* Detailed Deliveries */}
-            <div>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
-                Execution Details
+            {/* Technical Deliveries list */}
+            <div className="space-y-6">
+              <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block font-mono">
+                // WORKFLOW TRACKS
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
                 Key Technical Deliveries
               </h2>
-              <ul className="space-y-3.5">
+              <div className="grid grid-cols-1 gap-4">
                 {project.delivery.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs leading-relaxed text-slate-600">
-                    <span className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">
-                      {idx + 1}
+                  <div key={idx} className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-start gap-4 hover:border-blue-400 transition-all duration-300">
+                    <span className="w-6 h-6 rounded-full bg-blue-50 border border-blue-100 text-[#005ea6] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                      0{idx + 1}
                     </span>
-                    <span>{item}</span>
-                  </li>
+                    <span className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">{item}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
           </div>
 
-          {/* RIGHT COLUMN: SIDEBAR & GALLERY */}
+          {/* Outcome & Gallery (Right Column) */}
           <div className="w-full lg:w-[420px] shrink-0 space-y-8">
             
-            {/* Key Outcome Panel */}
-            <div className="bg-[#0a1f44] text-white p-6 border border-slate-800 shadow-md">
-              <span className="text-[9px] font-bold text-blue-400 uppercase tracking-widest block mb-2">Project Success KPI</span>
-              <h3 className="text-base font-bold font-serif mb-3">Deliverable Outcome</h3>
-              <div className="flex items-start gap-2.5 bg-white/5 p-4 border border-white/10 text-xs text-slate-300">
+            {/* Success KPI Outcome panel */}
+            <div className="bg-gradient-to-br from-[#0a1f44] to-[#0c244b] text-white p-8 rounded-2xl shadow-xl border border-white/5 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+              <span className="text-[9px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2 font-mono">
+                // DELIVERABLE KPI
+              </span>
+              <h3 className="text-lg font-bold font-serif mb-4">Success Milestone</h3>
+              <div className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/10 text-xs text-slate-200">
                 <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <span>{project.outcomes}</span>
+                <span className="leading-relaxed font-light">{project.outcomes}</span>
               </div>
             </div>
 
-            {/* Images Grid */}
-            <div className="bg-white border border-slate-200 p-6 shadow-sm">
-              <h4 className="text-xs font-bold text-[#0a1f44] uppercase tracking-wider mb-4">Project Gallery</h4>
+            {/* Gallery Grid */}
+            <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+              <h4 className="text-xs font-extrabold text-[#0a1f44] uppercase tracking-wider mb-4 font-mono">// PORTFOLIO SHOWCASE</h4>
               <div className="grid grid-cols-1 gap-4">
                 {project.images.map((img, idx) => (
-                  <div key={idx} className="relative h-[180px] w-full bg-slate-100 border border-slate-200 overflow-hidden group">
+                  <div key={idx} className="relative h-[200px] w-full rounded-xl overflow-hidden border border-slate-200 group">
                     <Image
                       src={img}
                       alt={`${project.client} showcase ${idx + 1}`}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:filter brightness-95"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f44]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <span className="text-[10px] font-bold text-white uppercase tracking-wider font-mono">
+                        Showcase View {idx + 1}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>

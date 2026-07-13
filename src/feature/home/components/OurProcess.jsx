@@ -1,28 +1,27 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import { OUR_PROCESS_CONTENT } from "../constants";
 
 export default function OurProcess() {
   const content = OUR_PROCESS_CONTENT;
 
   return (
-    <section className="w-full bg-[#0a1f44] text-white py-12 sm:py-16 border-b border-gray-800">
+    <section className="w-full bg-[#f8fafc] text-slate-900 py-16 sm:py-20 border-b border-gray-200">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-12">
         
         {/* LEFT PANEL - Tagline, Title & Description - 24% width */}
         <div className="w-full lg:w-[24%] flex flex-col justify-between py-1">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#005ea6] mb-3 block">
-              {content.tagline}
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#005ea6] mb-3 block font-mono">
+              // {content.tagline}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight leading-[1.2] text-white font-serif">
+            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight leading-[1.2] text-slate-900 font-serif">
               {content.titleLine1}
-              <span className="block font-bold mt-1 text-white font-serif">
+              <span className="block font-bold mt-1 text-slate-900 font-serif">
                 {content.titleLine2}
               </span>
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mt-4 max-w-xs">
+            <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mt-4 max-w-xs font-light">
               {content.description}
             </p>
           </div>
@@ -39,12 +38,12 @@ export default function OurProcess() {
               {index < content.steps.length - 1 && (
                 <div className="absolute top-6 left-14 right-0 h-6 -translate-y-1/2 hidden sm:block">
                   {/* Track path with traveler */}
-                  <div className={`absolute top-1/2 -translate-y-1/2 left-0 right-0 h-[1px] bg-[#005ea6]/30 overflow-hidden animate-line-${index}`}>
+                  <div className={`absolute top-1/2 -translate-y-1/2 left-0 right-0 h-[1px] bg-[#005ea6]/20 overflow-hidden animate-line-${index}`}>
                     {/* Light traveler */}
-                    <div className={`absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-[#60a5fa] to-transparent -translate-y-1/2 h-[3px] animate-traveler-${index}`} />
+                    <div className={`absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-[#005ea6] to-transparent -translate-y-1/2 h-[3px] animate-traveler-${index}`} />
                   </div>
                   {/* Arrowhead */}
-                  <div className={`absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-[#005ea6]/40 rotate-45 animate-arrowhead-${index}`} />
+                  <div className={`absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-[#005ea6]/30 rotate-45 animate-arrowhead-${index}`} />
                 </div>
               )}
 
@@ -54,17 +53,17 @@ export default function OurProcess() {
                 h-12
                 rounded-full
                 border
-                border-[#005ea6]/50
-                bg-[#005ea6]/10
+                border-[#005ea6]/30
+                bg-[#e6f0fa]
                 flex
                 items-center
                 justify-center
                 font-bold
                 text-sm
-                text-white
+                text-[#005ea6]
                 mb-4
                 z-10
-                shadow-[0_0_15px_rgba(0,94,166,0.1)]
+                shadow-sm
                 animate-circle-${index}
               `}>
                 {step.number}
@@ -76,7 +75,7 @@ export default function OurProcess() {
                 font-bold
                 uppercase
                 tracking-[0.15em]
-                text-white
+                text-slate-800
                 mb-2
               ">
                 {step.title}
@@ -84,10 +83,11 @@ export default function OurProcess() {
 
               {/* Step Description */}
               <p className="
-                text-slate-400
+                text-slate-500
                 text-[11px]
                 leading-relaxed
                 max-w-[160px]
+                font-light
               ">
                 {step.description}
               </p>

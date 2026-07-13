@@ -6,113 +6,43 @@ import {
   ShieldCheck,
   Heart,
   Award,
-  Plus,
   ArrowUpRight,
+  ChevronRight,
+  Mail,
+  CheckCircle,
 } from "lucide-react";
-
-/* ------------------------------------------------------------------ */
-/*  Shared "drawing sheet" primitives                                  */
-/*  ICC's own business is technical drawings & fit-out execution, so   */
-/*  the page borrows the vocabulary of a construction drawing set:     */
-/*  sheet codes, scale marks, registration crosses, schedules.         */
-/* ------------------------------------------------------------------ */
-
-function CornerMarks({ dark = false }) {
-  const cls = dark ? "text-white/25" : "text-slate-300";
-  const common = "absolute w-3 h-3 " + cls;
-  return (
-    <>
-      <Plus className={`${common} -top-1.5 -left-1.5`} strokeWidth={1.5} />
-      <Plus className={`${common} -top-1.5 -right-1.5`} strokeWidth={1.5} />
-      <Plus className={`${common} -bottom-1.5 -left-1.5`} strokeWidth={1.5} />
-      <Plus className={`${common} -bottom-1.5 -right-1.5`} strokeWidth={1.5} />
-    </>
-  );
-}
-
-function SheetBar({
-  code,
-  title,
-  scale = "NTS",
-  dark = false,
-}) {
-  return (
-    <div
-      className={`flex items-center justify-between border-b ${
-        dark ? "border-white/15" : "border-slate-300"
-      } pb-3 mb-8`}
-    >
-      <div className="flex items-baseline gap-3">
-        <span
-          className={`font-mono text-[10px] font-bold tracking-widest ${
-            dark ? "text-blue-400" : "text-[#003A70]"
-          }`}
-        >
-          {code}
-        </span>
-        <span
-          className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
-            dark ? "text-slate-300" : "text-slate-500"
-          }`}
-        >
-          {title}
-        </span>
-      </div>
-      <span
-        className={`font-mono text-[9px] tracking-wider ${
-          dark ? "text-slate-500" : "text-slate-400"
-        }`}
-      >
-        SCALE {scale}
-      </span>
-    </div>
-  );
-}
-
-const gridBg =
-  "bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:36px_36px]";
-
-const gridBgDark =
-  "bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:36px_36px]";
-
-/* ------------------------------------------------------------------ */
 
 export default function AboutPage() {
   const values = [
     {
-      code: "A-04.1",
-      icon: <ShieldCheck className="w-6 h-6 text-blue-500" strokeWidth={1.75} />,
+      num: "01",
+      icon: <ShieldCheck className="w-5 h-5" />,
       title: "Predictable Governance",
-      description:
-        "Bringing institutionalized process control, clear milestone auditing, and transparent documentation to commercial interior execution.",
+      description: "Institutionalized process control, clear milestone auditing, and transparent documentation to commercial interior execution.",
     },
     {
-      code: "A-04.2",
-      icon: <Award className="w-6 h-6 text-blue-500" strokeWidth={1.75} />,
+      num: "02",
+      icon: <Award className="w-5 h-5" />,
       title: "Absolute Accountability",
-      description:
-        "We assume complete ownership of project schedules, quality control, contractor alignment, and zero-delay execution benchmarks.",
+      description: "Complete ownership of project schedules, quality control, contractor alignment, and zero-delay execution benchmarks.",
     },
     {
-      code: "A-04.3",
-      icon: <Compass className="w-6 h-6 text-blue-500" strokeWidth={1.75} />,
+      num: "03",
+      icon: <Compass className="w-5 h-5" />,
       title: "Technical Due Diligence",
-      description:
-        "Deep expertise in MEP clash audits, civil line-outs, BOQ validation, and design optimization to mitigate timeline risks.",
+      description: "Deep expertise in MEP clash audits, civil line-outs, BOQ validation, and design optimization to mitigate timeline risks.",
     },
     {
-      code: "A-04.4",
-      icon: <Users className="w-6 h-6 text-blue-500" strokeWidth={1.75} />,
+      num: "04",
+      icon: <Users className="w-5 h-5" />,
       title: "Partner Alignment",
-      description:
-        "Supporting clients in selecting the right delivery partners, coordination frameworks, and managing stakeholder interfaces.",
+      description: "Supporting clients in selecting the right delivery partners, coordination frameworks, and managing stakeholder interfaces.",
     },
     {
-      code: "A-04.5",
-      icon: <Heart className="w-6 h-6 text-blue-500" strokeWidth={1.75} />,
+      num: "05",
+      icon: <Heart className="w-5 h-5" />,
       title: "Uncompromising Quality",
-      description:
-        "Conducting rigorous site safety supervision audits and detail-oriented snag list clearance before formal handovers.",
+      description: "Rigorous site safety supervision audits and detail-oriented snag list clearance before formal project handovers.",
     },
   ];
 
@@ -135,95 +65,84 @@ export default function AboutPage() {
   ];
 
   const clientsServed = [
-    "Bajaj Finance",
-    "Telstra",
-    "Magna Electronics",
-    "Flextronics",
-    "Western Union",
-    "NiCE Systems",
-    "Boardroom",
-    "Red Hat",
-    "Eaton",
+    "Bajaj Finance", "Telstra", "Magna Electronics", "Flextronics",
+    "Western Union", "NiCE Systems", "Boardroom", "Red Hat", "Eaton",
   ];
 
   return (
-    <div className="w-full bg-[#f7f8fa] text-slate-800 pb-16">
-      {/* PAGE HEADER SECTION — cover sheet */}
-      <section className="w-full bg-[#0a1f44] text-white py-16 lg:py-24 relative overflow-hidden">
-        <div className={`absolute inset-0 ${gridBgDark}`} />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a1f44]/40 to-[#0a1f44]" />
+    <div className="w-full bg-white text-[#111827]">
 
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 relative z-10">
-          <div className="relative pl-6 border-l border-white/20">
-            <div className="flex items-center justify-between mb-10 font-mono text-[10px] tracking-widest text-slate-400 uppercase">
-              <span>Sheet A-00 / About ICC</span>
-              <span className="hidden sm:inline">Rev. 2024.01</span>
+      {/* HERO — compact, clean, content-first */}
+      <section className="bg-[#0a1f44] text-white py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-blue-400 block mb-4">
+            // Our Story &amp; Leadership
+          </span>
+          <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-16">
+            <div className="flex-1">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light font-serif tracking-tight leading-[1.08] mb-5">
+                About <span className="font-extrabold font-sans bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">ICC</span>
+              </h1>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
+                Bringing high predictability and accountability to commercial interior
+                fit-out delivery — documented, measured, and executed with precision.
+              </p>
             </div>
-
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-blue-400 mb-4 block">
-              Our Story &amp; Leadership
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight font-serif max-w-2xl leading-[1.05]">
-              About <span className="font-extrabold text-blue-500">ICC</span>
-            </h1>
-            <p className="text-slate-400 text-sm mt-6 max-w-lg leading-relaxed">
-              Bringing high predictability and accountability to commercial
-              interior fit-out delivery — documented, measured, and executed
-              like the drawings we work from.
-            </p>
-
-            <div className="flex flex-wrap gap-x-10 gap-y-4 mt-12 font-mono text-[11px] text-slate-400">
-              <div>
-                <div className="text-2xl font-sans font-extrabold text-white">10M+</div>
-                <div className="uppercase tracking-widest text-[9px] mt-1">Sq. Ft. Delivered</div>
-              </div>
-              <div>
-                <div className="text-2xl font-sans font-extrabold text-white">20+</div>
-                <div className="uppercase tracking-widest text-[9px] mt-1">Years Experience</div>
-              </div>
-              <div>
-                <div className="text-2xl font-sans font-extrabold text-white">2024</div>
-                <div className="uppercase tracking-widest text-[9px] mt-1">Founded</div>
-              </div>
+            <div className="flex gap-8 lg:gap-12 shrink-0 pb-1">
+              {[
+                { val: "10M+", label: "Sq. Ft. Delivered" },
+                { val: "20+", label: "Years Experience" },
+                { val: "2024", label: "Founded" },
+              ].map((s) => (
+                <div key={s.label} className="border-l border-white/15 pl-6 first:border-0 first:pl-0">
+                  <p className="text-2xl sm:text-3xl font-extrabold text-white">{s.val}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">{s.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHO WE ARE */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 py-16 lg:py-20">
-        <SheetBar code="A-01" title="Foundation" />
+      {/* WHO WE ARE — white, content-focused */}
+      <section className="py-16 lg:py-20 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+            <div className="flex-1">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-3">
+                // Foundation
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44] mb-6 leading-tight">
+                Delivering Workspace Predictability Since 2024
+              </h2>
+              <div className="space-y-4 text-[#6b7280] text-sm sm:text-base leading-relaxed">
+                <p>
+                  Innovation Consultants and Contractors (ICC) was founded in 2024 by
+                  Yogesh Pawar to bring a higher standard of predictability and
+                  accountability to commercial interior delivery.
+                </p>
+                <p>
+                  We support our clients in selecting the right delivery partners and
+                  provide a complete, end-to-end project delivery solution — from concept
+                  to completion, with documented milestones at every stage.
+                </p>
+                <p>
+                  We help organizations execute workspace projects faster, more
+                  efficiently, and with extreme clarity — ensuring predictable cost,
+                  timelines, and quality across all coordinates.
+                </p>
+              </div>
+            </div>
 
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-stretch">
-          <div className="flex-1 flex flex-col justify-center">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0a1f44] font-serif mb-6 leading-tight">
-              Delivering Workspace Predictability Since 2024
-            </h2>
-            <p className="text-slate-600 text-sm leading-relaxed mb-4">
-              Innovation Consultants and Contractors (ICC) was founded in 2024
-              by Yogesh Pawar to bring a higher standard of predictability and
-              accountability to commercial interior delivery.
-            </p>
-            <p className="text-slate-600 text-sm leading-relaxed mb-4">
-              At ICC, we support our clients in selecting the right delivery
-              partners and provide a complete, end-to-end project delivery
-              solution — from concept to completion.
-            </p>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              We help organizations execute workspace projects faster, more
-              efficiently, and with extreme clarity — ensuring predictable
-              cost, timelines, and quality across all coordinates.
-            </p>
-          </div>
-
-          <div className="w-full lg:w-[400px] relative">
-            <CornerMarks />
-            <div className="bg-white border border-slate-200 p-8 h-full flex flex-col justify-between">
-              <div>
-                <h3 className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#003A70] mb-5">
-                  Key Priorities
-                </h3>
-                <ul className="space-y-4">
+            {/* Key priorities card — simple, clean */}
+            <div className="w-full lg:w-[380px] shrink-0">
+              <div className="border border-gray-200 rounded-2xl overflow-hidden">
+                <div className="bg-[#0a1f44] px-6 py-4">
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-300">
+                    Key Priorities
+                  </span>
+                </div>
+                <ul className="divide-y divide-gray-100 bg-white">
                   {[
                     "Predictable cost control systems",
                     "Strict timeline adherence mapping",
@@ -231,201 +150,268 @@ export default function AboutPage() {
                     "Expert contractor selection support",
                     "End-to-end delivery alignment",
                   ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs text-slate-600">
-                      <span className="font-mono text-[9px] text-blue-500 mt-0.5 shrink-0">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <span className="border-b border-dotted border-slate-200 pb-1 w-full leading-relaxed">
-                        {item}
-                      </span>
+                    <li key={idx} className="flex items-center gap-4 px-6 py-3.5">
+                      <CheckCircle className="w-4 h-4 text-[#003A70] shrink-0" />
+                      <span className="text-sm text-[#374151] font-medium">{item}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div className="border-t border-slate-200 pt-6 mt-8 flex items-end justify-between">
-                <div>
-                  <p className="text-2xl font-extrabold text-[#0a1f44] font-serif">10M+ Sq. Ft.</p>
-                  <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mt-1">
-                    Total Career Deliveries by Founder
-                  </p>
+                <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                  <div>
+                    <p className="text-xl font-extrabold text-[#0a1f44]">10M+ Sq. Ft.</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mt-0.5">Total Career Deliveries</p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-[#003A70]" />
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-blue-500 shrink-0" strokeWidth={1.75} />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* LEADERSHIP */}
-      <section className="bg-white border-y border-slate-200 py-16 lg:py-20 relative">
-        <div className={`absolute inset-0 ${gridBg} opacity-40 pointer-events-none`} />
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 relative">
-          <SheetBar code="A-02" title="Leadership" />
+      {/* LEADERSHIP — white background, creative layout */}
+      <section className="py-16 lg:py-24 border-b border-gray-100 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
-          <div className="flex flex-col lg:flex-row gap-12 items-stretch">
-            {/* Founder title block — modeled on an architectural drawing title block */}
-            <div className="w-full lg:w-[420px] shrink-0 relative">
-              <CornerMarks />
-              <div className="border border-slate-300 bg-[#f7f8fa]">
-                <div className="p-7 border-b border-slate-300">
-                  <div className="w-14 h-14 bg-[#0a1f44] text-white flex items-center justify-center font-bold text-lg mb-5 font-serif">
-                    YP
-                  </div>
-                  <h3 className="text-xl font-bold text-[#0a1f44] font-serif">{founder.name}</h3>
-                  <p className="text-xs font-bold text-[#003A70] uppercase tracking-widest mt-1">
-                    {founder.role}
-                  </p>
+          {/* Section label */}
+          <div className="mb-10">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#003A70] block mb-2">
+              // Leadership
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44]">Meet Our Founder</h2>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+
+            {/* ── LEFT: Founder Identity Card ── */}
+            <div className="w-full lg:w-[340px] shrink-0 flex flex-col rounded-2xl overflow-hidden border border-gray-200">
+
+              {/* Monogram hero */}
+              <div className="relative bg-gradient-to-br from-[#003A70] to-[#005ea6] px-8 pt-10 pb-8 flex flex-col items-center text-center overflow-hidden">
+                {/* Diagonal accent stripe */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
+                <div
+                  className="w-20 h-20 rounded-2xl bg-[#0a1f44]/60 border border-white/20 flex items-center justify-center font-black text-3xl text-white font-serif mb-4 shadow-[0_0_40px_rgba(0,94,166,0.4)] relative z-10"
+                >
+                  YP
                 </div>
-                <div className="p-7 border-b border-slate-300">
-                  <p className="text-slate-600 text-xs leading-relaxed">{founder.bio}</p>
+                <h3 className="text-lg font-bold text-white relative z-10">{founder.name}</h3>
+                <p className="text-xs text-cyan-300 mt-1 font-mono font-medium tracking-wider relative z-10">{founder.role}</p>
+                <div className="mt-4 w-10 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full relative z-10" />
+              </div>
+
+              {/* Bio */}
+              <div className="px-6 py-5 flex-1 border-b border-gray-100 bg-white">
+                <p className="text-sm text-[#6b7280] leading-relaxed">{founder.bio}</p>
+              </div>
+
+              {/* Stats bar */}
+              <div className="grid grid-cols-2 divide-x divide-gray-100 border-b border-gray-100 bg-white">
+                <div className="px-5 py-5 text-center">
+                  <p className="text-2xl font-black text-[#0a1f44] leading-none">20<span className="text-[#005ea6]">+</span></p>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-gray-400 mt-1.5">Years Exp.</p>
                 </div>
-                <div className="grid grid-cols-2 divide-x divide-slate-300 border-b border-slate-300">
-                  <div className="p-4">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-slate-400">Experience</p>
-                    <p className="text-sm font-bold text-[#0a1f44] mt-1">20+ Years</p>
-                  </div>
-                  <div className="p-4">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-slate-400">Delivered</p>
-                    <p className="text-sm font-bold text-[#0a1f44] mt-1">10M+ Sq. Ft.</p>
-                  </div>
+                <div className="px-5 py-5 text-center">
+                  <p className="text-2xl font-black text-[#0a1f44] leading-none">10M<span className="text-[#005ea6]">+</span></p>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-gray-400 mt-1.5">Sq. Ft. Delivered</p>
                 </div>
-                <div className="p-5">
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1">
-                    Direct Contact
-                  </p>
-                  <a
-                    href={`mailto:${founder.email}`}
-                    className="text-xs font-mono text-[#003A70] hover:underline font-bold"
-                  >
-                    {founder.email}
-                  </a>
+              </div>
+
+              {/* Email */}
+              <div className="px-6 py-4 bg-white flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                  <Mail className="w-3.5 h-3.5 text-[#003A70]" />
                 </div>
+                <a href={`mailto:${founder.email}`} className="text-xs font-mono text-[#003A70] hover:text-[#005ea6] transition-colors font-semibold truncate">
+                  {founder.email}
+                </a>
               </div>
             </div>
 
-            {/* Career deliveries — drawing schedule table */}
-            <div className="flex-1 flex flex-col justify-between py-1">
-              <div>
-                <h3 className="text-2xl font-bold tracking-tight text-[#0a1f44] font-serif mb-2 leading-tight">
-                  Major Deliveries Across Yogesh's Career
-                </h3>
-                <p className="text-xs text-slate-500 mb-6">
-                  Client project execution led directly by Yogesh Pawar prior to founding ICC.
-                </p>
+            {/* ── RIGHT: Career Deliveries Panel ── */}
+            <div className="flex-1 flex flex-col rounded-2xl overflow-hidden border border-gray-200">
 
-                <div className="border border-slate-300">
-                  <div className="grid grid-cols-[3rem_1fr_9rem] bg-[#0a1f44] text-white">
-                    <div className="font-mono text-[9px] uppercase tracking-widest px-3 py-2.5">No.</div>
-                    <div className="font-mono text-[9px] uppercase tracking-widest px-3 py-2.5">Client</div>
-                    <div className="font-mono text-[9px] uppercase tracking-widest px-3 py-2.5 text-right">
-                      Area
-                    </div>
-                  </div>
-                  {careerDeliveries.map((delivery, idx) => (
+              {/* Panel header */}
+              <div className="px-6 py-5 border-b border-gray-100 bg-white flex items-end justify-between">
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#003A70] mb-1">// Project Register</p>
+                  <h3 className="text-xl font-bold text-[#0a1f44]">Major Career Deliveries</h3>
+                </div>
+                <p className="text-xs text-gray-400 font-mono text-right max-w-[180px] leading-relaxed hidden sm:block">
+                  Led directly by Yogesh Pawar prior to founding ICC.
+                </p>
+              </div>
+
+              {/* Column headers */}
+              <div className="grid grid-cols-[2.5rem_1fr_7rem] gap-4 px-6 py-2.5 border-b border-gray-100 bg-gray-50">
+                <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-gray-400">#</div>
+                <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-gray-400">Client</div>
+                <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-gray-400 text-right">Area (Sq. Ft.)</div>
+              </div>
+
+              {/* Rows */}
+              <div className="flex-1 divide-y divide-gray-100 bg-white">
+                {careerDeliveries.map((d, idx) => {
+                  const maxVal = 4.5;
+                  const val = parseFloat(d.size);
+                  const pct = Math.round((val / maxVal) * 100);
+                  const barFrom = idx < 2 ? "from-[#005ea6]" : idx < 5 ? "from-[#003A70]" : "from-blue-400";
+                  const barTo = idx < 2 ? "to-cyan-400" : idx < 5 ? "to-[#005ea6]" : "to-[#003A70]";
+                  return (
                     <div
                       key={idx}
-                      className={`grid grid-cols-[3rem_1fr_9rem] items-center ${
-                        idx % 2 === 0 ? "bg-white" : "bg-[#f7f8fa]"
-                      } ${idx !== careerDeliveries.length - 1 ? "border-b border-slate-200" : ""}`}
+                      className="grid grid-cols-[2.5rem_1fr_7rem] gap-4 items-center px-6 py-3.5 hover:bg-blue-50/40 transition-colors group cursor-default"
                     >
-                      <div className="font-mono text-[10px] text-blue-500 font-bold px-3 py-3">
+                      {/* Index */}
+                      <div className="font-mono text-[11px] font-bold text-[#003A70]/50 group-hover:text-[#003A70] transition-colors">
                         {String(idx + 1).padStart(2, "0")}
                       </div>
-                      <div className="text-xs font-bold text-[#0a1f44] px-3 py-3">{delivery.client}</div>
-                      <div className="text-[10px] text-slate-500 font-semibold px-3 py-3 text-right font-mono">
-                        {delivery.size}
+
+                      {/* Client name + bar */}
+                      <div>
+                        <p className="text-sm font-semibold text-[#111827] group-hover:text-[#003A70] transition-colors mb-2">
+                          {d.client}
+                        </p>
+                        <div className="h-[3px] w-full bg-gray-100 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full bg-gradient-to-r ${barFrom} ${barTo} rounded-full`}
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Area badge */}
+                      <div className="text-right">
+                        <span className="inline-block text-[10px] font-mono font-bold text-[#374151] group-hover:text-[#003A70] transition-colors bg-gray-50 border border-gray-200 rounded-md px-2 py-1 leading-none">
+                          {d.size}
+                        </span>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* CLIENTS SERVED THROUGH ICC */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 py-16 lg:py-20">
-        <SheetBar code="A-03" title="Client Register" />
-
-        <div className="text-center max-w-xl mx-auto mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0a1f44] font-serif leading-tight">
-            Organizations Served Through ICC
-          </h2>
-          <p className="text-slate-500 text-xs mt-3">
-            Helping top institutions deliver high-precision corporate workspace fits.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {clientsServed.map((client, idx) => (
-            <div key={idx} className="relative group">
-              <CornerMarks />
-              <div className="bg-white border border-slate-200 p-6 flex items-center justify-center text-center group-hover:border-blue-400 transition-colors h-full">
-                <span className="text-xs font-bold text-slate-700 group-hover:text-[#003A70] transition-colors">
-                  {client}
+              {/* Panel footer total */}
+              <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-400">Total Career Volume</span>
+                <span className="text-sm font-black text-[#0a1f44] font-mono">
+                  ~24.8 <span className="text-[#005ea6]">Lakh Sq. Ft.</span>
                 </span>
               </div>
             </div>
-          ))}
+
+          </div>
         </div>
       </section>
 
-      {/* OPERATING PRINCIPLES */}
-      <section className="bg-[#0a1f44] py-16 lg:py-20 relative overflow-hidden">
-        <div className={`absolute inset-0 ${gridBgDark}`} />
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 relative">
-          <SheetBar code="A-04" title="Operating Principles" dark />
-
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-serif leading-tight">
-              How We Conduct Business
-            </h2>
+      {/* OPERATING PRINCIPLES — light gray bg, content dense */}
+      <section className="py-16 lg:py-20 bg-[#f7f8fa] border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">
+                // How We Operate
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44]">Our Operating Principles</h2>
+            </div>
+            <p className="text-sm text-gray-500 max-w-xs">Five pillars that define how we work on every project.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {values.map((val) => (
               <div
                 key={val.title}
-                className="bg-[#0a1f44] p-7 flex flex-col items-start hover:bg-[#0d2350] transition-colors duration-300"
+                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-0.5 hover:border-[#003A70]/20 transition-all duration-200 group"
               >
-                <div className="flex items-center justify-between w-full mb-5">
-                  {val.icon}
-                  <span className="font-mono text-[9px] text-slate-500 tracking-widest">{val.code}</span>
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-10 h-10 bg-[#0a1f44] rounded-xl flex items-center justify-center text-white shrink-0">
+                    {val.icon}
+                  </div>
+                  <span className="font-mono text-4xl font-black text-gray-100 leading-none select-none group-hover:text-gray-200 transition-colors">
+                    {val.num}
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 font-serif">{val.title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">{val.description}</p>
+                <h3 className="text-sm font-bold text-[#111827] mb-2 group-hover:text-[#003A70] transition-colors">{val.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{val.description}</p>
               </div>
+            ))}
+
+            {/* CTA card */}
+            <div className="bg-[#0a1f44] rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block mb-3">// Ready to Start</span>
+                <h3 className="text-lg font-bold text-white mb-3 leading-snug">
+                  Bring predictability to your next workspace project
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Let&apos;s discuss how ICC can align with your delivery goals.
+                </p>
+              </div>
+              <a
+                href={`mailto:${founder.email}`}
+                className="mt-6 inline-flex items-center gap-2 bg-white text-[#0a1f44] text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors self-start"
+              >
+                Contact Us
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CLIENTS SERVED — clean white, pill strip */}
+      <section className="py-14 border-b border-gray-100 bg-white">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <div>
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-1">// Client Register</span>
+              <h2 className="text-2xl font-bold text-[#0a1f44]">Organizations We&apos;ve Served</h2>
+            </div>
+            <p className="text-sm text-gray-400 max-w-xs">High-precision corporate workspace projects across India.</p>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            {clientsServed.map((client, idx) => (
+              <span
+                key={idx}
+                className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm font-semibold text-[#374151] hover:bg-[#0a1f44] hover:text-white hover:border-[#0a1f44] transition-all duration-200 cursor-default"
+              >
+                {client}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CLOSING / APPROVAL STAMP */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 py-14">
-        <div className="border border-slate-300 bg-white flex flex-col sm:flex-row items-center justify-between gap-6 p-8 relative">
-          <CornerMarks />
+      {/* CTA BANNER — navy, minimal */}
+      <section className="bg-[#0a1f44] py-16">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-blue-500 mb-2">
-              Approved for Issue
-            </p>
-            <h3 className="text-xl font-bold text-[#0a1f44] font-serif">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-3">
               Ready to bring predictability to your next fit-out?
-            </h3>
+            </h2>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-lg">
+              ICC delivers workspace projects with zero-delay benchmarks, thorough governance, and measurable outcomes.
+            </p>
           </div>
-          <a
-            href={`mailto:${founder.email}`}
-            className="shrink-0 inline-flex items-center gap-2 bg-[#0a1f44] text-white text-xs font-bold uppercase tracking-widest px-6 py-3.5 hover:bg-[#003A70] transition-colors"
-          >
-            Start a Conversation
-            <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
-          </a>
-        </div>
-        <div className="flex items-center justify-between mt-6 font-mono text-[9px] tracking-widest text-slate-400 uppercase">
-          <span>End of Sheet Set</span>
-          <span>ICC — Innovation Consultants and Contractors</span>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <a
+              href={`mailto:${founder.email}`}
+              className="inline-flex items-center gap-2 bg-white text-[#0a1f44] text-sm font-bold px-6 py-3.5 rounded-xl hover:bg-blue-50 transition-colors"
+            >
+              Start a Conversation
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <a
+              href="/expertise"
+              className="inline-flex items-center gap-2 border border-white/20 text-white text-sm font-semibold px-6 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
+            >
+              View Expertise
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </section>
+
     </div>
   );
 }
