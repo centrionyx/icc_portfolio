@@ -23,11 +23,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full h-[500px] sm:h-[600px] lg:h-[calc(100vh-80px)] min-h-[520px] lg:min-h-[520px] xl:min-h-[520px] bg-white overflow-hidden">
+    <section className="relative w-full h-auto lg:h-[calc(100vh-80px)] lg:min-h-[520px] xl:min-h-[520px] bg-[#0a1f44] overflow-hidden flex flex-col">
       
       {/* LEFT CONTENT PANEL (Navy Blue with Diagonal Cut) */}
       <div 
-        className="absolute inset-y-0 left-0 w-full lg:w-full bg-[#0a1f44] text-white p-6 sm:p-12 lg:py-10 lg:px-16 xl:py-16 xl:px-24 flex flex-col justify-between z-10 select-none
+        className="relative lg:absolute lg:inset-y-0 lg:left-0 w-full lg:w-full bg-[#0a1f44]/80 backdrop-blur-sm lg:bg-[#0a1f44] text-white p-6 sm:p-12 lg:py-10 lg:px-16 xl:py-16 xl:px-24 flex flex-col justify-between z-10 select-none
                    lg:[clip-path:polygon(0_-5%,_47%_-5%,_39%_105%,_0_105%)]"
       >
         {/* White stripe at the top connecting with the navbar */}
@@ -192,7 +192,7 @@ export default function HeroSection() {
             priority={idx === 0}
             style={{ transitionDuration: `${HERO_IMAGE_TRANSITION_DURATION}ms` }}
             className={`object-cover transition-opacity ease-in-out absolute inset-0 ${
-              idx === currentImageIndex ? "opacity-20" : "opacity-0"
+              idx === currentImageIndex ? "opacity-45" : "opacity-0"
             }`}
           />
         ))}

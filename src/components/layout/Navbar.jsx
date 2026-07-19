@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
@@ -60,9 +61,14 @@ export default function Header() {
             {/* LOGO */}
             <Link href="/" className="flex items-center shrink-0">
               <div className="flex items-center gap-3">
-                <h1 className="text-[42px] font-bold text-[#003A70] leading-none">
-                  ICC
-                </h1>
+                <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-slate-200 shadow-sm shrink-0">
+                  <Image
+                    src="/logo.svg"
+                    alt="ICC Logo"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
                 <div className="hidden sm:block">
                   <p className="text-[9px] font-semibold uppercase tracking-wide leading-tight text-slate-900">
@@ -192,10 +198,20 @@ export default function Header() {
         `}
       >
         {/* SIDEBAR HEADER */}
-        <div className="flex items-center justify-between px-6 py-6 border-b border-white/10">
-          <h2 className="text-white text-3xl font-bold">
-            ICC
-          </h2>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-white/10 shadow-sm shrink-0">
+              <Image
+                src="/logo.svg"
+                alt="ICC Logo"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h2 className="text-white text-xl font-bold">
+              ICC
+            </h2>
+          </div>
 
           <button
             onClick={() => setIsOpen(false)}

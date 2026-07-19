@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { FOOTER_CONTENT } from "./constants";
@@ -25,9 +26,14 @@ export function Footer() {
           {/* Column 1: Logo & Info */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3 shrink-0">
-              <h2 className="text-4xl font-bold text-white leading-none">
-                ICC
-              </h2>
+              <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-white/10 shadow-sm shrink-0">
+                <Image
+                  src="/logo.svg"
+                  alt="ICC Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div className="h-8 w-[1px] bg-white/20" />
               <div>
                 <p className="text-[8px] font-bold uppercase tracking-wider leading-tight text-slate-300">

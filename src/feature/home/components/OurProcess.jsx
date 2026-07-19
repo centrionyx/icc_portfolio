@@ -29,11 +29,15 @@ export default function OurProcess() {
         </div>
 
         {/* RIGHT PANEL - 5 Process Steps in a Row */}
-        <div className="flex-1 flex flex-col sm:flex-row items-start justify-between gap-6 lg:gap-8 mt-6 lg:mt-0 relative">
+        <div className="flex-1 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-10 lg:gap-8 mt-8 lg:mt-0 relative w-full">
+          
+          {/* Vertical timeline connector line (Mobile only) - Centered */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-6 bottom-28 w-[1px] bg-[#005ea6]/30 sm:hidden z-0" />
+
           {content.steps.map((step, index) => (
             <div 
               key={step.number} 
-              className="relative flex-1 flex flex-col items-start w-full sm:w-auto"
+              className="relative flex-1 flex flex-col items-center sm:items-start text-center sm:text-left w-full sm:w-auto"
             >
               {/* Connecting Line to Next Step (Desktop only) */}
               {index < content.steps.length - 1 && (
@@ -55,7 +59,7 @@ export default function OurProcess() {
                 rounded-full
                 border
                 border-[#005ea6]/50
-                bg-[#005ea6]/10
+                bg-[#0a1f44]
                 flex
                 items-center
                 justify-center
@@ -88,6 +92,8 @@ export default function OurProcess() {
                 text-[11px]
                 leading-relaxed
                 max-w-[160px]
+                mx-auto
+                sm:mx-0
               ">
                 {step.description}
               </p>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Users,
   Compass,
@@ -191,9 +192,14 @@ export default function AboutPage() {
                 {/* Diagonal accent stripe */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-400/10 [clip-path:polygon(100%_0,0_0,100%_100%)]" />
                 <div
-                  className="w-20 h-20 rounded-2xl bg-[#0a1f44]/60 border border-white/20 flex items-center justify-center font-black text-3xl text-white font-serif mb-4 shadow-[0_0_40px_rgba(0,94,166,0.4)] relative z-10"
+                  className="w-20 h-20 rounded-2xl border border-white/20 overflow-hidden mb-4 shadow-[0_0_40px_rgba(0,94,166,0.4)] relative z-10"
                 >
-                  YP
+                  <Image
+                    src="/founder.png"
+                    alt={founder.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <h3 className="text-lg font-bold text-white relative z-10">{founder.name}</h3>
                 <p className="text-xs text-cyan-300 mt-1 font-mono font-medium tracking-wider relative z-10">{founder.role}</p>

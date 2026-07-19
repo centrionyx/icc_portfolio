@@ -113,7 +113,7 @@ export default function InsightsSection() {
         </div>
 
         {/* RIGHT CONTAINER (Why ICC) - Full Bleed to the right edge of screen */}
-        <div className="w-full lg:w-[32%] bg-[#0a1f44] text-white py-12 sm:py-14 pl-8 sm:pl-12 lg:pr-[calc((100vw-1440px)/2+32px)] pr-5 relative overflow-hidden flex flex-col justify-between min-h-[350px] lg:min-h-0 shadow-lg">
+        <div className="w-full lg:w-[32%] bg-[#0a1f44] text-white py-12 sm:py-14 pl-5 sm:pl-8 lg:pl-12 lg:pr-[calc((100vw-1440px)/2+32px)] pr-5 relative overflow-hidden flex flex-col justify-between min-h-[350px] lg:min-h-0 shadow-lg">
           {/* Background Image aligned to the right */}
           <div className="absolute inset-y-0 right-0 w-[60%] sm:w-[50%] z-0">
             <Image

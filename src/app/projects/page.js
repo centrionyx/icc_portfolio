@@ -71,14 +71,14 @@ function ProjectCard({ project, onClick }) {
           <>
             <button
               onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-0 group-hover:opacity-100 z-10 shadow-md"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 z-10 shadow-md"
               aria-label="Previous Image"
             >
               <ChevronLeft size={14} />
             </button>
             <button
               onClick={handleNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-0 group-hover:opacity-100 z-10 shadow-md"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 z-10 shadow-md"
               aria-label="Next Image"
             >
               <ChevronRight size={14} />
