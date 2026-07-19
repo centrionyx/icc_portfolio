@@ -262,7 +262,7 @@ function ProjectStatsDashboard({ projects }) {
       <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xl relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group">
         <div className="absolute top-[-10%] right-[-10%] w-32 h-32 bg-blue-500/5 rounded-full blur-2xl transform transition-transform duration-500 group-hover:scale-110" />
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">// Total Delivery Area</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Total Delivery Area</span>
           <h4 className="text-3xl sm:text-4xl font-extrabold mt-3 text-slate-900">{formattedArea}</h4>
         </div>
         <p className="text-xs text-slate-500 mt-5 leading-relaxed">Calculated gross square footage of successfully executed interior & fit-out projects.</p>
@@ -272,7 +272,7 @@ function ProjectStatsDashboard({ projects }) {
       <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xl relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group">
         <div className="absolute top-[-10%] right-[-10%] w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl transform transition-transform duration-500 group-hover:scale-110" />
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">// Delivery Distribution</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Delivery Distribution</span>
           <div className="grid grid-cols-2 gap-4 mt-3">
             <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl text-center">
               <span className="text-2xl font-extrabold text-emerald-600">{handedOver}</span>
@@ -291,7 +291,7 @@ function ProjectStatsDashboard({ projects }) {
       <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xl relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group">
         <div className="absolute top-[-10%] right-[-10%] w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl transform transition-transform duration-500 group-hover:scale-110" />
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">// Categories Footprint</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Categories Footprint</span>
           <div className="flex flex-col gap-2 mt-3.5">
             {Object.entries(categoryBreakdown).map(([cat, count]) => (
               <div key={cat} className="flex items-center justify-between text-xs font-semibold">
@@ -546,7 +546,7 @@ export default function ProjectsPage() {
             
             {/* Monospace tagged category accent */}
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 block font-mono mb-4">
-              // PORTFOLIO SHOWCASE
+               PORTFOLIO SHOWCASE
             </span>
             
             {/* Clean symmetric title */}

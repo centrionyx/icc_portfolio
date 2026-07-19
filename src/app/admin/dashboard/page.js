@@ -1040,7 +1040,7 @@ export default function AdminDashboardPage() {
                   <div className="bg-gradient-to-r from-[#0a1f44] to-[#005ea6] text-white p-6 rounded-2xl shadow-md relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
                     <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400 block mb-1 font-mono">
-                      // WORKSPACE ADVISORY CONSOLE
+                       WORKSPACE ADVISORY CONSOLE
                     </span>
                     <h3 className="text-xl font-bold font-serif">Welcome back, Yogesh Pawar</h3>
                     <p className="text-slate-300 text-xs mt-1 font-light">
@@ -1091,7 +1091,7 @@ export default function AdminDashboardPage() {
                           </div>
                         </div>
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-3 font-mono">
-                          // {stat.detail}
+                         {stat.detail}
                         </p>
                       </div>
                     ))}

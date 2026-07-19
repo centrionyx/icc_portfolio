@@ -76,7 +76,7 @@ export default function AboutPage() {
       <section className="bg-[#0a1f44] text-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-blue-400 block mb-4">
-            // Our Story &amp; Leadership
+             Our Story &amp; Leadership
           </span>
           <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-16">
             <div className="flex-1">
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
             <div className="flex-1">
               <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-3">
-                // Foundation
+                Foundation
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44] mb-6 leading-tight">
                 Delivering Workspace Predictability Since 2024
@@ -176,7 +176,7 @@ export default function AboutPage() {
           {/* Section label */}
           <div className="mb-10">
             <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#003A70] block mb-2">
-              // Leadership
+              Leadership
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44]">Meet Our Founder</h2>
           </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
               {/* Panel header */}
               <div className="px-6 py-5 border-b border-gray-100 bg-white flex items-end justify-between">
                 <div>
-                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#003A70] mb-1">// Project Register</p>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#003A70] mb-1">Project Register</p>
                   <h3 className="text-xl font-bold text-[#0a1f44]">Major Career Deliveries</h3>
                 </div>
                 <p className="text-xs text-gray-400 font-mono text-right max-w-[180px] leading-relaxed hidden sm:block">
@@ -310,7 +310,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">
-                // How We Operate
+                How We Operate
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1f44]">Our Operating Principles</h2>
             </div>
@@ -339,7 +339,7 @@ export default function AboutPage() {
             {/* CTA card */}
             <div className="bg-[#0a1f44] rounded-2xl p-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block mb-3">// Ready to Start</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block mb-3">Ready to Start</span>
                 <h3 className="text-lg font-bold text-white mb-3 leading-snug">
                   Bring predictability to your next workspace project
                 </h3>
@@ -364,7 +364,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-1">// Client Register</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-1">Client Register</span>
               <h2 className="text-2xl font-bold text-[#0a1f44]">Organizations We&apos;ve Served</h2>
             </div>
             <p className="text-sm text-gray-400 max-w-xs">High-precision corporate workspace projects across India.</p>

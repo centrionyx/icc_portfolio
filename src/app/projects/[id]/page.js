@@ -163,7 +163,7 @@ export default async function ProjectDetailPage({ params }) {
             className="inline-flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest mb-8 hover:text-blue-300 transition-colors font-mono"
           >
             <ArrowLeft size={13} />
-            // Back to Portfolio
+             Back to Portfolio
           </Link>
           <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full mb-4 inline-block font-mono">
             {project.category}
@@ -209,7 +209,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* The Challenge */}
             <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
-                // PROJECT CHALLENGE
+                 PROJECT CHALLENGE
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
                 The Site Challenge
@@ -222,7 +222,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* Advisory Solution */}
             <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
-                // ADVISORY STRATEGY
+                 ADVISORY STRATEGY
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
                 Solutions & Execution Framework
@@ -235,7 +235,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* Technical Deliveries list */}
             <div className="space-y-6">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block font-mono">
-                // WORKFLOW TRACKS
+                 WORKFLOW TRACKS
               </span>
               <h2 className="text-xl font-bold tracking-tight text-[#0a1f44] font-serif mb-4">
                 Key Technical Deliveries
@@ -261,7 +261,7 @@ export default async function ProjectDetailPage({ params }) {
             <div className="bg-gradient-to-br from-[#0a1f44] to-[#0c244b] text-white p-8 rounded-2xl shadow-xl border border-white/5 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
               <span className="text-[9px] font-extrabold text-cyan-400 uppercase tracking-widest block mb-2 font-mono">
-                // DELIVERABLE KPI
+                 DELIVERABLE KPI
               </span>
               <h3 className="text-lg font-bold font-serif mb-4">Success Milestone</h3>
               <div className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/10 text-xs text-slate-200">
@@ -272,7 +272,7 @@ export default async function ProjectDetailPage({ params }) {
 
             {/* Gallery Grid */}
             <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
-              <h4 className="text-xs font-extrabold text-[#0a1f44] uppercase tracking-wider mb-4 font-mono">// PORTFOLIO SHOWCASE</h4>
+              <h4 className="text-xs font-extrabold text-[#0a1f44] uppercase tracking-wider mb-4 font-mono">PORTFOLIO SHOWCASE</h4>
               <div className="grid grid-cols-1 gap-4">
                 {project.images.map((img, idx) => (
                   <div key={idx} className="relative h-[200px] w-full rounded-xl overflow-hidden border border-slate-200 group">

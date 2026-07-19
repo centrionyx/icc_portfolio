@@ -13,7 +13,7 @@ export default function FeaturedProjects() {
   return (
     <section className="w-full bg-white py-16 sm:py-20 border-b border-gray-200">
       <div className="max-w-[1440px] mx-auto px-5 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-12">
-
+        
         {/* LEFT PANEL - Tagline, Title & CTA - 24% width for perfect vertical alignment */}
         <div className="w-full lg:w-[24%] flex flex-col justify-between py-2 border-r border-transparent lg:border-r-0">
           <div>
@@ -53,8 +53,8 @@ export default function FeaturedProjects() {
         </div>
 
         {/* RIGHT PANEL - Project Grid - 76% width */}
-        <div className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-4">
-
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          
           {/* Large Project Card - Changed to aspect-[1.5] (rectangular) */}
           {largeProject && (
             <div className="relative aspect-[1.5] w-full bg-slate-900 overflow-hidden group">
@@ -66,7 +66,7 @@ export default function FeaturedProjects() {
               />
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
+              
               {/* Project Details */}
               <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end text-white">
                 <h3 className="text-base sm:text-lg font-bold tracking-wide uppercase mb-1">
@@ -75,7 +75,7 @@ export default function FeaturedProjects() {
                 <p className="text-[10px] text-slate-300 tracking-wider mb-4">
                   {largeProject.location}
                 </p>
-
+                
                 {/* Stats */}
                 <div className="flex items-center gap-6 text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-200">
                   <span className="flex items-center gap-2">
@@ -125,7 +125,7 @@ export default function FeaturedProjects() {
                 />
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
+                
                 {/* Project Details */}
                 <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end text-white">
                   <h3 className="text-sm font-bold tracking-wide uppercase mb-0.5">
@@ -134,7 +134,7 @@ export default function FeaturedProjects() {
                   <p className="text-[9px] text-slate-300 tracking-wider mb-3">
                     {project.location}
                   </p>
-
+                  
                   {/* Stats */}
                   <div className="flex flex-wrap items-center gap-4 text-[9px] font-semibold uppercase tracking-wider text-slate-200">
                     <span className="flex items-center gap-1.5">

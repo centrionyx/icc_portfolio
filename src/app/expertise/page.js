@@ -90,14 +90,14 @@ function QAChecklistModal({ pillar, onClose }) {
             <X size={16} />
           </button>
           
-          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400 block font-mono mb-2">// TECHNICAL INSPECTION LOG</span>
+          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400 block font-mono mb-2">TECHNICAL INSPECTION LOG</span>
           <h3 className="text-xl font-extrabold">{pillar.title}</h3>
           <p className="text-xs text-slate-305 mt-2 leading-relaxed font-light">{pillar.description}</p>
         </div>
 
         {/* Checklist Content */}
         <div className="p-6 sm:p-8 overflow-y-auto flex-1 bg-slate-50/50">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-4 font-mono">// QA VERIFICATION CHECKPOINTS</span>
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-4 font-mono">QA VERIFICATION CHECKPOINTS</span>
           <div className="space-y-4">
             {checklist.map((item, idx) => (
               <div 
@@ -214,7 +214,7 @@ export default function ExpertisePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-405 block font-mono mb-3">
-              // TECHNICAL CAPABILITIES
+               TECHNICAL CAPABILITIES
             </span>
             <h1 className="text-3xl sm:text-5xl font-light tracking-tight leading-[1.15] font-serif text-white">
               Technical Competence.
@@ -229,7 +229,7 @@ export default function ExpertisePage() {
 
           {/* Simple Minimalist Stat Pill */}
           <div className="bg-white/5 border border-white/10 px-5 py-4 rounded-2xl max-w-xs shrink-0 backdrop-blur-sm self-start md:self-auto">
-            <span className="text-[10px] font-bold text-slate-405 uppercase tracking-wider block font-mono">// Global Compliance</span>
+            <span className="text-[10px] font-bold text-slate-405 uppercase tracking-wider block font-mono">Global Compliance</span>
             <p className="text-2xl font-extrabold mt-1 text-white">100% On-Time</p>
             <p className="text-[11px] text-slate-400 mt-1 leading-normal">Zero-delay MEP alignment with design guidelines.</p>
           </div>
@@ -242,7 +242,7 @@ export default function ExpertisePage() {
         
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 mb-10 pb-4 border-b border-slate-200/60">
           <div>
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">// TECHNICAL PILLARS</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">TECHNICAL PILLARS</span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-[#111827]">Fields of Specialization</h2>
           </div>
 
@@ -344,7 +344,7 @@ export default function ExpertisePage() {
           {/* SECTION HEADER */}
           <div className="text-center mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.25em] block mb-3 font-mono" style={{ color: 'var(--color-blue-600, #003A70)' }}>
-              // GOVERNANCE MODEL
+              GOVERNANCE MODEL
             </span>
             <h3 className="text-3xl lg:text-5xl font-extrabold tracking-tight leading-tight" style={{ color: 'var(--color-navy-900, #0a1f44)' }}>
               Our Rigorous Project
@@ -371,7 +371,7 @@ export default function ExpertisePage() {
 
           {/* 4-STEP PROCESS TIMELINE */}
           <div className="mb-16">
-            <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest text-center mb-10">// EXECUTION PROCESS — 4 PHASES</p>
+            <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest text-center mb-10">EXECUTION PROCESS — 4 PHASES</p>
             
             <div className="relative">
               {/* Single consistent connector track */}
@@ -446,7 +446,7 @@ export default function ExpertisePage() {
 
             <div className="w-full lg:w-[380px] shrink-0 bg-white border border-slate-200 p-7 rounded-3xl shadow-xl">
               <h4 className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-6">
-                // EXPERTISE HIGHLIGHTS
+                 EXPERTISE HIGHLIGHTS
               </h4>
               <div className="space-y-5">
                 {[

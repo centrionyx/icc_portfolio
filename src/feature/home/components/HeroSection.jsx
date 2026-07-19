@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Play, ChevronRight, ChevronLeft } from "lucide-react";
+import { ArrowRight, Play, ChevronRight } from "lucide-react";
 import { HERO_CONTENT, HERO_IMAGES, HERO_IMAGE_ROTATION_INTERVAL, HERO_IMAGE_TRANSITION_DURATION } from "../constants";
 
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const slide = HERO_CONTENT.slides[currentImageIndex] || HERO_CONTENT.slides[0];
+  const slide = HERO_CONTENT.slides[0];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,101 +16,63 @@ export default function HeroSection() {
     }, HERO_IMAGE_ROTATION_INTERVAL);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [currentImageIndex]);
 
   const handleNext = () => {
     setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
   };
 
-  const handlePrev = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
-  };
-
   return (
-    <section className="relative w-full h-[650px] sm:h-[720px] lg:h-[calc(100vh-80px)] min-h-[700px] bg-[#0a1f44] overflow-hidden">
-
-      {/* 1. DYNAMIC BACKGROUND ORBS */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-blue-600/20 to-transparent blur-[120px] animate-pulse duration-[8000ms]" />
-        <div className="absolute bottom-[-10%] right-[20%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-cyan-600/15 to-transparent blur-[100px] animate-pulse duration-[6000ms]" />
-      </div>
-
-      {/* 2. ARCHITECTURAL BLUEPRINT GRID OVERLAY */}
-      <div
-        className="absolute inset-0 opacity-[0.05] pointer-events-none z-0"
-        style={{
-          backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
-        }}
-      />
-
-      {/* 3. DIAGONALLY CUT LEFT CONTENT PANEL */}
-      <div
-        className="absolute inset-y-0 left-0 w-full lg:w-[54%] bg-[#0a1f44]/95 text-white p-6 sm:p-12 lg:pl-16 lg:pr-24 xl:pl-20 xl:pr-32 flex flex-col justify-between z-10 select-none
-                   lg:[clip-path:polygon(0_0,_100%_0,_84%_100%,_0_100%)] border-r border-white/5"
+    <section className="relative w-full h-[500px] sm:h-[600px] lg:h-[calc(100vh-80px)] min-h-[520px] lg:min-h-[520px] xl:min-h-[520px] bg-white overflow-hidden">
+      
+      {/* LEFT CONTENT PANEL (Navy Blue with Diagonal Cut) */}
+      <div 
+        className="absolute inset-y-0 left-0 w-full lg:w-full bg-[#0a1f44] text-white p-6 sm:p-12 lg:py-10 lg:px-16 xl:py-16 xl:px-24 flex flex-col justify-between z-10 select-none
+                   lg:[clip-path:polygon(0_-5%,_47%_-5%,_39%_105%,_0_105%)]"
       >
-        <div className="w-16 h-[3px] bg-gradient-to-r from-[#005ea6] to-cyan-400 mt-4 rounded-full relative z-10" />
+        {/* White stripe at the top connecting with the navbar */}
+        <div className="absolute top-0 left-0 right-0 h-[20px] bg-white z-20" />
 
-        {/* Stable Content Box */}
-        <div className="my-auto w-full max-w-lg relative z-10">
-          <div className="mb-3">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400 block font-mono">
-              // INNOVATIVE WORKPLACES
+        {/* Subtle decorative line at the top */}
+        <div className="w-12 h-[2px] bg-[#005ea6] mt-4" />
+
+        {/* Hero Text Content */}
+        <div className="my-auto max-w-[90%] lg:max-w-[42%] xl:max-w-[38%] py-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-[42px] xl:text-[56px] 2xl:text-[64px] font-normal tracking-tight leading-[1.15] mb-4 xl:mb-6 font-serif">
+            {slide.titleLine1}
+            <span className="block font-sans font-extrabold text-[#005ea6] mt-2">
+              {slide.titleLine2}
             </span>
-          </div>
+          </h2>
 
-          {/* Title Wrapper with fixed height to keep alignment */}
-          <div className="h-[120px] sm:h-[135px] lg:h-[160px] flex flex-col justify-end mb-4">
-            <h2 className="text-3xl sm:text-5xl lg:text-[46px] xl:text-[52px] font-light tracking-tight leading-[1.15] font-serif transition-all duration-500">
-              <span className="block text-white font-normal">
-                {slide.titleLine1}
-              </span>
-              <span className="block font-sans font-black bg-gradient-to-r from-[#005ea6] via-blue-400 to-cyan-400 bg-clip-text text-transparent mt-1">
-                {slide.titleLine2}
-              </span>
-            </h2>
-          </div>
+          <p className="text-slate-300 text-sm xl:text-base leading-relaxed max-w-md mb-6 xl:mb-8">
+            {slide.description}
+          </p>
 
-          {/* Description Wrapper with fixed height to keep CTA buttons in place */}
-          <div className="h-[75px] sm:h-[65px] lg:h-[80px] mb-8">
-            <p className="text-slate-350 text-xs sm:text-sm lg:text-base leading-relaxed font-light line-clamp-3">
-              {slide.description}
-            </p>
-          </div>
-
-          {/* Action Buttons (Fixed Frame Position) */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8">
             <Link
               href={slide.primaryCta.href}
               className="
-                relative
-                overflow-hidden
                 inline-flex
                 items-center
                 gap-3
-                bg-gradient-to-r
-                from-[#005ea6]
-                to-blue-500
+                bg-[#005ea6]
                 text-white
-                px-7
+                px-6
                 py-3.5
-                text-xs
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.15em]
-                rounded-lg
-                shadow-[0_4px_20px_rgba(0,94,166,0.3)]
                 transition-all
                 duration-300
-                hover:from-[#004b84]
-                hover:to-blue-600
-                hover:shadow-[0_6px_25px_rgba(0,94,166,0.5)]
-                hover:-translate-y-0.5
-                group
+                hover:bg-[#004b84]
+                hover:shadow-lg
               "
             >
               {slide.primaryCta.text}
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight size={14} />
             </Link>
 
             <button
@@ -122,13 +84,13 @@ export default function HeroSection() {
                 items-center
                 gap-3
                 text-white
-                text-xs
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.15em]
                 transition-colors
                 duration-300
-                hover:text-cyan-400
+                hover:text-blue-400
                 group
               "
             >
@@ -137,35 +99,30 @@ export default function HeroSection() {
                 h-10
                 rounded-full
                 border
-                border-white/10
-                bg-white/5
-                backdrop-blur-sm
+                border-white/20
                 flex
                 items-center
                 justify-center
                 transition-all
                 duration-300
-                group-hover:border-cyan-400
-                group-hover:bg-cyan-500/10
+                group-hover:border-blue-400
+                group-hover:bg-white/5
               ">
-                <Play size={11} className="fill-white ml-0.5 group-hover:fill-cyan-400 group-hover:text-cyan-400 transition-colors" />
+                <Play size={12} className="fill-white ml-0.5 group-hover:fill-blue-400 group-hover:text-blue-400" />
               </span>
               {slide.secondaryCta.text}
             </button>
           </div>
         </div>
 
-        {/* Stats Row (Always Pinned to Bottom) */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/10 w-full max-w-lg mb-4 relative z-10">
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 xl:pt-8 border-t border-white/10 max-w-[90%] lg:max-w-[40%] xl:max-w-[36%] mb-4">
           {HERO_CONTENT.stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="bg-white/5 border border-white/10 rounded-xl p-3 transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
-            >
-              <p className="text-xl sm:text-2xl font-extrabold tracking-tight mb-0.5 text-white">
+            <div key={idx} className="relative pr-4 last:border-0 sm:border-r sm:border-white/10">
+              <p className="text-2xl sm:text-3xl lg:text-[28px] xl:text-[36px] font-bold tracking-tight mb-1">
                 {stat.value}
               </p>
-              <p className="text-[9px] font-bold uppercase tracking-wider text-slate-450 leading-tight">
+              <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400 leading-tight">
                 {stat.label}
               </p>
             </div>
@@ -173,50 +130,52 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* 4. RIGHT IMAGE SLIDER - Fills behind the diagonal cut */}
-      <div
-        className="absolute inset-y-0 right-0 w-full lg:w-[60%] h-full bg-slate-900 z-0
-                   hidden lg:block lg:[clip-path:polygon(24%_0,_100%_0,_100%_100%,_0_100%)]"
+      {/* RIGHT IMAGE PANEL (Office Building Image & Slider Controls) */}
+      <div 
+        className="absolute inset-y-0 right-0 w-full lg:w-full h-full bg-slate-100 z-0
+                   hidden lg:block lg:[clip-path:polygon(46%_-5%,_105%_-5%,_105%_105%,_38%_105%)]"
       >
         {HERO_IMAGES.map((imgSrc, idx) => (
-          <div
+          <Image
             key={imgSrc}
-            className={`absolute inset-0 transition-all ease-in-out ${idx === currentImageIndex ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-              }`}
+            src={imgSrc}
+            alt={`Hero background ${idx + 1}`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority={idx === 0}
             style={{ transitionDuration: `${HERO_IMAGE_TRANSITION_DURATION}ms` }}
-          >
-            <Image
-              src={imgSrc}
-              alt={`Hero background ${idx + 1}`}
-              fill
-              priority={idx === 0}
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f44]/40 via-transparent to-black/30 pointer-events-none z-10" />
-          </div>
+            className={`object-cover transition-opacity ease-in-out absolute inset-0 ${
+              idx === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
         ))}
+        
+        {/* Subtle overlay for better contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none z-10" />
 
-        {/* Slider Controls */}
-        <div className="absolute bottom-6 right-6 flex items-center bg-[#0a1f44]/90 backdrop-blur-md text-white z-20 select-none rounded-lg border border-white/10 overflow-hidden shadow-2xl">
-          <button
-            onClick={handlePrev}
-            className="p-3.5 bg-white/5 text-white transition-colors duration-300 hover:bg-white/10 flex items-center justify-center"
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          <div className="px-4 py-2.5 text-[10px] font-mono tracking-widest text-slate-400 border-x border-white/10">
+        {/* Slider Controls (Bottom Right) */}
+        <div className="absolute bottom-0 right-0 flex items-center bg-[#0a1f44] text-white z-20 select-none">
+          <div className="px-6 py-4 text-xs font-mono tracking-widest text-slate-400 border-r border-white/10">
             <span className="text-white font-bold">
               {String(currentImageIndex + 1).padStart(2, "0")}
             </span>{" "}
             / {String(HERO_IMAGES.length).padStart(2, "0")}
           </div>
-
           <button
             onClick={handleNext}
-            className="p-3.5 bg-[#005ea6] text-white transition-colors duration-300 hover:bg-[#004b84] flex items-center justify-center"
+            className="
+              p-5
+              bg-[#005ea6]
+              text-white
+              transition-colors
+              duration-300
+              hover:bg-[#004b84]
+              flex
+              items-center
+              justify-center
+            "
           >
-            <ChevronRight size={16} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
@@ -229,21 +188,14 @@ export default function HeroSection() {
             src={imgSrc}
             alt={`Hero background mobile ${idx + 1}`}
             fill
+            sizes="100vw"
             priority={idx === 0}
             style={{ transitionDuration: `${HERO_IMAGE_TRANSITION_DURATION}ms` }}
-            className={`object-cover transition-opacity ease-in-out absolute inset-0 ${idx === currentImageIndex ? "opacity-25" : "opacity-0"
-              }`}
+            className={`object-cover transition-opacity ease-in-out absolute inset-0 ${
+              idx === currentImageIndex ? "opacity-20" : "opacity-0"
+            }`}
           />
         ))}
-        <div className="absolute inset-0 bg-[#0a1f44]/85 pointer-events-none" />
-      </div>
-
-      {/* Scrolling mouse indicator */}
-      <div className="absolute bottom-6 left-[41.5%] transform -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-1.5 opacity-60">
-        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Scroll</span>
-        <div className="w-[18px] h-[30px] border border-slate-400 rounded-full flex justify-center p-1">
-          <div className="w-[2px] h-[5px] bg-slate-400 rounded-full animate-bounce" />
-        </div>
       </div>
 
     </section>

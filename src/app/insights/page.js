@@ -298,7 +298,7 @@ function FeaturedArticleCard({ article, formatDate, onReadMore }) {
         <div>
           {/* Eyebrow */}
           <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#005ea6] mb-5">
-            // Featured Article
+             Featured Article
           </p>
 
           {/* Category pill */}
@@ -594,7 +594,7 @@ export default function InsightsPage() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28 z-10">
           {/* Eyebrow */}
           <span className="inline-block text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 mb-6">
-            // Ideas &amp; Knowledge
+             Ideas &amp; Knowledge
           </span>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 lg:gap-20">
@@ -720,7 +720,7 @@ export default function InsightsPage() {
             <div className="flex items-center justify-between border-b-2 border-slate-100 pb-5">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#005ea6] mb-1">
-                  // {activeCategory === "All" ? "All Publications" : activeCategory}
+                 {activeCategory === "All" ? "All Publications" : activeCategory}
                 </p>
                 <p className="text-sm font-semibold text-slate-500">
                   {filtered.length} {filtered.length === 1 ? "article" : "articles"} found
@@ -775,7 +775,7 @@ export default function InsightsPage() {
           <div className="relative max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10 z-10">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400 block mb-4">
-                // Collaborate with ICC
+                 Collaborate with ICC
               </span>
               <h3
                 className="text-3xl sm:text-4xl font-bold text-white mb-4"

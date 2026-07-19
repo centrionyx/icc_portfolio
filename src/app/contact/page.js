@@ -70,7 +70,7 @@ export default function ContactPage() {
         
         <div className="max-w-[1440px] mx-auto px-5 sm:px-8 relative z-10 text-center md:text-left">
           <span className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-[#3b82f6] mb-3 block font-mono">
-            // CLIENT ENGAGEMENT CENTER
+             CLIENT ENGAGEMENT CENTER
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight font-serif max-w-4xl leading-tight">
             Partner with <span className="font-extrabold bg-gradient-to-r from-blue-400 via-cyan-400 to-white bg-clip-text text-transparent">ICC Advisory</span>
@@ -91,7 +91,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
                 <div>
                   <h2 className="text-lg font-bold text-white font-serif">Submit Project Details</h2>
-                  <p className="text-[10px] text-slate-400 mt-1 font-mono">// FIELDS MARKED WITH * ARE MANDATORY</p>
+                  <p className="text-[10px] text-slate-400 mt-1 font-mono">FIELDS MARKED WITH * ARE MANDATORY</p>
                 </div>
                 <HelpCircle size={18} className="text-slate-500" />
               </div>
@@ -234,7 +234,7 @@ export default function ContactPage() {
             <div className="bg-[#0c244b]/50 border border-white/5 p-8 rounded-2xl shadow-xl flex flex-col justify-between flex-1">
               <div>
                 <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#3b82f6] mb-8 font-mono">
-                  // OFFICE COORDINATES
+                   OFFICE COORDINATES
                 </h3>
 
                 <ul className="space-y-7">
@@ -246,7 +246,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest font-mono">Email Address</p>
                       <a href="mailto:info@icc.co.in" className="text-xs font-bold text-white hover:text-blue-400 transition-colors mt-1 block">
-                        info@icc.co.in
+                        mail@example.com
                       </a>
                     </div>
                   </li>
@@ -259,7 +259,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest font-mono">Phone Lines</p>
                       <a href="tel:+918045678900" className="text-xs font-bold text-white hover:text-blue-400 transition-colors mt-1 block">
-                        +91 80 4567 8900
+                        +91 *** *** ****
                       </a>
                     </div>
                   </li>
@@ -272,12 +272,12 @@ export default function ContactPage() {
                     <div>
                       <p className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest font-mono">Registered HQ</p>
                       <p className="text-xs font-light text-slate-300 leading-relaxed mt-1">
-                        ICC Tech Park, Level 4, 100 Feet Road, Indiranagar, Bengaluru, KA - 560038
+                       .........................
                       </p>
                     </div>
                   </li>
 
-                  <li className="flex items-start gap-4">
+                  {/* <li className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-[#3b82f6]/10 border border-white/5 flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 text-blue-400" />
                     </div>
@@ -287,7 +287,7 @@ export default function ContactPage() {
                         Cyber City, Building 10-C, 12th Floor, DLF Phase 2, Gurugram, HR - 122002
                       </p>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 

@@ -214,7 +214,7 @@ export default function CareersPage() {
           <div className="w-16 h-[3px] bg-gradient-to-r from-[#005ea6] to-cyan-400 mb-6 rounded-full" />
           
           <span className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-400 block mb-4 font-mono">
-            // JOIN OUR CORE EXECUTION TEAM
+            JOIN OUR CORE EXECUTION TEAM
           </span>
           
           <h1 
@@ -238,7 +238,7 @@ export default function CareersPage() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#005ea6] block mb-3 font-mono">
-            // LIFE AT CENTRIONYX
+            LIFE AT CENTRIONYX
           </span>
           <h2 className="text-3xl font-bold tracking-tight text-[#0a1f44] font-serif">
             Why Build Your Career With Us?
@@ -275,7 +275,7 @@ export default function CareersPage() {
             <div className="flex-1 w-full space-y-8">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#005ea6] block mb-2 font-mono">
-                  // CAREER PORTAL
+                  CAREER PORTAL
                 </span>
                 <h2 className="text-3xl font-bold tracking-tight text-[#0a1f44] font-serif">
                   Current Openings
@@ -380,7 +380,7 @@ export default function CareersPage() {
                             {role.requirements && role.requirements.length > 0 && (
                               <>
                                 <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#005ea6] mb-3 font-mono">
-                                  // KEY REQUIREMENTS & CREDENTIALS
+                                  KEY REQUIREMENTS & CREDENTIALS
                                 </h4>
                                 <ul className="space-y-2.5 mb-6 font-sans">
                                   {role.requirements.map((req, idx) => (
@@ -628,7 +628,7 @@ export default function CareersPage() {
         
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400 block font-mono">
-            // SPECULATIVE APPLICATIONS
+            SPECULATIVE APPLICATIONS
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold font-serif">
             Don't See a Perfect Fit?

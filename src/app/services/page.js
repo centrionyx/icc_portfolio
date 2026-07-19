@@ -117,7 +117,7 @@ export default function ServicesPage() {
         {/* Content */}
         <div className="max-w-[1440px] mx-auto px-5 lg:px-8 h-full relative z-25 flex flex-col justify-center pb-20">
           <span className="text-xs font-black uppercase tracking-[0.25em] text-cyan-400 mb-3 block font-mono">
-            // OUR CAPABILITIES
+            OUR CAPABILITIES
           </span>
           <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-none text-white">
             Our Services
@@ -202,7 +202,7 @@ export default function ServicesPage() {
                   {/* Scope Bullet Checklist Points */}
                   <div className="border-t border-slate-200/50 pt-5 mb-6 text-left">
                     <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-3 font-mono text-center">
-                      // Scopes Audited
+                      Scopes Audited
                     </span>
                     <ul className="space-y-2.5">
                       {s.points.map((pt, ptIdx) => (
