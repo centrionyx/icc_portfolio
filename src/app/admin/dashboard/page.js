@@ -277,6 +277,11 @@ export default function AdminDashboardPage() {
   const [adminJobs, setAdminJobs] = useState([]);
   const [careerSubTab, setCareerSubTab] = useState("Applications"); // Applications, Jobs
 
+  // Consultation Enquiries State
+  const [enquiries, setEnquiries] = useState([]);
+  const [enquiryStats, setEnquiryStats] = useState({ total: 0, new: 0, contacted: 0, inProgress: 0, closed: 0 });
+  const [isUpdatingEnquiry, setIsUpdatingEnquiry] = useState(false);
+
   // Job Openings Form State
   const [isJobFormOpen, setIsJobFormOpen] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
@@ -330,7 +335,7 @@ export default function AdminDashboardPage() {
         router.push("/admin/login");
         return;
       }
-      const [blogsRes, projectsRes, remindersRes, notifRes, appsRes, adminJobsRes, heroRes, aboutRes] = await Promise.all([
+      const [blogsRes, projectsRes, remindersRes, notifRes, appsRes, adminJobsRes, heroRes, aboutRes, enquiriesRes] = await Promise.all([
         fetch("/api/blogs"),
         fetch("/api/projects"),
         fetch("/api/admin/reminders"),
@@ -338,7 +343,8 @@ export default function AdminDashboardPage() {
         fetch("/api/admin/applications"),
         fetch("/api/admin/jobs"),
         fetch("/api/admin/hero"),
-        fetch("/api/admin/about")
+        fetch("/api/admin/about"),
+        fetch("/api/admin/enquiries")
       ]);
       if (blogsRes.ok) setBlogs(await blogsRes.json());
       if (projectsRes.ok) setProjects(await projectsRes.json());
@@ -348,6 +354,11 @@ export default function AdminDashboardPage() {
         const appsData = await appsRes.json();
         setApplications(appsData.applications || []);
         setAppStats(appsData.stats || { total: 0, applied: 0, underReview: 0, interviewing: 0, hired: 0, declined: 0 });
+      }
+      if (enquiriesRes && enquiriesRes.ok) {
+        const enqData = await enquiriesRes.json();
+        setEnquiries(enqData.enquiries || []);
+        setEnquiryStats(enqData.stats || { total: 0, new: 0, contacted: 0, inProgress: 0, closed: 0 });
       }
       if (adminJobsRes.ok) setAdminJobs(await adminJobsRes.json());
       if (heroRes.ok) {
@@ -493,6 +504,40 @@ export default function AdminDashboardPage() {
       alert("Error saving About Us settings.");
     } finally {
       setIsSavingAbout(false);
+    }
+  };
+
+  const handleUpdateEnquiryStatus = async (id, newStatus) => {
+    setIsUpdatingEnquiry(true);
+    try {
+      const res = await fetch("/api/admin/enquiries", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+      if (res.ok) {
+        await fetchDashboardData();
+      } else {
+        alert("Failed to update enquiry status.");
+      }
+    } catch (err) {
+      console.error("Error updating enquiry:", err);
+    } finally {
+      setIsUpdatingEnquiry(false);
+    }
+  };
+
+  const handleDeleteEnquiry = async (id) => {
+    if (!confirm("Are you sure you want to delete this consultation enquiry?")) return;
+    try {
+      const res = await fetch(`/api/admin/enquiries?id=${id}`, { method: "DELETE" });
+      if (res.ok) {
+        await fetchDashboardData();
+      } else {
+        alert("Failed to delete enquiry.");
+      }
+    } catch (err) {
+      console.error("Error deleting enquiry:", err);
     }
   };
 
@@ -973,6 +1018,21 @@ export default function AdminDashboardPage() {
               Overview
             </button>
             <button
+              onClick={() => { setActiveTab("Enquiries"); setIsSidebarOpen(false); }}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider rounded transition-all ${activeTab === "Enquiries"
+                ? "bg-[#005ea6] text-white shadow-md shadow-[#005ea6]/20"
+                : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+                }`}
+            >
+              <MessageSquare size={16} />
+              Consultation Quotes
+              {enquiryStats.new > 0 && (
+                <span className="ml-auto bg-blue-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold">
+                  {enquiryStats.new}
+                </span>
+              )}
+            </button>
+            <button
               onClick={() => { setActiveTab("Projects"); setIsSidebarOpen(false); }}
               className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider rounded transition-all ${activeTab === "Projects"
                 ? "bg-[#005ea6] text-white shadow-md shadow-[#005ea6]/20"
@@ -1269,30 +1329,32 @@ export default function AdminDashboardPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-5">
                   {[
                     {
+                      title: "Consultation Quotes",
+                      value: enquiryStats.total,
+                      detail: `${enquiryStats.new} New / Unread Requests`,
+                      icon: <MessageSquare className="w-5 h-5 text-indigo-500" />,
+                      bg: "bg-indigo-50/50 border-indigo-100",
+                      tab: "Enquiries"
+                    },
+                    {
                       title: "Total Fit-Out Sq Ft",
                       value: calculateTotalSqFt(),
                       detail: "Across India",
                       icon: <TrendingUp className="w-5 h-5 text-blue-500" />,
-                      bgColor: "bg-blue-50/60"
+                      bg: "bg-blue-50/50 border-blue-100",
+                      tab: "Projects"
                     },
                     {
-                      title: "Supervised Projects",
-                      value: projects.length,
-                      detail: "In Active Ledger",
-                      icon: <Briefcase className="w-5 h-5 text-cyan-600" />,
-                      bgColor: "bg-cyan-50/60"
+                      title: "Completed Projects",
+                      value: completedProjectsCount,
+                      detail: `${activeProjects.length} Sites In Execution`,
+                      icon: <CheckCircle2 className="w-5 h-5 text-emerald-500" />,
+                      bg: "bg-emerald-50/50 border-emerald-100",
+                      tab: "Projects"
                     },
                     {
-                      title: "Active Openings",
-                      value: adminJobs.length,
-                      detail: "On Career Portal",
-                      icon: <Award className="w-5 h-5 text-indigo-600" />,
-                      bgColor: "bg-indigo-50/60"
-                    },
-                    {
-                      title: "Total Candidates",
+                      title: "Candidate Pipeline",
                       value: appStats.total,
-                      detail: "In HR Pipeline",
                       icon: <Users className="w-5 h-5 text-emerald-600" />,
                       bgColor: "bg-emerald-50/60"
                     }
@@ -1415,6 +1477,134 @@ export default function AdminDashboardPage() {
                         ))
                       )}
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* CONSULTATION ENQUIRIES TAB */}
+            {activeTab === "Enquiries" && (
+              <div className="space-y-6">
+                {/* Stats Bar */}
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Requests</p>
+                    <p className="text-2xl font-extrabold text-[#0a1f44] mt-1">{enquiryStats.total}</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm border-l-4 border-l-blue-500">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">New / Unread</p>
+                    <p className="text-2xl font-extrabold text-blue-600 mt-1">{enquiryStats.new}</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm border-l-4 border-l-amber-500">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Contacted</p>
+                    <p className="text-2xl font-extrabold text-amber-600 mt-1">{enquiryStats.contacted}</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm border-l-4 border-l-indigo-500">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">In Progress</p>
+                    <p className="text-2xl font-extrabold text-indigo-600 mt-1">{enquiryStats.inProgress}</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm border-l-4 border-l-emerald-500 col-span-2 sm:col-span-1">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Closed / Won</p>
+                    <p className="text-2xl font-extrabold text-emerald-600 mt-1">{enquiryStats.closed}</p>
+                  </div>
+                </div>
+
+                {/* Main Enquiries Table */}
+                <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-base font-bold font-serif text-[#0a1f44]">Consultation & Quote Enquiries</h3>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        Client requests submitted via the website quote consultation popup.
+                      </p>
+                    </div>
+                    <span className="text-xs font-mono text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg self-start sm:self-auto">
+                      Showing {enquiries.length} requests
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs text-slate-600">
+                      <thead className="bg-slate-50 border-b border-slate-100 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                        <tr>
+                          <th className="py-3.5 px-6">Client Name</th>
+                          <th className="py-3.5 px-6">Contact Info</th>
+                          <th className="py-3.5 px-6">Budget / Scope</th>
+                          <th className="py-3.5 px-6">Message / Notes</th>
+                          <th className="py-3.5 px-6">Submitted Date</th>
+                          <th className="py-3.5 px-6">Status</th>
+                          <th className="py-3.5 px-6 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {enquiries.length === 0 ? (
+                          <tr>
+                            <td colSpan={7} className="text-center py-12 text-slate-400 italic">
+                              No consultation enquiries received yet.
+                            </td>
+                          </tr>
+                        ) : (
+                          enquiries.map((enq) => (
+                            <tr key={enq._id} className="hover:bg-slate-50/80 transition-colors">
+                              <td className="py-4 px-6 font-bold text-[#0a1f44]">
+                                {enq.name}
+                              </td>
+                              <td className="py-4 px-6 space-y-1">
+                                <p className="font-mono text-slate-700">{enq.email}</p>
+                                <p className="text-[11px] text-slate-500 font-mono">{enq.phone}</p>
+                              </td>
+                              <td className="py-4 px-6">
+                                <span className="bg-blue-50 text-[#005ea6] border border-blue-100 font-semibold px-2.5 py-1 rounded text-[11px]">
+                                  {enq.projectType || "General"}
+                                </span>
+                              </td>
+                              <td className="py-4 px-6 max-w-xs">
+                                <p className="line-clamp-2 text-slate-600 text-[11px] leading-relaxed">
+                                  {enq.message || "—"}
+                                </p>
+                              </td>
+                              <td className="py-4 px-6 font-mono text-[11px] text-slate-400 whitespace-nowrap">
+                                {new Date(enq.createdAt).toLocaleDateString("en-US", {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric"
+                                })}
+                              </td>
+                              <td className="py-4 px-6 whitespace-nowrap">
+                                <select
+                                  disabled={isUpdatingEnquiry}
+                                  value={enq.status}
+                                  onChange={(e) => handleUpdateEnquiryStatus(enq._id, e.target.value)}
+                                  className={`text-[11px] font-bold px-2.5 py-1 rounded-md border focus:outline-none cursor-pointer ${
+                                    enq.status === "New"
+                                      ? "bg-blue-50 text-blue-600 border-blue-200"
+                                      : enq.status === "Contacted"
+                                      ? "bg-amber-50 text-amber-600 border-amber-200"
+                                      : enq.status === "In Progress"
+                                      ? "bg-indigo-50 text-indigo-600 border-indigo-200"
+                                      : "bg-emerald-50 text-emerald-600 border-emerald-200"
+                                  }`}
+                                >
+                                  <option value="New">New</option>
+                                  <option value="Contacted">Contacted</option>
+                                  <option value="In Progress">In Progress</option>
+                                  <option value="Closed">Closed</option>
+                                </select>
+                              </td>
+                              <td className="py-4 px-6 text-right whitespace-nowrap">
+                                <button
+                                  onClick={() => handleDeleteEnquiry(enq._id)}
+                                  className="p-1.5 border border-rose-200 bg-white hover:bg-rose-50 text-rose-500 rounded transition-colors"
+                                  title="Delete Enquiry"
+                                >
+                                  <Trash2 size={13} />
+                                </button>
+                              </td>
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

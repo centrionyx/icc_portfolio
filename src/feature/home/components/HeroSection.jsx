@@ -437,20 +437,7 @@ export default function HeroSection() {
         </AnimatePresence>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 hidden lg:block"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <motion.div
-            className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
+    
     </section>
   );
 }

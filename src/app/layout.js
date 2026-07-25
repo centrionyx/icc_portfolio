@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { QuoteModal } from "@/components/QuoteModal";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
+          <QuoteModal />
         </div>
       </body>
     </html>
