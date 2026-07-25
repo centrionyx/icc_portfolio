@@ -11,6 +11,7 @@ const ProjectSchema = new mongoose.Schema(
     outcomes: { type: String },
     images: { type: [String], default: [] },
     image: { type: String }, // support backward compatibility
+    status: { type: String, enum: ["Completed", "Ongoing", "Pending"], default: "Completed" },
     completion: { type: Number, default: 100 },
   },
   { timestamps: true }

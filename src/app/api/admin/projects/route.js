@@ -27,7 +27,7 @@ export async function POST(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { client, category, location, size, scope, duration, outcomes, images, completion } = body;
+    const { client, category, location, size, scope, duration, outcomes, images, status, completion } = body;
 
     if (!client || !category || !location || !size || !scope) {
       return NextResponse.json({ error: "Client, category, location, size, and scope are required." }, { status: 400 });
@@ -42,6 +42,7 @@ export async function POST(request) {
       duration: duration || "36 Weeks",
       outcomes,
       images: images || [],
+      status: status || "Completed",
       completion: completion !== undefined ? Number(completion) : 100,
     });
 
@@ -66,7 +67,7 @@ export async function PATCH(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { id, client, category, location, size, scope, duration, outcomes, images, completion } = body;
+    const { id, client, category, location, size, scope, duration, outcomes, images, status, completion } = body;
 
     if (!id) {
       return NextResponse.json({ error: "Missing project ID." }, { status: 400 });
@@ -81,6 +82,7 @@ export async function PATCH(request) {
     if (duration !== undefined) updateFields.duration = duration;
     if (outcomes !== undefined) updateFields.outcomes = outcomes;
     if (images !== undefined) updateFields.images = images;
+    if (status !== undefined) updateFields.status = status;
     if (completion !== undefined) updateFields.completion = Number(completion);
 
     const updatedProject = await Project.findByIdAndUpdate(id, updateFields, { new: true });

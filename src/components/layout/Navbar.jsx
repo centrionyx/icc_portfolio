@@ -18,11 +18,11 @@ export default function Header() {
   const [isAtTop, setIsAtTop] = useState(true);
 
   const navLinks = [
+    { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
-    { name: "Expertise", href: "/expertise" },
     { name: "About ICC", href: "/about" },
-    { name: "Insights", href: "/insights" },
+    { name: "Blogs", href: "/blogs" },
     { name: "Careers", href: "/careers" },
   ];
 

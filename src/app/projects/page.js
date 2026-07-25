@@ -60,11 +60,18 @@ function ProjectCard({ project, onClick }) {
           {project.category}
         </span>
 
-        {/* Completion Indicator */}
-        <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-medium px-2.5 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-          <span className={`w-2 h-2 rounded-full ${project.completion === 100 ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500 animate-pulse'}`}></span>
-          {project.completion}% Complete
-        </div>
+        {/* Status Indicator Badge */}
+        {(() => {
+          const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
+          const dotColor =
+            status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-blue-500" : "bg-amber-500";
+          return (
+            <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-medium px-2.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <span className={`w-2 h-2 rounded-full ${dotColor} animate-pulse`}></span>
+              {status}
+            </div>
+          );
+        })()}
 
         {/* Carousel controls if multiple images exist */}
         {images.length > 1 && (
@@ -197,10 +204,16 @@ function ProjectListCard({ project, onClick }) {
             <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               {project.client}
             </h3>
-            <div className="bg-slate-100 text-slate-800 text-[10px] font-medium px-2.5 py-1 rounded-full flex items-center gap-1">
-              <span className={`w-1.5 h-1.5 rounded-full ${project.completion === 100 ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
-              {project.completion}% Complete
-            </div>
+            {(() => {
+              const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
+              const dotColor = status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-blue-500" : "bg-amber-500";
+              return (
+                <div className="bg-slate-100 text-slate-800 text-[10px] font-medium px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></span>
+                  {status}
+                </div>
+              );
+            })()}
           </div>
           <p className="text-xs text-slate-500 mb-4 font-semibold">{project.scope}</p>
 
@@ -219,7 +232,7 @@ function ProjectListCard({ project, onClick }) {
             </div>
             <div>
               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Status</p>
-              <p className="text-xs font-semibold text-slate-700">{project.completion === 100 ? 'Handed Over' : 'In Progress'}</p>
+              <p className="text-xs font-semibold text-slate-700">{project.status || (project.completion === 100 ? 'Completed' : 'Ongoing')}</p>
             </div>
           </div>
 
@@ -248,8 +261,9 @@ function ProjectStatsDashboard({ projects }) {
     ? `${(totalAreaRaw / 100000).toFixed(1)} Lakh Sq. Ft.`
     : `${totalAreaRaw.toLocaleString()} Sq. Ft.`;
 
-  const handedOver = projects.filter(p => p.completion === 100).length;
-  const activeCount = projects.filter(p => p.completion < 100).length;
+  const completedCount = projects.filter(p => (p.status ? p.status === "Completed" : p.completion === 100)).length;
+  const ongoingCount = projects.filter(p => (p.status ? p.status === "Ongoing" : p.completion < 100)).length;
+  const pendingCount = projects.filter(p => p.status === "Pending").length;
 
   const categoryBreakdown = projects.reduce((acc, curr) => {
     acc[curr.category] = (acc[curr.category] || 0) + 1;
@@ -272,15 +286,19 @@ function ProjectStatsDashboard({ projects }) {
       <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xl relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group">
         <div className="absolute top-[-10%] right-[-10%] w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl transform transition-transform duration-500 group-hover:scale-110" />
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Delivery Distribution</span>
-          <div className="grid grid-cols-2 gap-4 mt-3">
-            <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl text-center">
-              <span className="text-2xl font-extrabold text-emerald-600">{handedOver}</span>
-              <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mt-1">Completed</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Delivery Status Breakdown</span>
+          <div className="grid grid-cols-3 gap-2 mt-3">
+            <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
+              <span className="text-xl font-extrabold text-emerald-600">{completedCount}</span>
+              <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Completed</span>
             </div>
-            <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl text-center">
-              <span className="text-2xl font-extrabold text-amber-600">{activeCount}</span>
-              <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mt-1">In Progress</span>
+            <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
+              <span className="text-xl font-extrabold text-blue-600">{ongoingCount}</span>
+              <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Ongoing</span>
+            </div>
+            <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
+              <span className="text-xl font-extrabold text-amber-600">{pendingCount}</span>
+              <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Pending</span>
             </div>
           </div>
         </div>
@@ -340,13 +358,13 @@ function ProjectDetailsModal({ project, onClose }) {
         </button>
 
         {/* Left Side: Images Showcase */}
-        <div className="lg:w-1/2 bg-slate-950 flex flex-col justify-between relative h-[300px] lg:h-auto min-h-[300px]">
+        <div className="lg:w-1/2 bg-slate-900 flex flex-col justify-between relative h-[300px] lg:h-auto min-h-[300px]">
           <img 
             src={images[activeImgIdx]} 
             alt={project.client} 
-            className="absolute inset-0 w-full h-full object-cover opacity-80" 
+            className="absolute inset-0 w-full h-full object-cover opacity-90" 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none" />
 
           {/* Badge Overlay */}
           <div className="p-6 relative z-10">
@@ -378,10 +396,16 @@ function ProjectDetailsModal({ project, onClose }) {
           <div>
             <div className="flex items-center justify-between gap-4 mb-4">
               <h2 className="text-2xl font-extrabold text-slate-950">{project.client}</h2>
-              <div className="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
-                <span className={`w-2.5 h-2.5 rounded-full ${project.completion === 100 ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
-                {project.completion}% Complete
-              </div>
+              {(() => {
+                const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
+                const dotColor = status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-blue-500" : "bg-amber-500";
+                return (
+                  <div className="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
+                    <span className={`w-2.5 h-2.5 rounded-full ${dotColor}`}></span>
+                    {status}
+                  </div>
+                );
+              })()}
             </div>
 
             <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-6">
@@ -390,7 +414,7 @@ function ProjectDetailsModal({ project, onClose }) {
 
             {/* Structured Specifications Grid */}
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
                   <MapPin size={18} />
                 </div>
@@ -400,7 +424,7 @@ function ProjectDetailsModal({ project, onClose }) {
                 </div>
               </div>
 
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
                   <Layout size={18} />
                 </div>
@@ -410,7 +434,7 @@ function ProjectDetailsModal({ project, onClose }) {
                 </div>
               </div>
 
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
                   <Calendar size={18} />
                 </div>
@@ -420,13 +444,13 @@ function ProjectDetailsModal({ project, onClose }) {
                 </div>
               </div>
 
-              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
                 <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
-                  <Percent size={18} />
+                  <CheckCircle size={18} />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Status Code</p>
-                  <p className="text-sm font-semibold text-slate-850">{project.completion === 100 ? "Ready/Handover" : "Construction"}</p>
+                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Project Status</p>
+                  <p className="text-sm font-semibold text-slate-850">{project.status || (project.completion === 100 ? "Completed" : "Ongoing")}</p>
                 </div>
               </div>
             </div>
@@ -538,7 +562,7 @@ export default function ProjectsPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* High contrast overlay mask */}
-        <div className="absolute inset-0 bg-[#0a1f44]/80 backdrop-blur-[1px] pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] pointer-events-none z-0" />
 
         {/* Symmetric container aligned to global page grids */}
         <div className="max-w-7xl mx-auto px-5 lg:px-8 h-full flex items-center relative z-10">

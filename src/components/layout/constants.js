@@ -21,8 +21,7 @@ export const FOOTER_CONTENT = {
       title: "EXPLORE",
       links: [
         { name: "Projects", href: "/projects" },
-        { name: "Expertise", href: "/expertise" },
-        { name: "Insights", href: "/insights" },
+        { name: "Blogs", href: "/blogs" },
         { name: "About ICC", href: "/about" },
         { name: "Careers", href: "/careers" },
       ],

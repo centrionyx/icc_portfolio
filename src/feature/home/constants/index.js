@@ -232,12 +232,12 @@ export const OUR_PROCESS_CONTENT = {
 };
 
 export const INSIGHTS_CONTENT = {
-  tagline: "INSIGHTS",
+  tagline: "BLOGS",
   titleLine1: "Ideas that",
   titleLine2: "Shape Workplaces",
   cta: {
-    text: "View All Insights",
-    href: "/insights",
+    text: "View All Blogs",
+    href: "/blogs",
   },
   cards: [
     {
@@ -245,21 +245,21 @@ export const INSIGHTS_CONTENT = {
       category: "WORKPLACE STRATEGY",
       title: "The Future of Work is Human-Centric",
       image: "/workplace_strategy.png",
-      href: "/insights/future-of-work",
+      href: "/blogs",
     },
     {
       id: "designing-workplaces",
       category: "SUSTAINABILITY",
       title: "Designing Workplaces for a Better Tomorrow",
       image: "/sustainability_office.png",
-      href: "/insights/designing-workplaces",
+      href: "/blogs",
     },
     {
       id: "flexibility-experience",
       category: "INDUSTRY TRENDS",
       title: "Flexibility, Experience. Performance.",
       image: "/industry_trends.png",
-      href: "/insights/flexibility-experience",
+      href: "/blogs",
     },
   ],
 };

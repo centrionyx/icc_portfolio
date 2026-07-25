@@ -54,12 +54,12 @@ export default function AdminLoginPage() {
         {/* Logo header */}
         <div className="flex flex-col items-center mb-8">
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-extrabold text-white leading-none">ICC</h1>
-            <div className="h-8 w-[1px] bg-slate-700" />
+            <div className="w-12 h-12 rounded-xl bg-white border border-slate-700/50 p-1.5 shadow-md flex items-center justify-center">
+              <img src="/logo.svg" alt="ICC Logo" className="w-full h-full object-contain" />
+            </div>
             <div>
-              <p className="text-[8px] font-bold uppercase tracking-wider leading-tight text-slate-300">Innovation</p>
-              <p className="text-[8px] font-bold uppercase tracking-wider leading-tight text-slate-300">Consultants &</p>
-              <p className="text-[8px] font-bold uppercase tracking-wider leading-tight text-slate-300">Contractors</p>
+              <h1 className="text-2xl font-extrabold text-white leading-none font-serif">ICC Admin</h1>
+              <p className="text-[9px] font-bold uppercase tracking-wider text-slate-300 mt-1">Innovation Consultants & Contractors</p>
             </div>
           </div>
           <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-blue-400 mt-6">

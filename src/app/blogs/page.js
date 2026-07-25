@@ -613,7 +613,7 @@ export default function InsightsPage() {
                     backgroundClip: "text",
                   }}
                 >
-                  Insights
+                  Blogs
                 </span>
               </h1>
               <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
