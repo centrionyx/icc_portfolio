@@ -50,108 +50,100 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-        {isHome && isAtTop && (
-          <div className="absolute bottom-[-1px] left-0 w-[47%] h-[1px] bg-white z-50 hidden lg:block" />
-        )}
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8">
-          <div className="h-20 flex items-center">
+      {/* HEADER — Floating Glassmorphism Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 pt-2 sm:pt-3 px-4 sm:px-8 pointer-events-none">
+        <div className="max-w-[1440px] mx-auto">
+          {/* Glassmorphism Capsule Bar */}
+          <div className="pointer-events-auto h-16 sm:h-20 bg-black/30 backdrop-blur-xl border border-white/20 rounded-full px-6 sm:px-8 flex items-center justify-between shadow-2xl shadow-black/40">
 
             {/* LOGO */}
-            <Link href="/" className="flex items-center shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-slate-200 shadow-sm shrink-0">
-                  <Image
-                    src="/logo.svg"
-                    alt="ICC Logo"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+            <Link href="/" className="flex items-center gap-3 shrink-0 group">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10  overflow-hidden   p-1 shadow-sm shrink-0">
+                <Image
+                  src="/logo.svg"
+                  alt="ICC Logo"
+                  fill
+                  className="object-contain p-1"
+                />
+              </div>
 
-                <div className="hidden sm:block">
-                  <p className="text-[9px] font-semibold uppercase tracking-wide leading-tight text-slate-900">
-                    Innovation
-                  </p>
-                  <p className="text-[9px] font-semibold uppercase tracking-wide leading-tight text-slate-900">
-                    Consultants &
-                  </p>
-                  <p className="text-[9px] font-semibold uppercase tracking-wide leading-tight text-slate-900">
-                    Contractors
-                  </p>
-                </div>
+              <div className="hidden sm:block flex flex-col text-left">
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-none text-white font-sans">
+                  INNOVATION
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-none text-white font-sans">
+                  Consultants &amp; Contractors
+                </p>
               </div>
             </Link>
 
             {/* DESKTOP NAVIGATION */}
-            <div className="hidden lg:flex items-center ml-auto">
+            <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`
+                      relative
+                      text-[11px]
+                      font-bold
+                      uppercase
+                      tracking-[0.14em]
+                      transition-all
+                      duration-300
+                      ${isActive 
+                        ? "text-white font-extrabold" 
+                        : "text-white/80 hover:text-white"
+                      }
+                    `}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-cyan-400 rounded-full" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
 
-              <nav className="flex items-center gap-8 xl:gap-10">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className={`
-                        relative
-                        text-[12px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        transition-all
-                        duration-300
-                        after:absolute
-                        after:left-0
-                        after:-bottom-2
-                        after:h-[2px]
-                        after:bg-[#003A70]
-                        after:transition-all
-                        after:duration-300
-                        ${isActive 
-                          ? "text-[#003A70] after:w-full" 
-                          : "text-slate-800 hover:text-[#003A70] after:w-0 hover:after:w-full"
-                        }
-                      `}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                })}
-              </nav>
-
+            {/* ACTION BUTTON (Glassmorphism Pill) */}
+            <div className="hidden lg:flex items-center">
               <Link
                 href="/contact"
                 className="
-                  ml-10
-                  bg-[#003A70]
+                  bg-white/15
+                  hover:bg-white
                   text-white
+                  hover:text-[#003A70]
+                  border
+                  border-white/30
                   px-6
-                  py-3
-                  text-[12px]
-                  font-semibold
+                  py-2.5
+                  rounded-full
+                  text-[11px]
+                  font-extrabold
                   uppercase
-                  tracking-[0.12em]
+                  tracking-[0.14em]
                   transition-all
                   duration-300
-                  hover:bg-[#004B91]
-                  hover:shadow-lg
+                  backdrop-blur-md
+                  shadow-md
+                  hover:scale-105
                 "
               >
-                Contact Us
+                Book Consultation
               </Link>
             </div>
 
             {/* MOBILE MENU BUTTON */}
             <button
               onClick={() => setIsOpen(true)}
-              className="ml-auto lg:hidden"
+              className="ml-auto lg:hidden text-white hover:text-cyan-300 p-2 transition-colors"
+              aria-label="Toggle Menu"
             >
-              <Menu
-                size={30}
-                className="text-[#003A70]"
-              />
+              <Menu size={26} />
             </button>
 
           </div>

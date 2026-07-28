@@ -20,13 +20,13 @@ export default function WhatWeDo() {
   return (
     <section className="w-full bg-white border-b border-gray-200">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row">
-        
+
         {/* LEFT PANEL (Text & CTA) - 24% width for perfect vertical alignment */}
         <div className="w-full lg:w-[35%] bg-[#f7f8fa] p-8 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-200">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#005ea6] mb-3 block">
             {content.tagline}
           </span>
-          
+
           <h2 className="text-2xl sm:text-3xl font-normal tracking-tight leading-[1.2] mb-4 text-slate-900 font-serif">
             {content.titleLine1}
             <span className="block font-bold mt-1 text-slate-900 font-serif">
@@ -119,15 +119,15 @@ export default function WhatWeDo() {
                 </h3>
 
                 {/* Arrow Indicator - Left Aligned */}
-                <ArrowRight 
-                  size={14} 
+                <ArrowRight
+                  size={14}
                   className="
                     text-slate-400
                     transition-all
                     duration-300
                     group-hover:text-[#005ea6]
                     group-hover:translate-x-0.5
-                  " 
+                  "
                 />
               </Link>
             );

@@ -1,104 +1,150 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Search, Compass, Layout, CheckCircle, LifeBuoy } from "lucide-react";
 import { OUR_PROCESS_CONTENT } from "../constants";
+
+// Icon mapping corresponding to step index
+const stepIcons = [Search, Compass, Layout, CheckCircle, LifeBuoy];
 
 export default function OurProcess() {
   const content = OUR_PROCESS_CONTENT;
 
   return (
-    <section className="w-full bg-[#0a1f44] text-white py-12 sm:py-16 border-b border-gray-800">
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-12">
+    <section className="w-full bg-slate-50/60 py-10 sm:py-14 px-5 lg:px-8 border-b border-slate-200/80">
+      <div className="max-w-[1280px] mx-auto">
         
-        {/* LEFT PANEL - Tagline, Title & Description - 24% width */}
-        <div className="w-full lg:w-[24%] flex flex-col justify-between py-1">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#005ea6] mb-3 block">
-              {content.tagline}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-normal tracking-tight leading-[1.2] text-white font-serif">
-              {content.titleLine1}
-              <span className="block font-bold mt-1 text-white font-serif">
-                {content.titleLine2}
-              </span>
-            </h2>
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mt-4 max-w-xs">
-              {content.description}
-            </p>
-          </div>
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#005ea6] block mb-1">
+            {content.tagline}
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a1f44] tracking-tight">
+            {content.titleLine1} <span className="text-[#005ea6]">{content.titleLine2}</span>
+          </h2>
+          <p className="text-slate-500 text-xs sm:text-sm font-light mt-1.5 max-w-md mx-auto leading-relaxed">
+            {content.description}
+          </p>
         </div>
 
-        {/* RIGHT PANEL - 5 Process Steps in a Row */}
-        <div className="flex-1 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-10 lg:gap-8 mt-8 lg:mt-0 relative w-full">
-          
-          {/* Vertical timeline connector line (Mobile only) - Centered */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-6 bottom-28 w-[1px] bg-[#005ea6]/30 sm:hidden z-0" />
+        {/* Process Steps - Fixed to single row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative items-start">
+          {content.steps.map((step, index) => {
+            const IconComponent = stepIcons[index % stepIcons.length];
+            const isFirst = index === 0;
+            const isLast = index === content.steps.length - 1;
 
-          {content.steps.map((step, index) => (
-            <div 
-              key={step.number} 
-              className="relative flex-1 flex flex-col items-center sm:items-start text-center sm:text-left w-full sm:w-auto"
-            >
-              {/* Connecting Line to Next Step (Desktop only) */}
-              {index < content.steps.length - 1 && (
-                <div className="absolute top-6 left-14 right-0 h-6 -translate-y-1/2 hidden sm:block">
-                  {/* Track path with traveler */}
-                  <div className={`absolute top-1/2 -translate-y-1/2 left-0 right-0 h-[1px] bg-[#005ea6]/30 overflow-hidden animate-line-${index}`}>
-                    {/* Light traveler */}
-                    <div className={`absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-[#60a5fa] to-transparent -translate-y-1/2 h-[3px] animate-traveler-${index}`} />
+            return (
+              <motion.div
+                key={step.number || index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative flex flex-col items-center text-center group"
+              >
+                {/* Animated Smooth Wavy Arrow Connector with Straight Arrowhead */}
+                {!isLast && (
+                  <div className="hidden lg:block absolute top-[48px] left-[52%] right-[-48%] h-12 z-0 pointer-events-none overflow-visible">
+                    <svg
+                      className="w-full h-full text-slate-300"
+                      viewBox="0 0 100 40"
+                      fill="none"
+                      preserveAspectRatio="none"
+                    >
+                      <defs>
+                        <marker
+                          id={`arrow-${index}`}
+                          viewBox="0 0 10 10"
+                          refX="7"
+                          refY="9"
+                          markerWidth="5"
+                          markerHeight="5"
+                          orient="0" // Keeps arrowhead completely straight horizontal
+                        >
+                          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#005ea6" />
+                        </marker>
+
+                        {/* Infinite looping mask revealing dotted line progressively */}
+                        <clipPath id={`clip-${index}`}>
+                          <motion.rect
+                            x="0"
+                            y="0"
+                            height="40"
+                            initial={{ width: "0%" }}
+                            animate={{ width: ["0%", "100%", "100%", "0%"] }}
+                            transition={{
+                              duration: 5.5,
+                              times: [
+                                (index * 1.0) / 5.5,
+                                ((index + 1) * 1.0) / 5.5,
+                                4.5 / 5.5,
+                                5.5 / 5.5,
+                              ],
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                        </clipPath>
+                      </defs>
+
+                      <path
+                        d="M 5 20 C 30 -2, 45 42, 70 18 C 80 8, 88 18, 92 20"
+                        stroke="#005ea6"
+                        strokeWidth="1.75"
+                        strokeDasharray="4 4"
+                        clipPath={`url(#clip-${index})`}
+                        markerEnd={`url(#arrow-${index})`}
+                      />
+                    </svg>
                   </div>
-                  {/* Arrowhead */}
-                  <div className={`absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-[#005ea6]/40 rotate-45 animate-arrowhead-${index}`} />
+                )}
+
+                {/* Step Number Above Circle */}
+                <span className="text-[11px] font-mono font-bold text-slate-400 mb-2 block select-none">
+                  {step.number || String(index + 1).padStart(2, '0')}
+                </span>
+
+                {/* Main Circular Icon Node */}
+                <div
+                  className={`
+                    relative
+                    w-20
+                    h-20
+                    rounded-full
+                    flex
+                    items-center
+                    justify-center
+                    mb-4
+                    z-10
+                    transition-transform
+                    duration-500
+                    group-hover:scale-105
+                    ${
+                      isFirst
+                        ? "bg-white shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-slate-100"
+                        : "bg-white border-2 border-dashed border-slate-200 shadow-sm"
+                    }
+                  `}
+                >
+                  {/* Inner Circular Badge Icon */}
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-inner group-hover:bg-[#005ea6] group-hover:text-white transition-colors duration-300">
+                    <IconComponent className="w-5 h-5" strokeWidth={2} />
+                  </div>
                 </div>
-              )}
 
-              {/* Number Circle */}
-              <div className={`
-                w-12
-                h-12
-                rounded-full
-                border
-                border-[#005ea6]/50
-                bg-[#0a1f44]
-                flex
-                items-center
-                justify-center
-                font-bold
-                text-sm
-                text-white
-                mb-4
-                z-10
-                shadow-[0_0_15px_rgba(0,94,166,0.1)]
-                animate-circle-${index}
-              `}>
-                {step.number}
-              </div>
+                {/* Step Title */}
+                <h3 className="text-sm sm:text-base font-bold text-[#0a1f44] mb-1 tracking-tight">
+                  {step.title}
+                </h3>
 
-              {/* Step Title */}
-              <h3 className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.15em]
-                text-white
-                mb-2
-              ">
-                {step.title}
-              </h3>
-
-              {/* Step Description */}
-              <p className="
-                text-slate-400
-                text-[11px]
-                leading-relaxed
-                max-w-[160px]
-                mx-auto
-                sm:mx-0
-              ">
-                {step.description}
-              </p>
-            </div>
-          ))}
+                {/* Step Description */}
+                <p className="text-slate-500 text-xs font-light leading-relaxed max-w-[170px] mx-auto">
+                  {step.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>

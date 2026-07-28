@@ -3,441 +3,121 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Play, ChevronRight, Building2, Award, Clock, Shield } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FloatingParticles, GlowFollower } from "@/components/animations";
-import { HERO_CONTENT, HERO_IMAGES, HERO_IMAGE_ROTATION_INTERVAL, HERO_IMAGE_TRANSITION_DURATION } from "../constants";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+// High-quality Unsplash images for commercial office workspace & interior design
+// const HERO_IMAGES = [
+//   "https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+//  ];
 
 export default function HeroSection() {
-  const [heroData, setHeroData] = useState({
-    slides: HERO_CONTENT.slides,
-    images: HERO_IMAGES,
-    stats: HERO_CONTENT.stats,
-    rotationInterval: HERO_IMAGE_ROTATION_INTERVAL,
-    transitionDuration: HERO_IMAGE_TRANSITION_DURATION,
-  });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const heroRef = useRef(null);
 
-  useEffect(() => {
-    async function fetchHero() {
-      try {
-        const res = await fetch("/api/hero");
-        if (res.ok) {
-          const data = await res.json();
-          setHeroData({
-            slides: data.slides && data.slides.length > 0 ? data.slides : HERO_CONTENT.slides,
-            images: data.images && data.images.length > 0 ? data.images : HERO_IMAGES,
-            stats: data.stats && data.stats.length > 0 ? data.stats : HERO_CONTENT.stats,
-            rotationInterval: data.rotationInterval || HERO_IMAGE_ROTATION_INTERVAL,
-            transitionDuration: data.transitionDuration || HERO_IMAGE_TRANSITION_DURATION,
-          });
-        }
-      } catch (err) {
-        console.error("Error fetching hero section data:", err);
-      }
-    }
-    fetchHero();
-  }, []);
-
-  const activeImages = heroData.images && heroData.images.length > 0 ? heroData.images : HERO_IMAGES;
-  const slide = (heroData.slides && heroData.slides[0]) || HERO_CONTENT.slides[0];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % activeImages.length);
-    }, heroData.rotationInterval || 3000);
-
-    return () => clearInterval(timer);
-  }, [activeImages.length, heroData.rotationInterval]);
-
-  const handleNext = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % activeImages.length);
-  };
-
-  const defaultIcons = [
-    <Building2 key="1" className="w-4 h-4" />,
-    <Award key="2" className="w-4 h-4" />,
-    <Clock key="3" className="w-4 h-4" />,
-    <Shield key="4" className="w-4 h-4" />,
-  ];
-
-  const statsWithIcons = (heroData.stats || []).map((st, idx) => ({
-    ...st,
-    icon: defaultIcons[idx % defaultIcons.length],
-  }));
+  const SINGLE_HERO_IMAGE = "https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070&auto=format&fit=crop";
 
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-auto lg:h-[calc(100vh-80px)] lg:min-h-[520px] xl:min-h-[520px] bg-[#0a1f44] overflow-hidden flex flex-col"
+      className="relative w-full h-screen min-h-[640px] overflow-hidden bg-[#0a1f44]"
     >
-      {/* Animated Background Particles */}
-      <FloatingParticles count={30} color="bg-blue-400/20" />
-
-      {/* Mouse-follow glow effect */}
-      <GlowFollower targetRef={heroRef} size={256} color="rgba(0, 94, 166, 0.2)" />
-
-      {/* LEFT CONTENT PANEL (Navy Blue with Diagonal Cut) */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative lg:absolute lg:inset-y-0 lg:left-0 w-full lg:w-full bg-[#0a1f44]/80 backdrop-blur-sm lg:bg-[#0a1f44] text-white p-6 sm:p-12 lg:py-10 lg:px-16 xl:py-16 xl:px-24 flex flex-col justify-between z-10 select-none
-                   lg:[clip-path:polygon(0_-5%,_47%_-5%,_39%_105%,_0_105%)]"
-      >
-        {/* Animated gradient line at top */}
-        <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px] z-30"
-          style={{
-            background: "linear-gradient(90deg, transparent, #005ea6, #00d4ff, #005ea6, transparent)",
-          }}
-          animate={{
-            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+      {/* Background Image - Single High Quality Unsplash Photo */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={SINGLE_HERO_IMAGE}
+          alt="Commercial Workspace Interior"
+          fill
+          priority
+          unoptimized
+          className="object-cover object-center"
         />
+        <div className="absolute inset-0 bg-black/50" />
+        {/* Dark overlay for optimal text contrast */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
-        {/* Decorative elements */}
-        <motion.div
-          className="absolute top-20 right-10 w-20 h-20 border border-blue-500/10 rounded-full hidden lg:block"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-16 h-16 border border-cyan-500/10 rounded-full hidden lg:block"
-          animate={{
-            rotate: -360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-          }}
-        />
-
-        {/* Subtle decorative line at the top */}
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: 48 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="w-12 h-[2px] bg-gradient-to-r from-[#005ea6] to-transparent mt-4"
-        />
-
-        {/* Hero Text Content */}
-        <div className="my-auto max-w-[90%] lg:max-w-[42%] xl:max-w-[38%] py-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-[42px] xl:text-[56px] 2xl:text-[64px] font-normal tracking-tight leading-[1.15] mb-4 xl:mb-6 font-serif"
-          >
-            {slide.titleLine1}
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="block font-sans font-extrabold text-[#005ea6] mt-2 relative"
-            >
-              {slide.titleLine2}
-              <motion.span
-                className="absolute -bottom-2 left-0 w-full h-[3px] bg-gradient-to-r from-[#005ea6] to-transparent"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1, duration: 0.8 }}
-                style={{ transformOrigin: "left" }}
-              />
-            </motion.span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-slate-300 text-sm xl:text-base leading-relaxed max-w-md mb-6 xl:mb-8"
-          >
-            {slide.description}
-          </motion.p>
-
-          {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="flex flex-wrap items-center gap-6 sm:gap-8"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href={slide.primaryCta.href}
-                className="
-                  inline-flex
-                  items-center
-                  gap-3
-                  bg-[#005ea6]
-                  text-white
-                  px-6
-                  py-3.5
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  tracking-[0.15em]
-                  transition-all
-                  duration-300
-                  hover:bg-[#004b84]
-                  hover:shadow-lg
-                  hover:shadow-[#005ea6]/25
-                  relative
-                  overflow-hidden
-                  group
-                "
-              >
-                <span className="relative z-10 flex items-center gap-3">
-                  {slide.primaryCta.text}
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight size={14} />
-                  </motion.div>
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#004b84] to-[#003a70]"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            </motion.div>
-
-            <motion.button
-              onClick={() => {
-                // Play showreel action
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="
-                inline-flex
-                items-center
-                gap-3
-                text-white
-                text-[11px]
-                font-bold
-                uppercase
-                tracking-[0.15em]
-                transition-colors
-                duration-300
-                hover:text-blue-400
-                group
-              "
-            >
-              <motion.span
-                className="
-                  w-10
-                  h-10
-                  rounded-full
-                  border
-                  border-white/20
-                  flex
-                  items-center
-                  justify-center
-                  transition-all
-                  duration-300
-                  group-hover:border-blue-400
-                  group-hover:bg-white/5
-                  relative
-                "
-                animate={{
-                  boxShadow: [
-                    "0 0 0 0 rgba(0, 94, 166, 0)",
-                    "0 0 0 10px rgba(0, 94, 166, 0)",
-                    "0 0 0 0 rgba(0, 94, 166, 0)",
-                  ],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                >
-                  <Play size={12} className="fill-white ml-0.5 group-hover:fill-blue-400 group-hover:text-blue-400" />
-                </motion.div>
-              </motion.span>
-              {slide.secondaryCta.text}
-            </motion.button>
-          </motion.div>
-        </div>
-
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 xl:pt-8 border-t border-white/10 max-w-[90%] lg:max-w-[40%] xl:max-w-[36%] mb-4"
-        >
-          {statsWithIcons.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              className="relative pr-4 last:border-0 sm:border-r sm:border-white/10 group cursor-default"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div
-                className="text-blue-400 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ y: 10 }}
-                whileHover={{ y: 0 }}
-              >
-                {stat.icon}
-              </motion.div>
-              <motion.p
-                className="text-2xl sm:text-3xl lg:text-[28px] xl:text-[36px] font-bold tracking-tight mb-1"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.4 + idx * 0.1 }}
-              >
-                {stat.value}
-              </motion.p>
-              <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400 leading-tight group-hover:text-blue-400 transition-colors duration-300">
-                {stat.label}
-              </p>
-              <motion.div
-                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#005ea6] to-transparent group-hover:w-full transition-all duration-300"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      {/* RIGHT IMAGE PANEL (Office Building Image & Slider Controls) */}
-      <div 
-        className="absolute inset-y-0 right-0 w-full lg:w-full h-full bg-slate-100 z-0
-                   hidden lg:block lg:[clip-path:polygon(46%_-5%,_105%_-5%,_105%_105%,_38%_105%)]"
-      >
-        <AnimatePresence mode="wait">
-          {activeImages.map((imgSrc, idx) => (
-            idx === currentImageIndex && (
-              <motion.div
-                key={imgSrc}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: HERO_IMAGE_TRANSITION_DURATION / 1000, ease: "easeInOut" }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={imgSrc}
-                  alt={`Hero background ${idx + 1}`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority={idx === 0}
-                  className="object-cover"
-                />
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>
-        
-        {/* Subtle overlay for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none z-10" />
-
-        {/* Slider Controls (Bottom Right) */}
+      {/* Centered Content for ICC Commercial Fit-Out Workspace */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center max-w-5xl mx-auto pt-16">
+        {/* Tagline above headline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-0 right-0 flex items-center bg-[#0a1f44] text-white z-20 select-none"
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="mb-4"
         >
-          <motion.div
-            className="px-6 py-4 text-xs font-mono tracking-widest text-slate-400 border-r border-white/10"
-            whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}
-          >
-            <motion.span
-              key={currentImageIndex}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-white font-bold inline-block"
-            >
-              {String(currentImageIndex + 1).padStart(2, "0")}
-            </motion.span>{" "}
-            / {String(activeImages.length).padStart(2, "0")}
-          </motion.div>
-          <motion.button
-            onClick={handleNext}
-            whileHover={{ scale: 1.1, backgroundColor: "#004b84" }}
-            whileTap={{ scale: 0.9 }}
+          <span className="text-cyan-300 text-xs sm:text-sm font-mono font-bold tracking-[0.25em] uppercase">
+            Commercial Workspace Management
+          </span>
+        </motion.div>
+
+        {/* Main Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] mb-6 drop-shadow-md"
+        >
+          Commercial Workspace <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-cyan-200">
+            Design &amp; Governance
+          </span>
+        </motion.h1>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed mb-8 drop-shadow-sm"
+        >
+          Delivering high-precision commercial interior fit-out project management, BOQ auditing, MEP clash resolution, and zero-delay execution governance across India.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          <Link
+            href="/contact"
             className="
-              p-5
-              bg-[#005ea6]
-              text-white
-              transition-colors
-              duration-300
-              hover:bg-[#004b84]
-              flex
+              inline-flex
               items-center
-              justify-center
-              relative
-              overflow-hidden
+              gap-3
+              bg-white
+              text-[#005EA6]
+              px-8
+              py-4
+              text-xs sm:text-sm
+              font-bold
+              tracking-[0.05em]
+              rounded-xl
+              shadow-2xl
+              transition-all
+              duration-300
+              hover:bg-slate-100
+              hover:scale-105
               group
             "
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-[#004b84] to-[#003a70]"
-              initial={{ x: "100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
+            <span>Book Free Consultation</span>
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-1 transition-transform duration-300"
             />
-            <motion.div
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="relative z-10"
-            >
-              <ChevronRight size={20} />
-            </motion.div>
-          </motion.button>
+          </Link>
+
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 bg-[#005EA6]/40 hover:bg-[#005EA6]/60 border border-white/25 text-white font-bold text-xs sm:text-sm px-8 py-4 rounded-xl backdrop-blur-md transition-all"
+          >
+            <span>Explore Services</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </motion.div>
       </div>
-
-      {/* Mobile background image fallback */}
-      <div className="absolute inset-0 lg:hidden z-0">
-        <AnimatePresence mode="wait">
-          {activeImages.map((imgSrc, idx) => (
-            idx === currentImageIndex && (
-              <motion.div
-                key={imgSrc}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.45 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: HERO_IMAGE_TRANSITION_DURATION / 1000 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={imgSrc}
-                  alt={`Hero background mobile ${idx + 1}`}
-                  fill
-                  sizes="100vw"
-                  priority={idx === 0}
-                  className="object-cover"
-                />
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>
-      </div>
-
-    
     </section>
   );
 }

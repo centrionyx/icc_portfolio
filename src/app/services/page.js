@@ -28,20 +28,17 @@ import {
   ClipboardList,
   GitMerge,
   BadgeCheck,
-  KeyRound
+  KeyRound,
+  ChevronRight,
+  Sparkles
 } from "lucide-react";
 import {
   FadeIn,
   ScaleIn,
   StaggerContainer,
   StaggerItem,
-  HoverCard,
   TiltCard,
-  MagneticButton,
   AnimateModal,
-  FloatingParticles,
-  GlowFollower,
-  TextReveal,
 } from "@/components/animations";
 
 // Technical Inspection Log Modal
@@ -105,42 +102,42 @@ function QAChecklistModal({ pillar, onClose }) {
           <X size={16} />
         </button>
           
-          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400 block font-mono mb-2">TECHNICAL INSPECTION LOG</span>
-          <h3 className="text-xl font-extrabold">{pillar.title}</h3>
-          <p className="text-xs text-slate-300 mt-2 leading-relaxed font-light">{pillar.description}</p>
-        </div>
+        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400 block font-mono mb-2">TECHNICAL INSPECTION LOG</span>
+        <h3 className="text-xl font-extrabold">{pillar?.title}</h3>
+        <p className="text-xs text-slate-300 mt-2 leading-relaxed font-light">{pillar?.description}</p>
+      </div>
 
-        {/* Checklist Content */}
-        <div className="p-6 sm:p-8 overflow-y-auto flex-1 bg-slate-50/50">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-4 font-mono">QA VERIFICATION CHECKPOINTS</span>
-          <div className="space-y-4">
-            {checklist.map((item, idx) => (
-              <div 
-                key={idx} 
-                className="bg-white border border-slate-200/80 p-4 rounded-xl shadow-sm flex items-start gap-4 hover:border-blue-500/20 transition-colors"
-              >
-                <span className="font-mono text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded">
-                  {item.check}
-                </span>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 leading-snug">{item.label}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 leading-normal">{item.desc}</p>
-                </div>
+      {/* Checklist Content */}
+      <div className="p-6 sm:p-8 overflow-y-auto flex-1 bg-slate-50/50">
+        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-4 font-mono">QA VERIFICATION CHECKPOINTS</span>
+        <div className="space-y-4">
+          {checklist.map((item, idx) => (
+            <div 
+              key={idx} 
+              className="bg-white border border-slate-200/80 p-4 rounded-xl shadow-sm flex items-start gap-4 hover:border-blue-500/20 transition-colors"
+            >
+              <span className="font-mono text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded">
+                {item.check}
+              </span>
+              <div>
+                <h4 className="text-xs font-bold text-slate-900 leading-snug">{item.label}</h4>
+                <p className="text-[11px] text-slate-500 mt-1 leading-normal">{item.desc}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Footer */}
-        <div className="p-5 border-t border-slate-100 flex items-center justify-between bg-white text-xs text-slate-400">
-          <span>Centrionyx Governance QA checklist manual</span>
-          <button 
-            onClick={onClose}
-            className="px-5 py-2 bg-[#0a1f44] text-white rounded-full text-xs font-bold hover:bg-blue-600 transition-colors"
-          >
-            Close Checkpoints
-          </button>
-        </div>
+      {/* Footer */}
+      <div className="p-5 border-t border-slate-100 flex items-center justify-between bg-white text-xs text-slate-400">
+        <span>Governance QA checklist manual</span>
+        <button 
+          onClick={onClose}
+          className="px-5 py-2 bg-[#0a1f44] text-white rounded-full text-xs font-bold hover:bg-blue-600 transition-colors"
+        >
+          Close Checkpoints
+        </button>
+      </div>
     </AnimateModal>
   );
 }
@@ -149,25 +146,30 @@ export default function ServicesPage() {
   const [activeTab, setActiveTab] = useState("services"); // "services" | "expertise"
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedPillar, setSelectedPillar] = useState(null);
+  const [expandedService, setExpandedService] = useState("fitout");
 
   const services = [
     {
       id: "fitout",
+      num: "01",
       icon: <Briefcase className="w-5 h-5" />,
-      title: "Project Management",
+      title: "Project Management & Fit-Out",
       short: "End-to-end site coordination, contractor governance, scheduling, and strict timeline execution control.",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Master planning & milestone scheduling",
         "Contractor governance & procurement",
-        "Daily performance dashboards",
+        "Daily site performance dashboards",
         "Handover governance & tracking"
       ]
     },
     {
       id: "advisory",
+      num: "02",
       icon: <Search className="w-5 h-5" />,
-      title: "Project Advisory",
+      title: "Project Advisory & Pre-Construction",
       short: "Design optimization, specification audits, value engineering, and pre-construction risk management.",
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Scope finalization & validation",
         "Structural design check audits",
@@ -177,9 +179,11 @@ export default function ServicesPage() {
     },
     {
       id: "coordination",
+      num: "03",
       icon: <Layers className="w-5 h-5" />,
-      title: "Design Coordination",
+      title: "Design Coordination & BIM Integration",
       short: "Bridging the gap between creative design intent, physical construction parameters and MEP blueprints.",
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Designer-Vendor-MEP interfaces",
         "Clash audits prior to site line-out",
@@ -189,9 +193,11 @@ export default function ServicesPage() {
     },
     {
       id: "costing",
+      num: "04",
       icon: <Calculator className="w-5 h-5" />,
-      title: "Cost Management",
+      title: "Cost Management & BOQ Auditing",
       short: "BOQ quantity audits, comprehensive vendor cost comparison matrices, and budget variations tracking.",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Quantity take-off validations",
         "Vendor comparative price sheets",
@@ -201,9 +207,11 @@ export default function ServicesPage() {
     },
     {
       id: "mep",
+      num: "05",
       icon: <Settings className="w-5 h-5" />,
-      title: "MEP Coordination",
+      title: "MEP Engineering & Systems Control",
       short: "Managing HVAC, electrical, plumbing, fire safety systems, and architectural layout integration.",
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Services constraint checks",
         "MEP shop drawings cross-review",
@@ -213,9 +221,11 @@ export default function ServicesPage() {
     },
     {
       id: "supervision",
+      num: "06",
       icon: <CheckSquare className="w-5 h-5" />,
-      title: "Site Supervision",
+      title: "Quality Control & Site Supervision",
       short: "Daily site inspection, quality control checking, inward material validation, and safety compliance audits.",
+      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Daily site progress tracking logs",
         "Snag identification & tracking logs",
@@ -281,393 +291,259 @@ export default function ServicesPage() {
     ? pillars 
     : pillars.filter(p => p.group === activeFilter);
 
+  const activeServiceObj = services.find(s => s.id === expandedService) || services[0];
+
   return (
     <div className="w-full bg-[#f8fafc] text-[#0a1f44] pb-24 font-sans antialiased">
       
-      {/* 1. HERO HEADER */}
-      <section className="w-full h-[400px] sm:h-[480px] relative overflow-hidden bg-[#0a1f44] text-white">
-        
-        {/* Background Image */}
+      {/* HERO SECTION — Matching reference image layout */}
+      <section className="relative w-full min-h-[580px] sm:min-h-[640px] flex items-center bg-[#f8fafc] overflow-hidden py-24 sm:py-32">
+        {/* Full-width High-Quality Interior Photo with Subtle Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/sustainability_office.png"
-            alt="Office space layout"
+            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+            alt="Luxury Commercial Interior Space"
             fill
             priority
-            className="object-cover object-center opacity-40"
+            unoptimized
+            className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-[#0a1f44]/45" />
+          {/* Soft vignette gradient for legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/20" />
         </div>
 
-        {/* Ambient glow */}
-        <div className="absolute top-0 left-[10%] w-[350px] h-[350px] rounded-full bg-cyan-400/20 blur-[90px] pointer-events-none z-10" />
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10">
+          <div className="max-w-3xl space-y-6">
+            {/* Dark Eyebrow Tagline matching image */}
+            <p className="text-xs sm:text-sm font-sans font-extrabold uppercase tracking-[0.25em] text-white/90 drop-shadow-md">
+              LET&apos;S RECREATE YOUR WAY OF WORKING
+            </p>
 
-        {/* Downward Gradient Fade */}
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-[#f8fafc]/45 to-[#f8fafc] z-15 pointer-events-none" />
+            {/* Massive Prominent White Title */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] drop-shadow-lg">
+              Commercial Interior <br />
+              Designers &amp; Management
+            </h1>
 
-        {/* Hero Content */}
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 h-full relative z-25 flex flex-col justify-center pb-24">
-          <span className="text-xs font-black uppercase tracking-[0.25em] text-cyan-400 mb-3 block font-mono">
-            CAPABILITIES &amp; EXPERTISE
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none text-white">
-            Services &amp; Expertise
-          </h1>
-          <p className="text-slate-200 text-sm leading-relaxed mt-4 max-w-xl font-light">
-            High-precision project management, pre-construction design audits, and specialized technical competence for corporate interior fit-out spaces across India.
-          </p>
-
-          {/* Toggle Switch Tabs */}
-          <div className="mt-8 flex items-center bg-white/10 backdrop-blur-md p-1.5 rounded-2xl w-fit border border-white/15">
-            <button
-              onClick={() => setActiveTab("services")}
-              className={`
-                px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all duration-300
-                ${activeTab === "services"
-                  ? "bg-white text-[#0a1f44] shadow-lg scale-[1.02]"
-                  : "text-white/80 hover:text-white hover:bg-white/5"
-                }
-              `}
-            >
-              Core Services
-            </button>
-            <button
-              onClick={() => setActiveTab("expertise")}
-              className={`
-                px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all duration-300
-                ${activeTab === "expertise"
-                  ? "bg-white text-[#0a1f44] shadow-lg scale-[1.02]"
-                  : "text-white/80 hover:text-white hover:bg-white/5"
-                }
-              `}
-            >
-              Technical Expertise
-            </button>
+            {/* White CTA Button with primary brand text matching image design */}
+            <div className="pt-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center bg-white hover:bg-slate-50 text-[#005EA6] font-bold text-xs sm:text-sm px-8 py-4 rounded-xl shadow-xl transition-all hover:scale-105 duration-200"
+              >
+                Book Free Consultation
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2. MAIN CONTENT SECTIONS */}
-
-      {/* SECTION A: CORE SERVICES */}
-      {activeTab === "services" && (
-        <section className="max-w-[1440px] mx-auto px-5 lg:px-8 relative z-30 -mt-20 sm:-mt-24">
-          <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-20">
-            {services.map((s) => (
-              <StaggerItem key={s.id} direction="up">
-                <TiltCard
-                  tiltMaxAngle={8}
-                  scaleOnHover={1.02}
-                  className="
-                    bg-slate-50/80 
-                    backdrop-blur-sm
-                    border 
-                    border-slate-200/60
-                    rounded-[24px] 
-                    p-8 
-                    pt-12
-                    relative 
-                    shadow-lg
-                    shadow-slate-900/5
-                    hover:bg-white
-                    hover:shadow-[0_0_30px_5px_rgba(0,94,166,0.06),_0_20px_50px_rgba(0,94,166,0.12)]
-                    hover:border-[#005ea6]/30
-                    transition-all
-                    duration-500
-                    flex 
-                    flex-col 
-                    justify-between
-                    group
-                    h-full
-                  "
-                >
-                  {/* Overlapping Top Icon Block */}
-                  <div className="
-                    w-12 
-                    h-12 
-                    rounded-xl 
-                    bg-[#0a1f44] 
-                    text-white 
-                    flex 
-                    items-center 
-                    justify-center 
-                    absolute 
-                    top-0 
-                    left-1/2 
-                    -translate-x-1/2 
-                    -translate-y-1/2 
-                    shadow-lg
-                    shadow-[#0a1f44]/25
-                    transition-all
-                    duration-500
-                    group-hover:bg-[#005ea6]
-                    group-hover:scale-110
-                    group-hover:shadow-[0_0_20px_rgba(0,94,166,0.65)]
-                  ">
-                    {s.icon}
-                  </div>
-
-                  <div className="text-center">
-                    <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-3 mt-2 group-hover:text-[#005ea6] transition-colors duration-500">
-                      {s.title}
-                    </h3>
-
-                    <p className="text-slate-500 text-xs leading-relaxed font-light mb-6 px-1">
-                      {s.short}
-                    </p>
-
-                    <div className="border-t border-slate-200/50 pt-5 mb-6 text-left">
-                      <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-3 font-mono text-center">
-                        Scopes Audited
+      {/* CORE SERVICES */}
+      <div id="services-matrix" className="max-w-[1440px] mx-auto px-5 lg:px-8 pt-16">
+        
+        {/* FEATURED INTERACTIVE SERVICE SHOWCASE */}
+        <div className="mb-20 bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+            
+            {/* Left Services Selector List */}
+            <div className="lg:col-span-5 border-r border-slate-100 bg-slate-50/60 divide-y divide-slate-100">
+              <div className="p-6 bg-[#005EA6]/5 border-b border-slate-100">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#005EA6]">
+                  Service Matrix
+                </span>
+                <h3 className="text-lg font-bold text-[#0a1f44] mt-0.5">Explore Key Solutions</h3>
+              </div>
+              {services.map((s) => {
+                const isSelected = expandedService === s.id;
+                return (
+                  <div
+                    key={s.id}
+                    onClick={() => setExpandedService(s.id)}
+                    className={`p-6 cursor-pointer transition-all duration-300 flex items-center justify-between group ${
+                      isSelected
+                        ? "bg-white border-l-4 border-l-[#005ea6] shadow-sm"
+                        : "hover:bg-white/80"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className={`font-mono text-xs font-bold ${isSelected ? "text-[#005ea6]" : "text-slate-400"}`}>
+                        {s.num}
                       </span>
-                      <ul className="space-y-2.5">
-                        {s.points.map((pt, ptIdx) => (
-                          <li key={ptIdx} className="flex items-start gap-2.5">
-                            <span className="
-                              w-5 
-                              h-5 
-                              rounded-lg 
-                              bg-[#e6f0fa] 
-                              border 
-                              border-[#005ea6]/10 
-                              flex 
-                              items-center 
-                              justify-center 
-                              shrink-0 
-                              mt-0.5 
-                              text-[#005ea6] 
-                              transition-all 
-                              duration-300 
-                              group-hover:bg-[#005ea6] 
-                              group-hover:text-white
-                              group-hover:scale-105
-                            ">
-                              <Check size={10} strokeWidth={3} />
-                            </span>
-                            <span className="text-slate-600 text-xs font-semibold leading-snug transition-colors duration-300 group-hover:text-slate-850">
-                              {pt}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div>
+                        <h4 className={`text-sm font-bold transition-colors ${isSelected ? "text-[#005ea6]" : "text-slate-800 group-hover:text-[#005ea6]"}`}>
+                          {s.title}
+                        </h4>
+                        <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{s.short}</p>
+                      </div>
                     </div>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? "text-[#005ea6] translate-x-1" : "text-slate-300"}`} />
                   </div>
-
-                  <div className="text-center mt-auto pt-4 border-t border-slate-200/50">
-                    <Link
-                      href={`/contact?interest=${s.id}`}
-                      className="
-                        inline-flex
-                        items-center
-                        gap-1.5
-                        text-[10px] 
-                        font-bold 
-                        text-[#005ea6] 
-                        group-hover:text-[#0a1f44]
-                        border-b 
-                        border-[#005ea6]/20 
-                        group-hover:border-[#0a1f44]
-                        uppercase 
-                        tracking-widest 
-                        pb-0.5 
-                        transition-all
-                        duration-300
-                      "
-                    >
-                      <span>Request Proposal</span>
-                      <ArrowRight size={10} className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </TiltCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </section>
-      )}
-
-      {/* SECTION B: TECHNICAL EXPERTISE */}
-      {activeTab === "expertise" && (
-        <section className="max-w-[1440px] mx-auto px-5 lg:px-8 relative z-30 -mt-16 sm:-mt-20">
-          
-          <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-xl mb-16">
-            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 mb-10 pb-4 border-b border-slate-200/60">
-              <div>
-                <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">TECHNICAL PILLARS</span>
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#111827]">Fields of Specialization</h2>
-              </div>
-
-              {/* Category Filter Pills */}
-              <div className="flex flex-wrap gap-2 items-center">
-                <SlidersHorizontal className="w-4 h-4 text-slate-400 mr-2 shrink-0 hidden sm:block" />
-                {filterCategories.map((cat) => {
-                  const count = cat.id === "all" 
-                    ? pillars.length 
-                    : pillars.filter(p => p.group === cat.id).length;
-
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveFilter(cat.id)}
-                      className={`
-                        px-4
-                        py-2
-                        text-xs
-                        font-bold
-                        uppercase
-                        tracking-wider
-                        transition-all
-                        rounded-xl
-                        flex
-                        items-center
-                        gap-2
-                        ${activeFilter === cat.id
-                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/10"
-                          : "bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                        }
-                      `}
-                    >
-                      {cat.label}
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${activeFilter === cat.id ? "bg-white text-blue-900 font-bold" : "bg-slate-200/60 text-slate-700"}`}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                );
+              })}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {filteredPillars.map((pillar, idx) => (
-                <div 
-                  key={pillar.title}
-                  onClick={() => setSelectedPillar(pillar)}
-                  className="bg-slate-50/70 border border-slate-200/80 p-8 rounded-2xl shadow-sm flex gap-6 items-start hover:bg-white hover:shadow-2xl hover:border-blue-500/20 hover:-translate-y-1 transition-all duration-300 group cursor-pointer relative"
-                >
-                  <span className="font-mono text-xl sm:text-2xl font-extrabold text-[#003A70] bg-blue-50 border border-blue-100 w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-colors group-hover:bg-[#003A70] group-hover:text-white">
-                    {String(idx + 1).padStart(2, "0")}
+            {/* Right Detail Display Pane */}
+            <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between relative bg-white">
+              <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden mb-8 shadow-md">
+                <Image
+                  src={activeServiceObj.image}
+                  alt={activeServiceObj.title}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f44]/80 via-transparent to-transparent flex items-end p-6">
+                  <span className="text-xs font-mono font-bold text-cyan-300 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-lg">
+                    SPECIFICATION OVERVIEW
                   </span>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[#111827] mb-2 group-hover:text-[#003A70] transition-colors">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-[#6b7280] text-sm leading-relaxed mb-4">
-                      {pillar.description}
-                    </p>
+                </div>
+              </div>
 
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-200/50">
-                      {pillar.scopes.map((scope) => (
-                        <span key={scope} className="text-xs bg-white border border-slate-200 px-3 py-1 rounded-md text-[#6b7280] font-semibold">
-                          {scope}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+              <div>
+                <h3 className="text-2xl font-bold text-[#0a1f44] mb-3">{activeServiceObj.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">{activeServiceObj.short}</p>
 
-                  <div className="absolute right-6 top-6 text-slate-400 group-hover:text-blue-600 transition-colors">
-                    <Info size={18} />
+                <div className="space-y-2.5 mb-8">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-bold block mb-3">
+                    AUDITED DELIVERABLES
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {activeServiceObj.points.map((pt, idx) => (
+                      <div key={idx} className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 p-3 rounded-xl">
+                        <CheckCircle className="w-4 h-4 text-[#005ea6] shrink-0" />
+                        <span className="text-xs font-semibold text-slate-700">{pt}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-xs font-mono text-slate-400">Zero-Delay Milestone Standard</span>
+                <Link
+                  href={`/contact?interest=${activeServiceObj.id}`}
+                  className="inline-flex items-center gap-2 bg-[#005ea6] hover:bg-[#004b84] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition-all shadow-md"
+                >
+                  <span>Request Proposal</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
+
+          </div>
+        </div>
+
+        {/* ALL SERVICES GRID */}
+        <div className="mb-12">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">
+            Capabilities
+          </span>
+          <h2 className="text-3xl font-bold text-[#0a1f44] mb-8">Comprehensive Delivery Solutions</h2>
+        </div>
+
+        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((s) => (
+            <StaggerItem key={s.id} direction="up">
+              <TiltCard
+                tiltMaxAngle={6}
+                scaleOnHover={1.02}
+                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between h-full group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-[#005ea6] flex items-center justify-center group-hover:bg-[#005ea6] group-hover:text-white transition-colors duration-300">
+                      {s.icon}
+                    </div>
+                    <span className="font-mono text-2xl font-black text-slate-200 group-hover:text-[#005ea6]/20 transition-colors">
+                      {s.num}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-[#0a1f44] mb-3 group-hover:text-[#005ea6] transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed mb-6 font-light">{s.short}</p>
+
+                  <div className="space-y-2 border-t border-slate-100 pt-5 mb-6">
+                    {s.points.map((pt, ptIdx) => (
+                      <div key={ptIdx} className="flex items-start gap-2 text-xs text-slate-600">
+                        <Check className="w-3.5 h-3.5 text-[#005ea6] shrink-0 mt-0.5" />
+                        <span>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Link
+                  href={`/contact?interest=${s.id}`}
+                  className="inline-flex items-center justify-between w-full pt-4 border-t border-slate-100 text-xs font-bold text-[#005ea6] uppercase tracking-wider group-hover:text-[#0a1f44] transition-colors"
+                >
+                  <span>Request Audit</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </TiltCard>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </div>
+
+      {/* PROJECT GOVERNANCE PROCESS (lhinteriors inspired cards) */}
+      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 mt-20">
+        <div className="bg-[#0a1f44] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
+          <div className="text-center mb-14">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400 block mb-3 font-mono">
+              PROJECT WORKFLOW
+            </span>
+            <h3 className="text-3xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white font-serif">
+              Our Structured Fit-Out <span className="font-sans text-cyan-300">Governance Model</span>
+            </h3>
+            <p className="text-sm mt-4 max-w-2xl mx-auto leading-relaxed text-slate-300 font-light">
+              We manage fit-out advisory through structured checklists, clash audits, and periodic milestone reviews.
+            </p>
           </div>
 
-          {/* PROJECT GOVERNANCE MODEL */}
-          <div className="bg-[#0a1f44] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
-            <div className="text-center mb-14">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400 block mb-3 font-mono">
-                GOVERNANCE MODEL
-              </span>
-              <h3 className="text-3xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
-                Our Rigorous Project <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-400 bg-clip-text text-transparent">Governance Model</span>
-              </h3>
-              <p className="text-sm mt-5 max-w-2xl mx-auto leading-relaxed text-slate-300">
-                We manage fit-out advisory through structured checklists, clash audits, and periodic milestone reviews — protecting clients from cost overruns and vendor extensions.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {[
-                { num: "01", icon: <ClipboardList className="w-5 h-5" />, title: "Audit & Onboarding", desc: "Site documentation audit, stakeholder kickoff, BOQ and scope validation against CAD/BIM inputs." },
-                { num: "02", icon: <GitMerge className="w-5 h-5" />, title: "Clash Clearance", desc: "MEP 3D clash detection, drywall alignment checks, and sequential material inward batch certifications." },
-                { num: "03", icon: <BadgeCheck className="w-5 h-5" />, title: "Milestone QA Reviews", desc: "Periodic sign-off audits at civil, MEP, finishes, and furniture stages before proceeding to next phase." },
-                { num: "04", icon: <KeyRound className="w-5 h-5" />, title: "Snag-Free Handover", desc: "Formal snag list clearance, punch list submissions, and occupancy certificate coordination with the landlord." },
-              ].map((step, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-400/10 text-cyan-400 flex items-center justify-center border border-cyan-400/20">
-                      {step.icon}
-                    </div>
-                    <span className="font-mono text-xs font-bold text-cyan-400">Phase {idx + 1}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { num: "01", icon: <ClipboardList className="w-5 h-5" />, title: "Audit & Onboarding", desc: "Site documentation audit, stakeholder kickoff, BOQ and scope validation against CAD/BIM inputs." },
+              { num: "02", icon: <GitMerge className="w-5 h-5" />, title: "Clash Clearance", desc: "MEP 3D clash detection, drywall alignment checks, and sequential material inward batch certifications." },
+              { num: "03", icon: <BadgeCheck className="w-5 h-5" />, title: "Milestone QA Reviews", desc: "Periodic sign-off audits at civil, MEP, finishes, and furniture stages before proceeding to next phase." },
+              { num: "04", icon: <KeyRound className="w-5 h-5" />, title: "Snag-Free Handover", desc: "Formal snag list clearance, punch list submissions, and occupancy certificate coordination with the landlord." },
+            ].map((step, idx) => (
+              <div key={idx} className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:border-cyan-400/40 transition-colors">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-400/10 text-cyan-300 flex items-center justify-center border border-cyan-400/20">
+                    {step.icon}
                   </div>
-                  <h4 className="text-base font-bold text-white mb-2">{step.title}</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">{step.desc}</p>
+                  <span className="font-mono text-xs font-bold text-cyan-400">Phase {idx + 1}</span>
                 </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-10">
-              {[
-                { icon: <FileCheck className="w-5 h-5 text-cyan-400" />, metric: "100%", desc: "Material validation and certificate checks" },
-                { icon: <Zap className="w-5 h-5 text-cyan-400" />, metric: "Clash-Free", desc: "MEP layouts verified before site execution" },
-                { icon: <ShieldCheck className="w-5 h-5 text-cyan-400" />, metric: "Zero Snag", desc: "Goal at official project handover phase" }
-              ].map((item, idx) => (
-                <div key={idx} className="flex gap-4 items-center bg-white/5 border border-white/10 p-4 rounded-xl">
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <span className="text-lg font-extrabold block text-white leading-none">{item.metric}</span>
-                    <span className="text-xs mt-1 block text-slate-300 leading-normal">{item.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+                <h4 className="text-base font-bold text-white mb-2">{step.title}</h4>
+                <p className="text-xs text-slate-300 leading-relaxed font-light">{step.desc}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-        </section>
-      )}
-
-      {/* 3. BOTTOM PROPOSAL REQUEST BANNER */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 pb-12 mt-20 relative z-30">
-        <div className="bg-[#0a1f44] text-white p-8 sm:p-12 rounded-[24px] flex flex-col md:flex-row items-center justify-between gap-6 border border-white/5 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-[-50%] right-[-20%] w-[300px] h-[300px] rounded-full bg-blue-600/10 blur-[50px] pointer-events-none" />
-          <div className="flex items-center gap-4 relative z-10">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 shrink-0">
-              <FileText size={20} />
+      {/* BOTTOM PROPOSAL REQUEST BANNER */}
+      <section className="max-w-[1440px] mx-auto px-5 lg:px-8 mt-16">
+        <div className="bg-gradient-to-r from-[#0a1f44] to-[#005ea6] text-white p-8 sm:p-12 rounded-[24px] flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-2xl">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 shrink-0">
+              <FileText size={22} />
             </div>
             <div>
-              <h4 className="text-base font-extrabold text-white uppercase tracking-wider font-sans">Request Detailed Auditing SOPs</h4>
-              <p className="text-xs text-slate-400 leading-relaxed mt-0.5 max-w-xl font-light">Get in touch to receive our standardized project templates, BoQ comparison sheets, and site safety audit guidelines.</p>
+              <h4 className="text-lg font-bold text-white uppercase tracking-wider font-sans">Request Standard Auditing SOPs</h4>
+              <p className="text-xs text-slate-200 leading-relaxed mt-0.5 max-w-xl font-light">
+                Get in touch to receive our standardized project templates, BoQ comparison sheets, and site safety audit guidelines.
+              </p>
             </div>
           </div>
           <Link
             href="/contact"
-            className="
-              bg-[#005ea6]
-              hover:bg-[#004b84]
-              text-white
-              py-4
-              px-8
-              rounded-xl
-              text-xs
-              font-extrabold
-              uppercase
-              tracking-widest
-              flex
-              items-center
-              gap-2
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-              shrink-0
-              shadow-lg
-              shadow-blue-900/20
-              relative
-              z-10
-            "
+            className="bg-white text-[#0a1f44] hover:bg-slate-100 py-4 px-8 rounded-xl text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 transition-all shrink-0 shadow-lg"
           >
             Contact Advisor
-            <ArrowRight size={13} />
+            <ArrowRight size={14} />
           </Link>
         </div>
       </section>

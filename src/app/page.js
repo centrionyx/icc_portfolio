@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col w-full">
       <HeroSection />
-      <WhatWeDo />
+      {/* <WhatWeDo /> */}
       <FeaturedProjects />
       <OurProcess />
       <InsightsSection />

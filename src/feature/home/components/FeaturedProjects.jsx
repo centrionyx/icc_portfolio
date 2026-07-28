@@ -1,180 +1,169 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plus, Calendar, Square } from "lucide-react";
-import { FEATURED_PROJECTS_CONTENT } from "../constants";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+// 5 High-quality projects
+const PROJECTS = [
+  {
+    id: 1,
+    title: "Skyline Towers",
+    subtitle: "Sophisticated urban living",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
+  },
+  {
+    id: 2,
+    title: "Midtown Lofts",
+    subtitle: "Stylish apartment community",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+  },
+  {
+    id: 3,
+    title: "The Shoreline",
+    subtitle: "Waterside luxury lifestyle",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+  },
+  {
+    id: 4,
+    title: "Apex Horizon",
+    subtitle: "Modern corporate workspace",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+  },
+  {
+    id: 5,
+    title: "Vanguard Hub",
+    subtitle: "Executive interior suite",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80",
+  },
+];
 
 export default function FeaturedProjects() {
-  const content = FEATURED_PROJECTS_CONTENT;
-  const largeProject = content.projects.find((p) => p.isLarge);
-  const smallProjects = content.projects.filter((p) => !p.isLarge);
+  const scrollRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Discrete step auto-scroll: Step to next card every 2.5 seconds cleanly
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % PROJECTS.length);
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Smoothly scroll container whenever currentIndex updates
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container || !container.children[currentIndex]) return;
+
+    const targetCard = container.children[currentIndex];
+    const offsetLeft = targetCard.offsetLeft - container.offsetLeft;
+
+    container.scrollTo({
+      left: offsetLeft,
+      behavior: "smooth",
+    });
+  }, [currentIndex]);
 
   return (
-    <section className="w-full bg-white py-16 sm:py-20 border-b border-gray-200">
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-12">
-        
-        {/* LEFT PANEL - Tagline, Title & CTA - 24% width for perfect vertical alignment */}
-        <div className="w-full lg:w-[24%] flex flex-col justify-between py-2 border-r border-transparent lg:border-r-0">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#005ea6] mb-4 block">
-              {content.tagline}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-normal tracking-tight leading-[1.2] text-slate-900 font-serif">
-              {content.titleLine1}
-              <span className="block font-bold mt-1 text-slate-900 font-serif">
-                {content.titleLine2}
-              </span>
-            </h2>
-          </div>
+    <section className="w-full bg-white py-10 sm:py-14 px-5 lg:px-8 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto">
+        {/* Header - Single Heading without duplicate text */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 pb-4 border-b border-gray-100 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black leading-tight">
+            Featured <span className="font-bold">Projects</span>
+          </h2>
 
           <Link
-            href={content.cta.href}
+            href="/projects"
             className="
               inline-flex
               items-center
               gap-2
-              text-[#005ea6]
-              text-[11px]
-              font-bold
-              uppercase
-              tracking-[0.15em]
-              mt-8
-              lg:mt-0
-              transition-colors
+              text-black/60
+              text-sm
+              font-medium
+              transition-all
               duration-300
-              hover:text-[#004b84]
+              hover:text-black
               group
+              whitespace-nowrap
             "
           >
-            {content.cta.text}
-            <ArrowRight size={14} className="transition-transform duration-350 group-hover:translate-x-1" />
+            View All Developments
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-1 transition-transform duration-300"
+            />
           </Link>
         </div>
 
-        {/* RIGHT PANEL - Project Grid - 76% width */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          
-          {/* Large Project Card - Changed to aspect-[1.5] (rectangular) */}
-          {largeProject && (
-            <div className="relative aspect-[1.5] w-full bg-slate-900 overflow-hidden group">
+        {/* Carousel Slider Row — Exactly 3 full cards visible at once on md/lg screens */}
+        <div
+          ref={scrollRef}
+          className="flex gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory scroll-smooth py-1"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {PROJECTS.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative aspect-[4/3] w-full min-w-[280px] md:min-w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-2.5rem)/3)] flex-shrink-0 overflow-hidden group cursor-pointer snap-start"
+            >
               <Image
-                src={largeProject.image}
-                alt={largeProject.client}
+                src={project.image}
+                alt={project.title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-              
-              {/* Project Details */}
-              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end text-white">
-                <h3 className="text-base sm:text-lg font-bold tracking-wide uppercase mb-1">
-                  {largeProject.client}
-                </h3>
-                <p className="text-[10px] text-slate-300 tracking-wider mb-4">
-                  {largeProject.location}
-                </p>
-                
-                {/* Stats */}
-                <div className="flex items-center gap-6 text-[9px] sm:text-xs font-semibold uppercase tracking-wider text-slate-200">
-                  <span className="flex items-center gap-2">
-                    <Square size={14} className="text-slate-400" />
-                    {largeProject.size}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <Calendar size={14} className="text-slate-400" />
-                    {largeProject.duration}
-                  </span>
-                </div>
-              </div>
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-              {/* Plus Button */}
-              <Link
-                href={`/projects/${largeProject.id}`}
-                className="
-                  absolute
-                  bottom-0
-                  right-0
-                  w-10
-                  h-10
-                  bg-[#005ea6]
-                  text-white
-                  flex
-                  items-center
-                  justify-center
-                  transition-colors
-                  duration-300
-                  hover:bg-[#004b84]
-                "
-              >
-                <Plus size={16} />
-              </Link>
-            </div>
-          )}
-
-          {/* 2x2 Small Projects Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {smallProjects.map((project) => (
-              <div key={project.id} className="relative aspect-[1.5] w-full bg-slate-900 overflow-hidden group">
-                <Image
-                  src={project.image}
-                  alt={project.client}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                
-                {/* Project Details */}
-                <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end text-white">
-                  <h3 className="text-sm font-bold tracking-wide uppercase mb-0.5">
-                    {project.client}
+              {/* Project info & View Details - Cleanly Aligned at Bottom */}
+              <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between z-10">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-medium tracking-tight text-white mb-0.5">
+                    {project.title}
                   </h3>
-                  <p className="text-[9px] text-slate-300 tracking-wider mb-3">
-                    {project.location}
+                  <p className="text-xs text-white/80 font-light tracking-wide">
+                    {project.subtitle}
                   </p>
-                  
-                  {/* Stats */}
-                  <div className="flex flex-wrap items-center gap-4 text-[9px] font-semibold uppercase tracking-wider text-slate-200">
-                    <span className="flex items-center gap-1.5">
-                      <Square size={12} className="text-slate-400" />
-                      {project.size}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Calendar size={12} className="text-slate-400" />
-                      {project.duration}
-                    </span>
-                  </div>
                 </div>
 
-                {/* Plus Button */}
+                {/* View details link */}
                 <Link
                   href={`/projects/${project.id}`}
                   className="
-                    absolute
-                    bottom-0
-                    right-0
-                    w-10
-                    h-10
-                    bg-[#005ea6]
-                    text-white
+                    text-white/80
+                    hover:text-white
+                    text-xs
+                    font-medium
+                    uppercase
+                    tracking-wider
                     flex
                     items-center
-                    justify-center
+                    gap-1.5
                     transition-colors
                     duration-300
-                    hover:bg-[#004b84]
+                    group/link
+                    shrink-0
+                    ml-2
                   "
                 >
-                  <Plus size={16} />
+                  <span>Details</span>
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/link:translate-x-1 transition-transform duration-300"
+                  />
                 </Link>
               </div>
-            ))}
-          </div>
-
+            </motion.div>
+          ))}
         </div>
-
       </div>
     </section>
   );

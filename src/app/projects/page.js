@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  MapPin, 
-  Calendar, 
-  Layout, 
-  Award, 
-  CheckCircle, 
-  ArrowRight, 
-  RefreshCw, 
-  ChevronLeft, 
+import {
+  MapPin,
+  Calendar,
+  Layout,
+  Award,
+  CheckCircle,
+  ArrowRight,
+  RefreshCw,
+  ChevronLeft,
   ChevronRight,
   Search,
   Grid,
@@ -24,9 +24,9 @@ import {
 // Subcomponent for each project card (Grid View) - CLEAN LIGHT THEME
 function ProjectCard({ project, onClick }) {
   const [currentIdx, setCurrentIdx] = useState(0);
-  
-  const images = project.images && project.images.length > 0 
-    ? project.images 
+
+  const images = project.images && project.images.length > 0
+    ? project.images
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
   const handleNext = (e) => {
@@ -42,7 +42,7 @@ function ProjectCard({ project, onClick }) {
   };
 
   return (
-    <div 
+    <div
       onClick={() => onClick(project)}
       className="bg-white border border-slate-200/80 rounded-2xl flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/5 hover:-translate-y-1.5 cursor-pointer relative"
     >
@@ -54,7 +54,7 @@ function ProjectCard({ project, onClick }) {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
-        
+
         {/* Category Badge */}
         <span className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg">
           {project.category}
@@ -96,9 +96,8 @@ function ProjectCard({ project, onClick }) {
               {images.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${
-                    idx === currentIdx ? "bg-white scale-125 px-2" : "bg-white/50"
-                  }`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${idx === currentIdx ? "bg-white scale-125 px-2" : "bg-white/50"
+                    }`}
                 />
               ))}
             </div>
@@ -179,12 +178,12 @@ function ProjectCard({ project, onClick }) {
 
 // Subcomponent for List View Card - CLEAN LIGHT THEME
 function ProjectListCard({ project, onClick }) {
-  const image = project.images && project.images.length > 0 
-    ? project.images[0] 
+  const image = project.images && project.images.length > 0
+    ? project.images[0]
     : (project.image ? project.image : "/office_building_dusk.png");
 
   return (
-    <div 
+    <div
       onClick={() => onClick(project)}
       className="bg-white border border-slate-200/80 rounded-2xl flex flex-col md:flex-row group overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5 cursor-pointer"
     >
@@ -257,7 +256,7 @@ function ProjectStatsDashboard({ projects }) {
     return acc + (isLakh ? val * 100000 : val);
   }, 0);
 
-  const formattedArea = totalAreaRaw > 100000 
+  const formattedArea = totalAreaRaw > 100000
     ? `${(totalAreaRaw / 100000).toFixed(1)} Lakh Sq. Ft.`
     : `${totalAreaRaw.toLocaleString()} Sq. Ft.`;
 
@@ -316,8 +315,8 @@ function ProjectStatsDashboard({ projects }) {
                 <span className="text-slate-655 capitalize">{cat} Offices</span>
                 <div className="flex items-center gap-2">
                   <div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-blue-600 to-cyan-500" 
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-600 to-cyan-500"
                       style={{ width: `${(count / projects.length) * 100}%` }}
                     />
                   </div>
@@ -338,18 +337,18 @@ function ProjectDetailsModal({ project, onClose }) {
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   if (!project) return null;
 
-  const images = project.images && project.images.length > 0 
-    ? project.images 
+  const images = project.images && project.images.length > 0
+    ? project.images
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
   return (
     <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto animate-fade-in">
-      <div 
+      <div
         className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[90vh] md:max-h-[85vh] animate-scale-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 bg-slate-900/80 hover:bg-slate-900 text-white p-2 rounded-full z-20 transition-all shadow-lg"
           aria-label="Close Modal"
@@ -359,10 +358,10 @@ function ProjectDetailsModal({ project, onClose }) {
 
         {/* Left Side: Images Showcase */}
         <div className="lg:w-1/2 bg-slate-900 flex flex-col justify-between relative h-[300px] lg:h-auto min-h-[300px]">
-          <img 
-            src={images[activeImgIdx]} 
-            alt={project.client} 
-            className="absolute inset-0 w-full h-full object-cover opacity-90" 
+          <img
+            src={images[activeImgIdx]}
+            alt={project.client}
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none" />
 
@@ -380,9 +379,8 @@ function ProjectDetailsModal({ project, onClose }) {
                 <button
                   key={idx}
                   onClick={() => setActiveImgIdx(idx)}
-                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
-                    idx === activeImgIdx ? "border-blue-500 scale-105" : "border-white/20 hover:border-white/50"
-                  }`}
+                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${idx === activeImgIdx ? "border-blue-500 scale-105" : "border-white/20 hover:border-white/50"
+                    }`}
                 >
                   <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
                 </button>
@@ -467,8 +465,8 @@ function ProjectDetailsModal({ project, onClose }) {
 
           <div className="pt-4 border-t border-slate-150 flex items-center justify-between">
             <span className="text-xs text-slate-400">Centrionyx Portfolio Delivery Showcase</span>
-            <button 
-              onClick={onClose} 
+            <button
+              onClick={onClose}
               className="px-5 py-2.5 bg-blue-600 text-white rounded-full text-xs font-bold hover:bg-blue-500 transition-colors shadow-lg"
             >
               Close Showcase
@@ -546,15 +544,15 @@ export default function ProjectsPage() {
         const parseWeeks = (durStr) => parseFloat(durStr.match(/\d+/)?.[0] || 0);
         return parseWeeks(b.duration) - parseWeeks(a.duration);
       }
-      return 0; 
+      return 0;
     });
 
   return (
     <div className="w-full bg-[#f8fafc] text-slate-800 pb-20 min-h-screen relative overflow-hidden">
-      
+
       {/* PRECISE SYMMETRIC IMAGE HERO SECTION */}
       <section className="relative w-full h-[380px] sm:h-[420px] lg:h-[460px] overflow-hidden select-none">
-        
+
         {/* Full-bleed background fit-out image */}
         <img
           src="/workplace_strategy.png"
@@ -567,12 +565,12 @@ export default function ProjectsPage() {
         {/* Symmetric container aligned to global page grids */}
         <div className="max-w-7xl mx-auto px-5 lg:px-8 h-full flex items-center relative z-10">
           <div className="w-full lg:w-3/5 flex flex-col items-start text-white">
-            
+
             {/* Monospace tagged category accent */}
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 block font-mono mb-4">
-               PORTFOLIO SHOWCASE
+              PORTFOLIO SHOWCASE
             </span>
-            
+
             {/* Clean symmetric title */}
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-none text-white">
               Precision Execution.
@@ -580,7 +578,7 @@ export default function ProjectsPage() {
                 Handover Excellence.
               </span>
             </h1>
-            
+
             <p className="text-slate-300 text-xs sm:text-sm mt-5 max-w-xl leading-relaxed font-light">
               Explore our project footprints representing premium fit-out execution, strict safety compliance, and global design standard alignment.
             </p>
@@ -600,7 +598,7 @@ export default function ProjectsPage() {
 
       {/* EXPLORER DASHBOARD BODY */}
       <main className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 relative z-30">
-        
+
         {/* THREE STATS OVERVIEW PANEL */}
         {!loading && projects.length > 0 && (
           <ProjectStatsDashboard projects={projects} />
@@ -609,7 +607,7 @@ export default function ProjectsPage() {
         {/* SEARCH, SORT, FILTER & LAYOUT CONTROLS CARD */}
         <div className="bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-100/50 p-6 mb-8 flex flex-col gap-6 backdrop-blur-md">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-            
+
             {/* Search Input */}
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
@@ -621,7 +619,7 @@ export default function ProjectsPage() {
                 className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-800 placeholder-slate-400 transition-all"
               />
               {searchQuery && (
-                <button 
+                <button
                   onClick={() => setSearchQuery("")}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650"
                 >
@@ -668,8 +666,8 @@ export default function ProjectsPage() {
           {/* Filter Categories Tabs */}
           <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5">
             {categories.map((cat) => {
-              const count = cat.id === "all" 
-                ? projects.length 
+              const count = cat.id === "all"
+                ? projects.length
                 : projects.filter(p => p.category === cat.id).length;
 
               return (
@@ -725,9 +723,9 @@ export default function ProjectsPage() {
           ) : layoutMode === "grid" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {processedProjects.map((project) => (
-                <ProjectCard 
-                  key={project._id || project.id} 
-                  project={project} 
+                <ProjectCard
+                  key={project._id || project.id}
+                  project={project}
                   onClick={setSelectedProject}
                 />
               ))}
@@ -735,9 +733,9 @@ export default function ProjectsPage() {
           ) : (
             <div className="flex flex-col gap-6">
               {processedProjects.map((project) => (
-                <ProjectListCard 
-                  key={project._id || project.id} 
-                  project={project} 
+                <ProjectListCard
+                  key={project._id || project.id}
+                  project={project}
                   onClick={setSelectedProject}
                 />
               ))}
@@ -749,9 +747,9 @@ export default function ProjectsPage() {
 
       {/* DETAIL MODAL DRAWER */}
       {selectedProject && (
-        <ProjectDetailsModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
+        <ProjectDetailsModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
         />
       )}
 
