@@ -311,8 +311,8 @@ export default function ContactPage() {
               </div>
               <div>
                 <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Headquarters</h4>
-                <p className="text-xs font-semibold text-slate-100 mt-0.5 leading-tight">
-                  Indiranagar, Bengaluru, KA 560038
+                <p className="text-xs font-semibold text-slate-100 mt-0.5 leading-snug">
+                  6, Apurva Apartment, CME Colony, Near Bharat Bakery, New Sangavi, Pune - 411061, Maharashtra, India
                 </p>
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function ContactPage() {
               <div>
                 <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Email Enquiries</h4>
                 <p className="text-xs font-semibold text-slate-100 mt-0.5">
-                  mail@example.com
+                  info@iccindia.co.in
                 </p>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function ContactPage() {
               <div>
                 <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Direct Line</h4>
                 <p className="text-xs font-semibold text-slate-100 mt-0.5">
-                  +91 *** *** ****
+                  +91 93569 81566
                 </p>
               </div>
             </div>
@@ -360,14 +360,14 @@ export default function ContactPage() {
 
           <div className="w-full h-[380px] sm:h-[420px] rounded-3xl overflow-hidden border-2 border-slate-200 shadow-lg relative">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.978168231016!2d77.6402434!3d12.9732731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34522a!2sIndiranagar%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+              src="https://maps.google.com/maps?q=Apurva+apartment%2C+Ganesh+Nagar%2C+Sant+Tukaram+Nagar%2C+New+Sangavi%2C+Pimpri-Chinchwad%2C+Maharashtra+411061&t=&z=17&ie=UTF8&iwloc=B&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="ICC Headquarters Coordinates"
+              title="ICC Headquarters Exact Location Pin - Apurva Apartment, Pune"
             />
           </div>
         </div>

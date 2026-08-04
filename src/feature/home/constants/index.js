@@ -1,5 +1,5 @@
 export const HERO_IMAGES = [
-  "/office_building_dusk.png",
+  "/Images/PrincipalGlobal.jpeg",
   "/industry_trends.png",
   "/sustainability_office.png",
   "/workplace_strategy.png"
@@ -15,7 +15,7 @@ export const HERO_CONTENT = {
       titleLine1: "Better Workplaces.",
       titleLine2: "Stronger Impact.",
       description: "End-to-end workplace solutions that combine innovation, sustainability and precision to create lasting value.",
-      image: "/office_building_dusk.png",
+      image: "/Images/PrincipalGlobal.jpeg",
       primaryCta: {
         text: "Explore Our Work",
         href: "/projects",
@@ -30,7 +30,7 @@ export const HERO_CONTENT = {
       titleLine1: "Innovative Design.",
       titleLine2: "Modern Spaces.",
       description: "Creating functional and inspiring environments tailored to the needs of modern businesses.",
-      image: "/office_building_dusk.png",
+      image: "/Images/PrincipalGlobal.jpeg",
       primaryCta: {
         text: "Explore Our Work",
         href: "/projects",
@@ -45,7 +45,7 @@ export const HERO_CONTENT = {
       titleLine1: "Sustainable Build.",
       titleLine2: "Green Future.",
       description: "Committed to eco-friendly construction and energy-efficient workplace solutions.",
-      image: "/office_building_dusk.png",
+      image: "/Images/PrincipalGlobal.jpeg",
       primaryCta: {
         text: "Explore Our Work",
         href: "/projects",
@@ -60,7 +60,7 @@ export const HERO_CONTENT = {
       titleLine1: "Precision Execution.",
       titleLine2: "Lasting Value.",
       description: "Ensuring the highest standards of craftsmanship and project management from start to finish.",
-      image: "/office_building_dusk.png",
+      image: "/Images/PrincipalGlobal.jpeg",
       primaryCta: {
         text: "Explore Our Work",
         href: "/projects",
@@ -198,35 +198,46 @@ export const FEATURED_PROJECTS_CONTENT = {
 };
 
 export const OUR_PROCESS_CONTENT = {
-  tagline: "OUR PROCESS",
-  titleLine1: "A Proven Path",
-  titleLine2: "to Excellence",
-  description: "A collaborative, transparent and agile approach that ensures every project is delivered with precision.",
+  tagline: "OUR APPROACH",
+  titleLine1: "Delivering Projects from",
+  titleLine2: "Concept to Completion",
+  description: "A comprehensive 6-stage structured delivery process ensuring seamless planning, execution, and long-term performance.",
   steps: [
     {
       number: "01",
-      title: "DISCOVER",
-      description: "Understanding your vision, goals and challenges.",
+      title: "CONCEPT STAGE",
+      description: "Project Schedule, Budgeting, Stakeholder Appointment & Site Due Diligence.",
+      bullets: ["Project Schedule", "Project Budget", "Stakeholder Appointment", "Site Due Diligence & Shortlisting"]
     },
     {
       number: "02",
-      title: "STRATEGIZE",
-      description: "Crafting smart, data-driven workplace strategies.",
+      title: "DESIGN & PLANNING",
+      description: "Test Fit, Look & Feel, MEP DBR Reviews, BOQs & Contracts.",
+      bullets: ["Test Fit", "Look & Feel", "MEP DBR Reviews & Inputs", "BOQ's and Contracts"]
     },
     {
       number: "03",
-      title: "DESIGN",
-      description: "Creating inspiring, functional and future-ready designs.",
+      title: "TECHNICAL & PROCUREMENT",
+      description: "Award of Work, D&B Partners, Long Lead Items & Contract Sign Offs.",
+      bullets: ["Recommendation & Award of Work", "D&B Partners", "Order Long Lead & Supply Packages", "Contract Sign Off's"]
     },
     {
       number: "04",
-      title: "DELIVER",
-      description: "Executing with precision, quality and transparency.",
+      title: "CONSTRUCTION STAGE",
+      description: "Vendor Management, Technical Submittals, Risk Mitigation & UAT.",
+      bullets: ["Vendor Management", "Sample & Technical Submittals", "Time & Risk Management", "Logistics & UAT"]
     },
     {
       number: "05",
-      title: "SUPPORT",
-      description: "Ensuring long-term performance through maintenance & support.",
+      title: "HANDOVER & CLOSE OUT",
+      description: "Testing & Commissioning, Punch Listing, Deficiencies & As-builts.",
+      bullets: ["Testing & Commissioning", "Punch Listing & Walk-through", "Close-out Training Programs", "O&M Manual & As-built Collation"]
+    },
+    {
+      number: "06",
+      title: "POST HANDOVER STAGE",
+      description: "Post-Move Support, DLP, Facilities Performance & Warranty Coordination.",
+      bullets: ["Post Move Support during DLP", "Performance Review of Services", "Warranty Coordination", "Maintenance Advisory"]
     },
   ],
 };

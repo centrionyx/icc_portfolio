@@ -110,12 +110,12 @@ export default function AboutPage() {
 
   const founder = {
     name: dynAbout?.founderName || "Yogesh Pawar",
-    role: dynAbout?.founderRole || "Founder",
-    bio: dynAbout?.founderBio || "Project Management Consultant with 20+ years of experience delivering more than 10 million sq ft of commercial interior fit-out projects across India. Specialized in project governance, stakeholder alignment, technical due diligence, contractor selection, and end-to-end delivery of fast-track corporate workspace projects.",
+    role: dynAbout?.founderRole || "Founder and Lead Consultant - BE Mechanical",
+    bio: dynAbout?.founderBio || "Yogesh Pawar has more than 18+ years of varied experience in Project management & controls of commercial interior Office fitout Projects. He has completed more than 8 million Sq.ft of Interior project in the field of IT / ITES / BFSI / Retail.\n\nHe has been responsible for leading a team of professional project vendors and technical agencies to handle various aspects of Interior office fitout project including Project Process & Procedures. As a “Project Owner”, he works with the client team for managing all aspects of the project delivery and Process management from concept to completion & post handover support for new & retrofit Projects. He is also responsible for Operational Oversight, client relationship management & Strategic planning for effective implementation of the projects.",
     email: dynAbout?.founderEmail || "yogesh.pawar@icc.ind.in",
     image: dynAbout?.founderImage || "/founder.png",
-    experience: dynAbout?.founderExperience || "20",
-    deliveredArea: calculatedDeliveredArea || "10M",
+    experience: dynAbout?.founderExperience || "18",
+    deliveredArea: calculatedDeliveredArea || "8M",
   };
 
   const clientsServed = [

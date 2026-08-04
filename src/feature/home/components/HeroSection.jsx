@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
   const heroRef = useRef(null);
 
-  const SINGLE_HERO_IMAGE = "https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070&auto=format&fit=crop";
+  const SINGLE_HERO_IMAGE = "/Images/workDay.jpeg";
 
   return (
     <section
@@ -33,7 +33,7 @@ export default function HeroSection() {
         />
         <div className="absolute inset-0 bg-black/50" />
         {/* Dark overlay for optimal text contrast */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* <div className="absolute inset-0 bg-black/40" /> */}
       </div>
 
       {/* Centered Content for ICC Commercial Fit-Out Workspace */}
@@ -45,9 +45,7 @@ export default function HeroSection() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="mb-4"
         >
-          <span className="text-cyan-300 text-xs sm:text-sm font-mono font-bold tracking-[0.25em] uppercase">
-            Commercial Workspace Management
-          </span>
+         
         </motion.div>
 
         {/* Main Headline */}
@@ -57,20 +55,20 @@ export default function HeroSection() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] mb-6 drop-shadow-md"
         >
-          Commercial Workspace <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-cyan-200">
-            Design &amp; Governance
+          Delivering Projects From <br />
+          <span className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] mb-6 drop-shadow-md">
+            Concept to Completion
           </span>
         </motion.h1>
 
-        {/* Description */}
+        {/* Sub-headline / Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed mb-8 drop-shadow-sm"
+          className="text-slate-200 text-sm sm:text-base md:text-lg max-w-3xl font-light leading-relaxed mb-8 drop-shadow-sm"
         >
-          Delivering high-precision commercial interior fit-out project management, BOQ auditing, MEP clash resolution, and zero-delay execution governance across India.
+          Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management
         </motion.p>
 
         {/* CTA Buttons */}
@@ -102,7 +100,7 @@ export default function HeroSection() {
               group
             "
           >
-            <span>Book Free Consultation</span>
+            <span>Get a Consultation</span>
             <ArrowRight
               size={16}
               className="group-hover:translate-x-1 transition-transform duration-300"
@@ -110,10 +108,10 @@ export default function HeroSection() {
           </Link>
 
           <Link
-            href="/services"
+            href="/projects"
             className="inline-flex items-center gap-2 bg-[#005EA6]/40 hover:bg-[#005EA6]/60 border border-white/25 text-white font-bold text-xs sm:text-sm px-8 py-4 rounded-xl backdrop-blur-md transition-all"
           >
-            <span>Explore Services</span>
+            <span>View Our Projects</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

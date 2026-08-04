@@ -54,7 +54,7 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 pt-2 sm:pt-3 px-4 sm:px-8 pointer-events-none">
         <div className="max-w-[1440px] mx-auto">
           {/* Glassmorphism Capsule Bar */}
-          <div className="pointer-events-auto h-16 sm:h-20 bg-black/30 backdrop-blur-xl border border-white/20 rounded-full px-6 sm:px-8 flex items-center justify-between shadow-2xl shadow-black/40">
+          <div className="pointer-events-auto h-16 sm:h-20 bg-slate-900/45 backdrop-blur-md border border-white/15 rounded-full px-6 sm:px-8 flex items-center justify-between shadow-lg">
 
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
@@ -67,11 +67,11 @@ export default function Header() {
                 />
               </div>
 
-              <div className="hidden sm:block flex flex-col text-left">
-                <p className="text-[10px] font-bold uppercase tracking-widest leading-none text-white font-sans">
+              <div className="hidden sm:flex flex-col ">
+                <p className="text-[10px] ml-14 font-bold uppercase tracking-widest leading-tight text-white font-sans">
                   INNOVATION
                 </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest leading-none text-white font-sans">
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-white font-sans">
                   Consultants &amp; Contractors
                 </p>
               </div>
@@ -93,8 +93,8 @@ export default function Header() {
                       tracking-[0.14em]
                       transition-all
                       duration-300
-                      ${isActive 
-                        ? "text-white font-extrabold" 
+                      ${isActive
+                        ? "text-white font-extrabold"
                         : "text-white/80 hover:text-white"
                       }
                     `}

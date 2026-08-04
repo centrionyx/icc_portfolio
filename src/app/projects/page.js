@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Calendar,
@@ -12,6 +13,7 @@ import {
   RefreshCw,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Search,
   Grid,
   List,
@@ -21,156 +23,42 @@ import {
   Briefcase
 } from "lucide-react";
 
-// Subcomponent for each project card (Grid View) - CLEAN LIGHT THEME
+// Subcomponent for each project card (Clean Minimalist Design with Glass Shine Hover)
 function ProjectCard({ project, onClick }) {
-  const [currentIdx, setCurrentIdx] = useState(0);
-
   const images = project.images && project.images.length > 0
     ? project.images
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentIdx((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrev = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentIdx((prev) => (prev - 1 + images.length) % images.length);
-  };
-
   return (
     <div
       onClick={() => onClick(project)}
-      className="bg-white border border-slate-200/80 rounded-2xl flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/5 hover:-translate-y-1.5 cursor-pointer relative"
+      className="group flex flex-col cursor-pointer transition-all duration-300"
     >
-      {/* Cover Image Carousel container */}
-      <div className="relative h-[240px] w-full bg-slate-100 overflow-hidden">
+      {/* Clean Minimalist Image Frame with Zoom & Glass Shine Hover */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 mb-4 rounded-sm">
         <img
-          src={images[currentIdx]}
-          alt={`${project.client} ${currentIdx + 1}`}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src={images[0]}
+          alt={project.client}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
+        
+        {/* Glass Shine Light Beam Effect on Hover */}
+        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="absolute -top-[100%] -left-[100%] w-[300%] h-[300%] bg-gradient-to-r from-transparent via-white/25 to-transparent transform -rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+        </div>
 
-        {/* Category Badge */}
-        <span className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg">
-          {project.category}
-        </span>
-
-        {/* Status Indicator Badge */}
-        {(() => {
-          const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
-          const dotColor =
-            status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-blue-500" : "bg-amber-500";
-          return (
-            <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-medium px-2.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
-              <span className={`w-2 h-2 rounded-full ${dotColor} animate-pulse`}></span>
-              {status}
-            </div>
-          );
-        })()}
-
-        {/* Carousel controls if multiple images exist */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 z-10 shadow-md"
-              aria-label="Previous Image"
-            >
-              <ChevronLeft size={14} />
-            </button>
-            <button
-              onClick={handleNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-blue-600 hover:text-white text-slate-800 p-1.5 rounded-full transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 z-10 shadow-md"
-              aria-label="Next Image"
-            >
-              <ChevronRight size={14} />
-            </button>
-
-            {/* Indicator dots */}
-            <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-1.5 z-10">
-              {images.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${idx === currentIdx ? "bg-white scale-125 px-2" : "bg-white/50"
-                    }`}
-                />
-              ))}
-            </div>
-          </>
-        )}
+        {/* Subtle overlay tint */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
       </div>
 
-      {/* Text content details */}
-      <div className="p-6 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
-            {project.client}
-          </h3>
-
-          {/* Structured attributes */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
-                <MapPin className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Location</p>
-                <p className="text-xs font-semibold text-slate-700">{project.location}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
-                <Layout className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Area Size</p>
-                <p className="text-xs font-semibold text-slate-700">{project.size}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
-                <Calendar className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
-                <p className="text-xs font-semibold text-slate-700">{project.duration}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
-                <Award className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Scope</p>
-                <p className="text-xs font-semibold text-slate-700 truncate max-w-[110px]" title={project.scope}>
-                  {project.scope}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Outcome Panel */}
-          <div className="border-t border-slate-100 pt-4 mt-2">
-            <div className="flex items-start gap-2.5 text-xs bg-slate-50/80 p-3 rounded-xl border border-slate-100">
-              <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold text-slate-900 block text-[10px] uppercase tracking-wider mb-0.5">Key Outcome</span>
-                <p className="text-[11px] leading-relaxed text-slate-600 line-clamp-2">{project.outcomes}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer Link */}
-        <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 uppercase tracking-wider">
-          <span>Explore Details</span>
-          <ArrowRight size={14} className="transform group-hover:translate-x-1.5 transition-transform" />
-        </div>
+      {/* Title and Location beneath image */}
+      <div className="text-center">
+        <h3 className="text-base sm:text-lg font-bold text-[#005ea6] tracking-tight mb-1 group-hover:opacity-85 transition-opacity">
+          {project.client}
+        </h3>
+        <p className="text-xs text-slate-500 font-light tracking-wider uppercase">
+          {project.location}
+        </p>
       </div>
     </div>
   );
@@ -332,7 +220,7 @@ function ProjectStatsDashboard({ projects }) {
   );
 }
 
-// Project Details Dialog Modal - CLEAN LIGHT THEME
+// Project Details Dialog Modal - LUXURIOUS MODERN AESTHETIC
 function ProjectDetailsModal({ project, onClose }) {
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   if (!project) return null;
@@ -342,45 +230,49 @@ function ProjectDetailsModal({ project, onClose }) {
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
   return (
-    <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto animate-fade-in">
+    <div 
+      className="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fade-in"
+      onClick={onClose}
+    >
       <div
-        className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[90vh] md:max-h-[85vh] animate-scale-up"
+        className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[90vh] md:max-h-[82vh] border border-slate-100"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
+        {/* Floating Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 bg-slate-900/80 hover:bg-slate-900 text-white p-2 rounded-full z-20 transition-all shadow-lg"
+          className="absolute top-4 right-4 bg-slate-900/70 hover:bg-slate-900 text-white p-2.5 rounded-full z-30 transition-all shadow-xl backdrop-blur-md border border-white/10"
           aria-label="Close Modal"
         >
           <X size={18} />
         </button>
 
         {/* Left Side: Images Showcase */}
-        <div className="lg:w-1/2 bg-slate-900 flex flex-col justify-between relative h-[300px] lg:h-auto min-h-[300px]">
+        <div className="lg:w-1/2 bg-slate-950 flex flex-col justify-between relative min-h-[280px] lg:min-h-full">
           <img
             src={images[activeImgIdx]}
             alt={project.client}
-            className="absolute inset-0 w-full h-full object-cover opacity-90"
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-black/30 pointer-events-none" />
 
-          {/* Badge Overlay */}
+          {/* Category Badge Overlay */}
           <div className="p-6 relative z-10">
-            <span className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg">
+            <span className="bg-[#005ea6] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-lg border border-white/20">
               {project.category}
             </span>
           </div>
 
           {/* Bottom Thumbnails */}
           {images.length > 1 && (
-            <div className="p-6 relative z-10 flex gap-2 overflow-x-auto">
+            <div className="p-5 relative z-10 flex gap-2.5 overflow-x-auto bg-slate-950/40 backdrop-blur-md border-t border-white/10">
               {images.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveImgIdx(idx)}
-                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${idx === activeImgIdx ? "border-blue-500 scale-105" : "border-white/20 hover:border-white/50"
-                    }`}
+                  className={`w-12 h-12 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                    idx === activeImgIdx ? "border-cyan-400 scale-105 shadow-lg" : "border-white/20 opacity-70 hover:opacity-100"
+                  }`}
                 >
                   <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
                 </button>
@@ -390,86 +282,95 @@ function ProjectDetailsModal({ project, onClose }) {
         </div>
 
         {/* Right Side: Information Content */}
-        <div className="lg:w-1/2 p-8 overflow-y-auto flex flex-col justify-between text-slate-800">
+        <div className="lg:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between bg-white text-slate-800">
           <div>
-            <div className="flex items-center justify-between gap-4 mb-4">
-              <h2 className="text-2xl font-extrabold text-slate-950">{project.client}</h2>
+            {/* Client Title & Status */}
+            <div className="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#005ea6] block mb-1">
+                  PROJECT SPECIFICATIONS
+                </span>
+                <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">{project.client}</h2>
+              </div>
+              
               {(() => {
                 const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
-                const dotColor = status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-blue-500" : "bg-amber-500";
+                const dotColor = status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-[#005ea6]" : "bg-amber-500";
                 return (
-                  <div className="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
-                    <span className={`w-2.5 h-2.5 rounded-full ${dotColor}`}></span>
+                  <div className="bg-slate-100/80 border border-slate-200/60 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
+                    <span className={`w-2 h-2 rounded-full ${dotColor} animate-pulse`}></span>
                     {status}
                   </div>
                 );
               })()}
             </div>
 
-            <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-6">
-              Scope: <span className="text-slate-800 lowercase first-letter:uppercase">{project.scope}</span>
+            <p className="text-slate-600 text-xs font-light leading-relaxed mb-6">
+              {project.scope}
             </p>
 
-            {/* Structured Specifications Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
-                  <MapPin size={18} />
+            {/* Grid of Key Specs */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
+                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
+                  <MapPin size={16} />
                 </div>
                 <div>
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Location</p>
-                  <p className="text-sm font-semibold text-slate-850">{project.location}</p>
+                  <p className="text-xs font-bold text-slate-800">{project.location}</p>
                 </div>
               </div>
 
-              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
-                  <Layout size={18} />
+              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
+                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
+                  <Layout size={16} />
                 </div>
                 <div>
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Area Size</p>
-                  <p className="text-sm font-semibold text-slate-855">{project.size}</p>
+                  <p className="text-xs font-bold text-slate-800">{project.size}</p>
                 </div>
               </div>
 
-              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
-                  <Calendar size={18} />
+              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
+                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
+                  <Calendar size={16} />
                 </div>
                 <div>
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Duration</p>
-                  <p className="text-sm font-semibold text-slate-850">{project.duration}</p>
+                  <p className="text-xs font-bold text-slate-800">{project.duration}</p>
                 </div>
               </div>
 
-              <div className="bg-[#f8fafc] p-3 rounded-2xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2 bg-blue-100 text-blue-600 rounded-xl">
-                  <CheckCircle size={18} />
+              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
+                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
+                  <CheckCircle size={16} />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Project Status</p>
-                  <p className="text-sm font-semibold text-slate-850">{project.status || (project.completion === 100 ? "Completed" : "Ongoing")}</p>
+                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Status</p>
+                  <p className="text-xs font-bold text-slate-800">{project.status || "Completed"}</p>
                 </div>
               </div>
             </div>
 
             {/* Outcome Highlight Box */}
-            <div className="border border-emerald-100 bg-emerald-50/50 p-4 rounded-2xl mb-4">
-              <div className="flex items-center gap-2 mb-2 text-emerald-850">
-                <CheckCircle size={18} className="text-emerald-600" />
-                <span className="text-xs font-bold uppercase tracking-wider">Key Delivery Outcome</span>
+            {project.outcomes && (
+              <div className="border border-emerald-200/80 bg-emerald-50/40 p-4 rounded-2xl mb-4">
+                <div className="flex items-center gap-2 mb-1 text-emerald-800">
+                  <CheckCircle size={15} className="text-emerald-600 shrink-0" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider font-mono">Key Delivery Outcome</span>
+                </div>
+                <p className="text-xs leading-relaxed text-slate-700 font-light">{project.outcomes}</p>
               </div>
-              <p className="text-xs leading-relaxed text-slate-700">{project.outcomes}</p>
-            </div>
+            )}
           </div>
 
-          <div className="pt-4 border-t border-slate-150 flex items-center justify-between">
-            <span className="text-xs text-slate-400">Centrionyx Portfolio Delivery Showcase</span>
+          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span className="text-[11px] font-mono text-slate-400">ICC Project Showcase</span>
             <button
               onClick={onClose}
-              className="px-5 py-2.5 bg-blue-600 text-white rounded-full text-xs font-bold hover:bg-blue-500 transition-colors shadow-lg"
+              className="px-5 py-2.5 bg-[#005ea6] hover:bg-[#004b84] text-white rounded-xl text-xs font-bold transition-colors shadow-md"
             >
-              Close Showcase
+              Close
             </button>
           </div>
         </div>
@@ -550,153 +451,182 @@ export default function ProjectsPage() {
   return (
     <div className="w-full bg-[#f8fafc] text-slate-800 pb-20 min-h-screen relative overflow-hidden">
 
-      {/* PRECISE SYMMETRIC IMAGE HERO SECTION */}
-      <section className="relative w-full h-[380px] sm:h-[420px] lg:h-[460px] overflow-hidden select-none">
+      {/* HERO SECTION - Screen-Fit height with Scroll Down Indicator */}
+      <section className="relative w-full h-screen min-h-[640px] flex flex-col justify-between bg-[#f8fafc] overflow-hidden pt-20 sm:pt-28 pb-6">
+        {/* Full-width High-Quality Interior Photo with Vignette Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/Images/workDay.jpeg"
+            alt="Commercial Fit-Out Workspaces Portfolio"
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Soft vignette gradient for legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
+        </div>
 
-        {/* Full-bleed background fit-out image */}
-        <img
-          src="/workplace_strategy.png"
-          alt="Execution Fit-Out Workspace"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* High contrast overlay mask */}
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] pointer-events-none z-0" />
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10 my-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Eyebrow Tagline */}
+              <p className="text-xs sm:text-sm font-sans font-extrabold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-md">
+                PORTFOLIO SHOWCASE
+              </p>
 
-        {/* Symmetric container aligned to global page grids */}
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 h-full flex items-center relative z-10">
-          <div className="w-full lg:w-3/5 flex flex-col items-start text-white">
+              {/* Large Prominent Title */}
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] drop-shadow-lg">
+                Our Featured Work <br />
+                &amp; Deliveries
+              </h1>
 
-            {/* Monospace tagged category accent */}
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 block font-mono mb-4">
-              PORTFOLIO SHOWCASE
-            </span>
+              {/* Sub-headline Description */}
+              <p className="text-slate-100 text-xs sm:text-sm font-medium leading-relaxed max-w-xl drop-shadow-md">
+                A curated showcase of our interior fit-out executions, project advisory, and technical management across commercial, IT/ITES, BFSI, retail, and hospitality spaces.
+              </p>
 
-            {/* Clean symmetric title */}
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-none text-white">
-              Precision Execution.
-              <span className="block bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent mt-2">
-                Handover Excellence.
-              </span>
-            </h1>
-
-            <p className="text-slate-300 text-xs sm:text-sm mt-5 max-w-xl leading-relaxed font-light">
-              Explore our project footprints representing premium fit-out execution, strict safety compliance, and global design standard alignment.
-            </p>
-
-            {/* Centered compliance stats pill */}
-            <div className="mt-8 flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300">
-                100% On-Time MEP Handover Rate
-              </span>
+              {/* White CTA Button matching Services page */}
+              <div className="pt-2">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center bg-white hover:bg-slate-50 text-[#005ea6] font-bold text-xs sm:text-sm px-8 py-4 rounded-xl shadow-xl transition-all hover:scale-105 duration-200"
+                >
+                  Start Your Project
+                </Link>
+              </div>
             </div>
 
+            {/* Right Side Stats Cards */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+              {/* Stat Card 1 */}
+              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#005ea6] flex items-center justify-center font-bold shadow-inner">
+                    <Layout className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#005ea6] bg-blue-50/80 px-2 py-0.5 rounded-full border border-blue-100">
+                    Volume
+                  </span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
+                    8M+
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
+                    Sq. Ft. Delivered
+                  </span>
+                </div>
+              </div>
+
+              {/* Stat Card 2 */}
+              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center font-bold shadow-inner">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50/80 px-2 py-0.5 rounded-full border border-cyan-100">
+                    Excellence
+                  </span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
+                    18+
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
+                    Years Leadership
+                  </span>
+                </div>
+              </div>
+
+              {/* Stat Card 3 */}
+              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold shadow-inner">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50/80 px-2 py-0.5 rounded-full border border-emerald-100">
+                    Quality
+                  </span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
+                    100%
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
+                    Predictable Delivery
+                  </span>
+                </div>
+              </div>
+
+              {/* Stat Card 4 */}
+              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold shadow-inner">
+                    <Briefcase className="w-5 h-5" />
+                  </div>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50/80 px-2 py-0.5 rounded-full border border-indigo-100">
+                    Portfolio
+                  </span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
+                    {projects.length > 0 ? `${projects.length}+` : "50+"}
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
+                    Corporate Projects
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* BOTTOM ANIMATED SCROLL DOWN ARROW BUTTON */}
+        <div className="relative z-10 flex flex-col items-center justify-center pb-2">
+          <button
+            onClick={() => {
+              const mainSection = document.getElementById("projects-explorer");
+              if (mainSection) {
+                mainSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="group flex flex-col items-center gap-1.5 text-white/80 hover:text-white transition-colors cursor-pointer"
+            aria-label="Scroll down to view projects"
+          >
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-300 group-hover:text-cyan-300 transition-colors drop-shadow-sm">
+              Explore Projects Below
+            </span>
+            <div className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center animate-bounce group-hover:bg-white/30 transition-all shadow-xl">
+              <ChevronDown className="w-5 h-5 text-white" />
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* EXPLORER DASHBOARD BODY */}
-      <main className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 relative z-30">
+      <main id="projects-explorer" className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 relative z-30">
 
-        {/* THREE STATS OVERVIEW PANEL */}
-        {!loading && projects.length > 0 && (
-          <ProjectStatsDashboard projects={projects} />
-        )}
-
-        {/* SEARCH, SORT, FILTER & LAYOUT CONTROLS CARD */}
-        <div className="bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-100/50 p-6 mb-8 flex flex-col gap-6 backdrop-blur-md">
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-
-            {/* Search Input */}
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search projects by client, location, scope..."
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-slate-800 placeholder-slate-400 transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-650"
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
-
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-3 shrink-0">
-              <SlidersHorizontal className="text-slate-400 w-4 h-4" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-slate-50 border border-slate-200 text-slate-700 px-4 py-3 rounded-2xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer"
-              >
-                <option value="default">Default Order</option>
-                <option value="area">Sort by Area Size</option>
-                <option value="completion">Sort by Completion %</option>
-                <option value="duration">Sort by Duration</option>
-              </select>
-            </div>
-
-            {/* Layout Toggle buttons */}
-            <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 p-1.5 rounded-2xl shrink-0 self-end lg:self-auto">
-              <button
-                onClick={() => setLayoutMode("grid")}
-                className={`p-2 rounded-xl transition-all ${layoutMode === "grid" ? "bg-blue-600 text-white shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
-                title="Grid Layout"
-              >
-                <Grid size={16} />
-              </button>
-              <button
-                onClick={() => setLayoutMode("list")}
-                className={`p-2 rounded-xl transition-all ${layoutMode === "list" ? "bg-blue-600 text-white shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
-                title="List Layout"
-              >
-                <List size={16} />
-              </button>
-            </div>
-
-          </div>
-
-          {/* Filter Categories Tabs */}
-          <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5">
+        {/* MINIMAL CATEGORY FILTER TABS */}
+        <div className="mb-12 border-b border-slate-200/80 pb-4">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
             {categories.map((cat) => {
-              const count = cat.id === "all"
-                ? projects.length
-                : projects.filter(p => p.category === cat.id).length;
-
+              const isSelected = activeFilter === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
-                  className={`
-                    px-4
-                    py-2
-                    text-xs
-                    font-bold
-                    uppercase
-                    tracking-wider
-                    transition-all
-                    duration-200
-                    rounded-xl
-                    flex
-                    items-center
-                    gap-2
-                    ${activeFilter === cat.id
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                    }
-                  `}
+                  className={`relative py-2 text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 ${
+                    isSelected
+                      ? "text-[#005ea6] font-bold"
+                      : "text-slate-500 font-medium hover:text-slate-800"
+                  }`}
                 >
                   {cat.label}
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${activeFilter === cat.id ? "bg-white text-blue-900 font-bold" : "bg-slate-200 text-slate-700"}`}>
-                    {count}
-                  </span>
+                  {isSelected && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#005ea6] rounded-full" />
+                  )}
                 </button>
               );
             })}

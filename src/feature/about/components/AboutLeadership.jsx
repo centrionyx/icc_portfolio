@@ -6,114 +6,134 @@ import { Mail } from "lucide-react";
 
 export default function AboutLeadership({ founder, careerDeliveries }) {
   return (
-    <section className="py-20 lg:py-28 border-b border-gray-100 bg-white overflow-hidden">
+    <section className="py-8 lg:py-10 border-b border-gray-100 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        {/* FOUNDER SECTION: Ultra-compact height layout preserving all content */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center mb-8"
         >
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#003A70] block mb-2">
-            Leadership
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[#0a1f44]">Meet Our Founder</h2>
-        </motion.div>
-
-        {/* FOUNDERS CARD: Photo, Name, Designation on LEFT; Description & Social Profiles on RIGHT */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-xl mb-16 relative overflow-hidden"
-        >
-          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-center md:items-start">
-            {/* LEFT COLUMN: Photo, Name & Designation */}
-            <div className="w-full md:w-80 shrink-0 flex flex-col items-center text-center border-b md:border-b-0 md:border-r border-gray-100 pb-8 md:pb-0 md:pr-10">
-              <motion.div
-                className="relative w-40 sm:w-48 aspect-[3/4] rounded-2xl overflow-hidden mb-5 shadow-lg border-2 border-[#003A70]/10"
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image
-                  src={founder.image || "/founder.png"}
-                  alt={founder.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#003A70]/30 to-transparent" />
-              </motion.div>
-              
-              <h3 className="text-2xl font-bold text-[#0a1f44]">{founder.name}</h3>
-              <p className="text-sm text-[#005ea6] font-mono font-semibold tracking-wider mt-1">
-                {founder.role}
+          {/* LEFT COLUMN: Title, Bio, Circular Stats & Socials */}
+          <div className="lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#003A70] block mb-0.5">
+                Leadership
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0a1f44] tracking-tight mb-0.5">
+                Meet Our Founder
+              </h2>
+              <p className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#005ea6] mb-3">
+                {founder.name} — <span className="text-gray-500">{founder.role}</span>
               </p>
 
-              {/* Founder Quick Stats */}
-              <div className="grid grid-cols-2 gap-4 w-full mt-6 pt-6 border-t border-gray-100">
-                <div className="text-center">
-                  <p className="text-xl font-black text-[#0a1f44]">{founder.experience}+</p>
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-0.5">Years Exp.</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xl font-black text-[#0a1f44]">{founder.deliveredArea}+</p>
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-0.5">Sq. Ft.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN: Description & Social Profiles */}
-            <div className="flex-1 flex flex-col justify-between h-full pt-2">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-[#003A70] font-semibold block mb-3">
-                  About Founder
-                </span>
-                <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
-                  {founder.bio}
-                </p>
+              <div className="space-y-2 mb-4">
+                {founder.bio ? (
+                  founder.bio.split("\n\n").map((para, idx) => (
+                    <p key={idx} className="text-gray-600 text-xs sm:text-sm leading-snug sm:leading-relaxed">
+                      {para}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-gray-600 text-xs sm:text-sm leading-snug sm:leading-relaxed">
+                    {founder.bio}
+                  </p>
+                )}
               </div>
 
-              {/* Social Profiles & Contact */}
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-4">
-                  Connect & Social Profiles
-                </h4>
-                <div className="flex flex-wrap items-center gap-3">
-                  <a
-                    href={`mailto:${founder.email}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-50 border border-blue-100 text-[#003A70] hover:bg-[#003A70] hover:text-white transition-all text-xs font-semibold"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>{founder.email}</span>
-                  </a>
-                  
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] transition-all text-xs font-semibold tracking-wide"
-                  >
-                    <span>LinkedIn</span>
-                  </a>
+              {/* TWO COMPACT FEATURE STATS WITH CIRCULAR ICONS */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 pt-3 border-t border-gray-100">
+                {/* Feature 1 */}
+                <div className="flex items-center gap-3 p-2 rounded-lg bg-gray-50/60 hover:bg-gray-100/60 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#0a1f44] shrink-0 shadow-sm border border-gray-100">
+                    <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-bold font-mono tracking-wider text-[#0a1f44] uppercase leading-tight">
+                      {founder.experience}+ Years Exp.
+                    </h4>
+                    <p className="text-[10px] text-gray-500 italic font-serif leading-tight mt-0.5">
+                      Commercial interior fitout & governance.
+                    </p>
+                  </div>
+                </div>
 
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#1da1f2] hover:text-white hover:border-[#1da1f2] transition-all text-xs font-semibold tracking-wide"
-                  >
-                    <span>Twitter / X</span>
-                  </a>
-
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#0a1f44] hover:text-white hover:border-[#0a1f44] transition-all text-xs font-semibold tracking-wide"
-                  >
-                    <span>Portfolio</span>
-                  </a>
+                {/* Feature 2 */}
+                <div className="flex items-center gap-3 p-2 rounded-lg bg-gray-50/60 hover:bg-gray-100/60 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#0a1f44] shrink-0 shadow-sm border border-gray-100">
+                    <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-bold font-mono tracking-wider text-[#0a1f44] uppercase leading-tight">
+                      {founder.deliveredArea}+ Sq. Ft.
+                    </h4>
+                    <p className="text-[10px] text-gray-500 italic font-serif leading-tight mt-0.5">
+                      Delivered corporate workspace projects.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Social Profiles & Contact */}
+            <div className="pt-2.5 border-t border-gray-100">
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={`mailto:${founder.email}`}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 border border-blue-100 text-[#003A70] hover:bg-[#003A70] hover:text-white transition-all text-[11px] font-semibold"
+                >
+                  <Mail className="w-3 h-3" />
+                  <span>{founder.email}</span>
+                </a>
+
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] transition-all text-[11px] font-semibold tracking-wide"
+                >
+                  <span>LinkedIn</span>
+                </a>
+
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#1da1f2] hover:text-white hover:border-[#1da1f2] transition-all text-[11px] font-semibold tracking-wide"
+                >
+                  <span>Twitter / X</span>
+                </a>
+
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-50 border border-gray-200 text-gray-700 hover:bg-[#0a1f44] hover:text-white hover:border-[#0a1f44] transition-all text-[11px] font-semibold tracking-wide"
+                >
+                  <span>Portfolio</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Executive Portrait Image (Compact Portrait Shape) */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <motion.div
+              className="relative w-full max-w-[280px] sm:max-w-[310px] aspect-[3/4] rounded-lg overflow-hidden shadow-sm border border-gray-200 bg-gray-100"
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Image
+                src={founder.image || "/founder.png"}
+                alt={founder.name}
+                fill
+                className="object-cover object-top"
+                priority
+              />
+            </motion.div>
           </div>
         </motion.div>
 
@@ -153,14 +173,14 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                 idx < 2
                   ? "from-[#005ea6]"
                   : idx < 5
-                  ? "from-[#003A70]"
-                  : "from-blue-400";
+                    ? "from-[#003A70]"
+                    : "from-blue-400";
               const barTo =
                 idx < 2
                   ? "to-cyan-400"
                   : idx < 5
-                  ? "to-[#005ea6]"
-                  : "to-[#003A70]";
+                    ? "to-[#005ea6]"
+                    : "to-[#003A70]";
 
               return (
                 <motion.div

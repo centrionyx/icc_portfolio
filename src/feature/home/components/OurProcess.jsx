@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Compass, Layout, CheckCircle, LifeBuoy } from "lucide-react";
+import { Search, Compass, Layout, CheckCircle, LifeBuoy, ShieldCheck } from "lucide-react";
 import { OUR_PROCESS_CONTENT } from "../constants";
 
-// Icon mapping corresponding to step index
-const stepIcons = [Search, Compass, Layout, CheckCircle, LifeBuoy];
+// Icon mapping corresponding to step index (6 icons)
+const stepIcons = [Search, Compass, Layout, CheckCircle, LifeBuoy, ShieldCheck];
 
 export default function OurProcess() {
   const content = OUR_PROCESS_CONTENT;
@@ -27,8 +27,8 @@ export default function OurProcess() {
           </p>
         </div>
 
-        {/* Process Steps - Fixed to single row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative items-start">
+        {/* Process Steps - Original UX with wavy animated arrows */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-2 relative items-start">
           {content.steps.map((step, index) => {
             const IconComponent = stepIcons[index % stepIcons.length];
             const isFirst = index === 0;

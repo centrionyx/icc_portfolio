@@ -38,8 +38,8 @@ export default function CareersHero() {
     }
   ];
 
-  // High quality interior office space photo
-  const OFFICE_BACKGROUND_IMAGE = "https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070&auto=format&fit=crop";
+  // High quality interior office space photo (Same as Homepage & About Hero)
+  const OFFICE_BACKGROUND_IMAGE = "/Images/workDay.jpeg";
 
   return (
     <section className="relative w-full bg-[#f8fafc] text-[#0a1f44] pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden select-none">
@@ -54,20 +54,20 @@ export default function CareersHero() {
           unoptimized
           className="object-cover object-center"
         />
-        {/* Soft light tint to keep background office image clearly visible */}
-        <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px]" />
+        {/* Dark Overlay matching Homepage & About Hero */}
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* TOP HEADER TITLE CONTAINER */}
       <div className="max-w-3xl mx-auto px-6 text-center relative z-10 space-y-3">
         
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0a1f44] font-serif drop-shadow-sm">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-sans drop-shadow-md">
           Build Your Future with Us
         </h1>
 
         {/* Subtitle */}
-        <p className="text-slate-800 text-xs sm:text-sm max-w-lg mx-auto font-semibold font-sans leading-relaxed">
+        <p className="text-slate-200 text-xs sm:text-sm max-w-lg mx-auto font-light font-sans leading-relaxed drop-shadow-sm">
           Discover exciting opportunities and grow your career in a thriving, high-performance environment.
         </p>
       </div>
