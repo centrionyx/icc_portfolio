@@ -31,19 +31,18 @@ export default function InsightsSection() {
               inline-flex
               items-center
               justify-center
-              bg-[#e2e6ea]
-              hover:bg-[#d8dce0]
-              text-[#0a1f44]
+              bg-[#E5A900]
+              hover:bg-[#CA9400]
+              text-slate-950
               text-xs
-              font-semibold
+              font-bold
               px-6
               py-2.5
               rounded-full
-              border
-              border-slate-300/60
+              shadow-sm
               transition-all
               duration-300
-              hover:shadow-sm
+              hover:scale-105
             "
           >
             Browse all Blogs
@@ -106,8 +105,9 @@ export default function InsightsSection() {
                     transition-transform
                     duration-300
                     group-hover:scale-110
-                    group-hover:bg-white
-                    group-hover:text-[#005ea6]
+                    group-hover:bg-[#E5A900]
+                    group-hover:text-slate-950
+                    group-hover:border-[#E5A900]
                   ">
                     <ArrowUpRight size={20} strokeWidth={2} />
                   </div>
@@ -115,7 +115,7 @@ export default function InsightsSection() {
 
                 {/* Bottom Content — Category Title & Subtext description matching reference image */}
                 <div className="relative z-10 p-6 sm:p-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-200 transition-colors">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight group-hover:text-[#E5A900] transition-colors">
                     {card.category || card.title}
                   </h3>
 

@@ -9,7 +9,7 @@ import { FaFacebookF, FaInstagram, FaPinterestP, FaLinkedinIn, FaPaperPlane } fr
 // FOOTER CONFIGURATION CONSTANTS (Easily editable here)
 export const FOOTER_CONFIG = {
   brand: {
-    name: "ICC Consultants",
+    name: "Innovation Consultants & Contractors",
     subtitle: "Consultants & Contractors",
     logoSrc: "/logo.svg",
     description: "We design beautiful, functional and inspiring interiors that enhance the way you live and work.",
@@ -80,22 +80,22 @@ export function Footer() {
           {/* Column 1: Brand Info & Socials (3 cols) */}
           <div className="lg:col-span-3 flex flex-col justify-between space-y-4">
             <div>
-              {/* Brand Logo & Title */}
+              {/* Brand Logo & Title - Matched exactly with Navbar Header */}
               <Link href="/" className="flex items-center gap-3 shrink-0 group mb-4">
-                <div className="relative w-10 h-10 sm:w-11 sm:h-11 overflow-hidden p-1 shrink-0">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden p-1 shrink-0">
                   <Image
                     src={brand.logoSrc}
                     alt={`${brand.name} Logo`}
                     fill
-                    className="object-contain p-0.5"
+                    className="object-contain p-1"
                   />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-base font-extrabold tracking-tight text-slate-900 font-sans leading-tight">
-                    {brand.name}
+                <div className="flex flex-col items-center text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
+                    INNOVATION
                   </p>
-                  <p className="text-xs font-medium text-slate-500 font-sans leading-tight mt-0.5">
-                    {brand.subtitle}
+                  <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
+                    Consultants &amp; Contractors
                   </p>
                 </div>
               </Link>

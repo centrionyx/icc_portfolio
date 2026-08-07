@@ -1,117 +1,112 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, ArrowUpRight } from "lucide-react";
 
-export default function AboutPrinciples({ values, founderEmail }) {
+export default function AboutPrinciples({ values }) {
+  // If values prop is passed, use it, else fallback to default principles list
+  const defaultPrinciples = [
+    {
+      title: "Thoughtful Design",
+      description: "We design with intention, creating spaces that reflect your personality and purpose.",
+    },
+    {
+      title: "Quality First",
+      description: "We never compromise on quality — from materials to craftsmanship, every detail matters.",
+    },
+    {
+      title: "Client-Centric Approach",
+      description: "Your vision is our starting point. We listen, understand, and build around your needs.",
+    },
+    {
+      title: "Innovation in Every Detail",
+      description: "We blend creativity with functionality to deliver spaces that are both modern and timeless.",
+    },
+    {
+      title: "Sustainable Thinking",
+      description: "We believe in responsible design choices that create a better, greener future for spaces we live in.",
+    },
+    {
+      title: "Integrity & Transparency",
+      description: "Honest communication, clear processes, and complete transparency at every stage of the journey.",
+    },
+  ];
+
+  const list = values && values.length >= 6 ? values : defaultPrinciples;
+
   return (
-    <section className="py-20 lg:py-28 bg-[#f7f8fa] border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+    <section className="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        
+        {/* ── TOP LEFT-ALIGNED HEADER SECTION ── */}
+        <div className="text-left max-w-3xl mb-12 sm:mb-16">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-2">
+            OUR PRINCIPLES
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-3">
+            Our Principles
+          </h2>
+          <div className="w-12 h-1 bg-[#E5A900] rounded-full mb-4" />
+          <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed">
+            At ICC, our work is guided by a set of core principles that define the way we design, collaborate, and deliver.
+          </p>
+        </div>
+
+        {/* ── 6 CARDS GRID ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
+          {list.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+              className="bg-[#fcf8f2]/70 border border-amber-100/80 rounded-2xl p-7 sm:p-8 hover:shadow-md hover:bg-[#fcf8f2] transition-all duration-300 flex flex-col justify-start"
+            >
+              {/* Top Golden Pill Bar */}
+              <div className="w-10 h-1 bg-[#E5A900] rounded-full mb-6" />
+
+              {/* Card Title */}
+              <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 mb-3 tracking-tight">
+                {item.title}
+              </h3>
+
+              {/* Card Description */}
+              <p className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed">
+                {item.description || item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── FULL-WIDTH QUOTE BANNER AT BOTTOM ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="bg-[#fcf8f2] border border-amber-200/80 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative overflow-hidden"
         >
-          <div>
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#003A70] block mb-2">
-              How We Operate
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-[#0a1f44]">
-              Our Operating Principles
-            </h2>
+          {/* Quote Icon */}
+          <div className="text-4xl sm:text-5xl font-serif text-[#E5A900] leading-none shrink-0 select-none">
+            ““
           </div>
-          <p className="text-sm text-gray-500 max-w-xs">
-            Five pillars that define how we work on every project.
+
+          {/* Vertical Divider */}
+          <div className="hidden sm:block w-px h-10 bg-amber-200" />
+
+          {/* Quote Text */}
+          <p className="text-base sm:text-lg font-bold text-slate-900 leading-snug tracking-tight">
+            We don’t just design spaces, we build trust, relationships, and experiences that last.
           </p>
+
+          {/* Subtle Decorative Yellow Ribbon Path */}
+          <div className="absolute right-0 bottom-0 top-0 w-48 opacity-10 pointer-events-none hidden md:block">
+            <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+              <path d="M0 50 Q 50 10, 100 50 T 200 50" stroke="#E5A900" strokeWidth="4" />
+            </svg>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {values.map((val, idx) => (
-            <motion.div
-              key={val.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0, 58, 112, 0.1)" }}
-              className="relative bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 group cursor-default"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#003A70] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="flex items-start justify-between mb-5">
-                <motion.div
-                  className={`w-12 h-12 bg-gradient-to-br ${val.gradient} rounded-xl flex items-center justify-center text-white shrink-0`}
-                  whileHover={{ rotate: 15, scale: 1.1 }}
-                >
-                  {val.icon}
-                </motion.div>
-                <motion.span
-                  className="font-mono text-5xl font-black text-gray-100 leading-none select-none group-hover:text-blue-50 transition-colors"
-                  animate={{ opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {val.num}
-                </motion.span>
-              </div>
-              <h3 className="text-base font-bold text-[#111827] mb-2 group-hover:text-[#003A70] transition-colors">
-                {val.title}
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{val.description}</p>
-              
-              <motion.div
-                className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
-                animate={{ rotate: [0, 15, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Zap className="w-4 h-4 text-[#003A70]" />
-              </motion.div>
-            </motion.div>
-          ))}
-
-          {/* CTA card with pulse animation */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="relative bg-[#0a1f44] rounded-2xl p-6 flex flex-col justify-between overflow-hidden group"
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20"
-              animate={{ opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <div className="relative z-10">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block mb-3">
-                Ready to Start
-              </span>
-              <h3 className="text-xl font-bold text-white mb-3 leading-snug">
-                Bring predictability to your next workspace project
-              </h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                Let's discuss how ICC can align with your delivery goals.
-              </p>
-            </div>
-            <motion.a
-              href={`mailto:${founderEmail}`}
-              className="relative z-10 mt-6 inline-flex items-center gap-2 bg-white text-[#0a1f44] text-xs font-bold uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-gray-50 transition-colors self-start group/btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Us
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowUpRight className="w-4 h-4" />
-              </motion.div>
-            </motion.a>
-            
-            {/* Animated border */}
-            <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-400/30 transition-colors" />
-          </motion.div>
-        </div>
       </div>
     </section>
   );

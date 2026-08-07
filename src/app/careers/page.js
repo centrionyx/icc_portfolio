@@ -1,213 +1,183 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PageHero from "@/components/layout/PageHero";
-import CareersBenefits from "@/feature/careers/components/CareersBenefits";
-import CareersOpenings from "@/feature/careers/components/CareersOpenings";
-import ApplicationForm from "@/feature/careers/components/ApplicationForm";
-import SpeculativeInquiry from "@/feature/careers/components/SpeculativeInquiry";
+import JoinCreativeTeam from "@/feature/careers/components/JoinCreativeTeam";
+import OpenPositionsList from "@/feature/careers/components/OpenPositionsList";
+import SendResumeBanner from "@/feature/careers/components/SendResumeBanner";
+import { X, Check } from "lucide-react";
 
 export default function CareersPage() {
-  const [roles, setRoles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [expandedRole, setExpandedRole] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterLocation, setFilterLocation] = useState("All");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [dragActive, setDragActive] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    role: "",
-    coverLetter: "",
-    resumeName: "",
-    resumeContent: ""
-  });
-  const [formState, setFormState] = useState({
-    isSubmitting: false,
-    submitted: false,
-    error: ""
-  });
-
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const res = await fetch("/api/jobs");
-        if (res.ok) {
-          const data = await res.json();
-          setRoles(data);
-        }
-      } catch (err) {
-        console.error("Failed to load job listings:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchJobs();
-  }, []);
-
-  const handleToggle = (id) => {
-    setExpandedRole(expandedRole === id ? null : id);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
-
-  const processFile = (file) => {
-    if (!file) return;
-    if (file.size > 10 * 1024 * 1024) {
-      alert("File size exceeds 10MB limit.");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setSelectedFile(file);
-      setFormData((prev) => ({
-        ...prev,
-        resumeName: file.name,
-        resumeContent: reader.result // Base64 data URL
-      }));
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      processFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      processFile(e.target.files[0]);
-    }
-  };
-
-  const removeFile = () => {
-    setSelectedFile(null);
-    setFormData((prev) => ({
-      ...prev,
-      resumeName: "",
-      resumeContent: ""
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.role) {
-      setFormState({ isSubmitting: false, submitted: false, error: "Please fill out all required fields." });
-      return;
-    }
-
-    setFormState({ isSubmitting: true, submitted: false, error: "" });
-
-    try {
-      const response = await fetch("/api/careers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setFormState({ isSubmitting: false, submitted: true, error: "" });
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          role: "",
-          coverLetter: "",
-          resumeName: "",
-          resumeContent: ""
-        });
-        setSelectedFile(null);
-      } else {
-        const errData = await response.json();
-        throw new Error(errData.error || "Failed to submit application");
-      }
-    } catch (err) {
-      setFormState({ isSubmitting: false, submitted: false, error: err.message || "An unexpected error occurred." });
-    }
-  };
-
-  // Filter logic
-  const filteredRoles = roles.filter(role => {
-    const matchesSearch = role.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      role.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      role.department.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesLocation = filterLocation === "All" ||
-      role.location.toLowerCase().includes(filterLocation.toLowerCase());
-
-    return matchesSearch && matchesLocation;
-  });
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   return (
-    <div className="w-full bg-[#f8fafc] text-[#0a1f44]">
-      {/* 1. HERO SECTION */}
+    <div className="w-full bg-[#f8fafc] text-slate-900 pb-20">
+      
+      {/* ── PAGE HERO ── */}
       <PageHero
-        title="Careers at ICC"
-        subtitle="Join our team of project managers, engineers, and fit-out consultants building next-generation commercial spaces."
+        title="Careers & Opportunities"
+        subtitle="Build your career with India's leading interior fit-out & consulting firm."
         breadcrumbs={[{ label: "Careers" }]}
       />
 
-      {/* 2. BENEFITS / VALUE PROPOSITION */}
-      <CareersBenefits />
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 mt-12 sm:mt-16 space-y-16">
+        
+        {/* ── 1. JOIN OUR CREATIVE TEAM SECTION ── */}
+        <JoinCreativeTeam />
 
-      {/* 3. ACTIVE ROLES & APPLICATION SECTION */}
-      <section className="bg-slate-100/50 border-t-2 border-slate-200/60 py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-            {/* LEFT COLUMN: ACTIVE ROLES LIST */}
-            <CareersOpenings
-              loading={loading}
-              filteredRoles={filteredRoles}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              filterLocation={filterLocation}
-              setFilterLocation={setFilterLocation}
-              expandedRole={expandedRole}
-              handleToggle={handleToggle}
-              setFormData={setFormData}
-            />
+        {/* ── 2. OPEN POSITIONS SECTION ── */}
+        <OpenPositionsList onSelectJob={(job) => setSelectedJob(job)} />
 
-            {/* RIGHT COLUMN: BLUEPRINT STYLE APPLICATION FORM */}
-            <ApplicationForm
-              roles={roles}
-              formData={formData}
-              formState={formState}
-              selectedFile={selectedFile}
-              dragActive={dragActive}
-              handleChange={handleChange}
-              handleDrag={handleDrag}
-              handleDrop={handleDrop}
-              handleFileChange={handleFileChange}
-              removeFile={removeFile}
-              handleSubmit={handleSubmit}
-              setFormState={setFormState}
-            />
+        {/* ── 3. DON'T SEE THE RIGHT ROLE BANNER ── */}
+        <SendResumeBanner onOpenResumeModal={() => setResumeModalOpen(true)} />
+
+      </div>
+
+      {/* ── JOB DETAILS MODAL ── */}
+      {selectedJob && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+          onClick={() => setSelectedJob(null)}
+        >
+          <div
+            className="bg-white rounded-2xl w-full max-w-xl p-6 sm:p-8 shadow-2xl relative border border-slate-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedJob(null)}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-2 cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            <span className="bg-[#E5A900] text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-4 inline-block font-mono">
+              {selectedJob.department}
+            </span>
+
+            <h2 className="text-2xl font-extrabold text-slate-900 mb-1">{selectedJob.title}</h2>
+            <p className="text-xs text-slate-500 font-semibold mb-6">{selectedJob.experience} • {selectedJob.location}</p>
+
+            <div className="mb-6">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Role Overview</h4>
+              <p className="text-slate-600 text-sm leading-relaxed">{selectedJob.description}</p>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+              <button
+                onClick={() => setSelectedJob(null)}
+                className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 cursor-pointer"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedJob(null);
+                  setResumeModalOpen(true);
+                }}
+                className="px-6 py-2.5 rounded-xl bg-[#0a1f44] text-white text-xs font-bold hover:bg-[#E5A900] hover:text-slate-950 transition-colors cursor-pointer"
+              >
+                Apply Now
+              </button>
+            </div>
           </div>
         </div>
-      </section>
+      )}
 
-      {/* 4. SPECULATIVE INQUIRY PANEL */}
-      <SpeculativeInquiry />
+      {/* ── SEND RESUME MODAL ── */}
+      {resumeModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+          onClick={() => setResumeModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl w-full max-w-md p-6 sm:p-8 shadow-2xl relative border border-slate-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => {
+                setResumeModalOpen(false);
+                setEmailSubmitted(false);
+              }}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-2 cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            {emailSubmitted ? (
+              <div className="text-center py-6">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+                  <Check size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Resume Submitted!</h3>
+                <p className="text-xs text-slate-500 leading-relaxed mb-6">
+                  Thank you for applying. Our talent team will review your profile and reach out shortly.
+                </p>
+                <button
+                  onClick={() => {
+                    setResumeModalOpen(false);
+                    setEmailSubmitted(false);
+                  }}
+                  className="px-6 py-2.5 bg-[#0a1f44] text-white text-xs font-bold rounded-xl cursor-pointer"
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setEmailSubmitted(true);
+                }}
+              >
+                <h3 className="text-xl font-bold text-slate-900 mb-1">Submit Your Resume</h3>
+                <p className="text-xs text-slate-500 mb-6">Send us your details to be considered for active and upcoming openings.</p>
+
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Rahul Sharma"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="name@example.com"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Resume / CV Link or File</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Google Drive link or portfolio URL"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs rounded-xl shadow-md transition-all cursor-pointer uppercase tracking-wider"
+                >
+                  Submit Application
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

@@ -16,11 +16,11 @@ export default function OurProcess() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#005ea6] block mb-1">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#E5A900] block mb-1">
             {content.tagline}
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a1f44] tracking-tight">
-            {content.titleLine1} <span className="text-[#005ea6]">{content.titleLine2}</span>
+            {content.titleLine1} <span className="text-[#E5A900]">{content.titleLine2}</span>
           </h2>
           <p className="text-slate-500 text-xs sm:text-sm font-light mt-1.5 max-w-md mx-auto leading-relaxed">
             {content.description}
@@ -62,7 +62,7 @@ export default function OurProcess() {
                           markerHeight="5"
                           orient="0" // Keeps arrowhead completely straight horizontal
                         >
-                          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#005ea6" />
+                          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#E5A900" />
                         </marker>
 
                         {/* Infinite looping mask revealing dotted line progressively */}
@@ -90,7 +90,7 @@ export default function OurProcess() {
 
                       <path
                         d="M 5 20 C 30 -2, 45 42, 70 18 C 80 8, 88 18, 92 20"
-                        stroke="#005ea6"
+                        stroke="#E5A900"
                         strokeWidth="1.75"
                         strokeDasharray="4 4"
                         clipPath={`url(#clip-${index})`}
@@ -128,7 +128,7 @@ export default function OurProcess() {
                   `}
                 >
                   {/* Inner Circular Badge Icon */}
-                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-inner group-hover:bg-[#005ea6] group-hover:text-white transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-full bg-amber-50 text-[#E5A900] flex items-center justify-center shadow-inner group-hover:bg-[#E5A900] group-hover:text-slate-950 transition-colors duration-300">
                     <IconComponent className="w-5 h-5" strokeWidth={2} />
                   </div>
                 </div>

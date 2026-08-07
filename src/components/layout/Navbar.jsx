@@ -67,8 +67,8 @@ export default function Header() {
                 />
               </div>
 
-              <div className="hidden sm:flex flex-col">
-                <p className="text-[10px] ml-14 font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
+              <div className="hidden sm:flex flex-col items-center text-center">
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
                   INNOVATION
                 </p>
                 <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">

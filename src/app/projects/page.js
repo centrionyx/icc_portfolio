@@ -54,7 +54,7 @@ function ProjectCard({ project, onClick }) {
 
       {/* Title and Location beneath image */}
       <div className="text-center">
-        <h3 className="text-base sm:text-lg font-bold text-[#005ea6] tracking-tight mb-1 group-hover:opacity-85 transition-opacity">
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight mb-1 group-hover:text-[#E5A900] transition-colors">
           {project.client}
         </h3>
         <p className="text-xs text-slate-500 font-light tracking-wider uppercase">
@@ -221,7 +221,7 @@ function ProjectStatsDashboard({ projects }) {
   );
 }
 
-// Project Details Dialog Modal - LUXURIOUS MODERN AESTHETIC
+// Project Details Dialog Modal - SHARP EDGE LUXURY ARCHITECTURAL DESIGN
 function ProjectDetailsModal({ project, onClose }) {
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   if (!project) return null;
@@ -230,49 +230,58 @@ function ProjectDetailsModal({ project, onClose }) {
     ? project.images
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
+  // Automatic image slideshow timer (changes image every 3 seconds if multiple images exist)
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setActiveImgIdx((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <div 
-      className="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fade-in"
+      className="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-0 sm:p-4 md:p-8 overflow-y-auto animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[90vh] md:max-h-[82vh] border border-slate-100"
+        className="bg-white rounded-none w-full max-w-5xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[92vh] border border-slate-200/90"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Floating Close Button */}
+        {/* Sharp Square Top Cross Icon Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 bg-slate-900/70 hover:bg-slate-900 text-white p-2.5 rounded-full z-30 transition-all shadow-xl backdrop-blur-md border border-white/10"
+          className="absolute top-4 right-4 bg-slate-950/90 hover:bg-[#E5A900] text-white hover:text-slate-950 p-2.5 rounded-none z-30 transition-all duration-300 shadow-xl border border-white/20 cursor-pointer"
           aria-label="Close Modal"
         >
           <X size={18} />
         </button>
 
-        {/* Left Side: Images Showcase */}
-        <div className="lg:w-1/2 bg-slate-950 flex flex-col justify-between relative min-h-[280px] lg:min-h-full">
+        {/* Left Side: Image Showcase with Auto-Slideshow */}
+        <div className="lg:w-7/12 bg-slate-950 flex flex-col justify-between relative min-h-[320px] lg:min-h-[520px]">
           <img
             src={images[activeImgIdx]}
             alt={project.client}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-black/30 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/20 to-black/30 pointer-events-none" />
 
           {/* Category Badge Overlay */}
           <div className="p-6 relative z-10">
-            <span className="bg-[#005ea6] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-lg border border-white/20">
+            <span className="bg-[#E5A900] text-slate-950 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-none shadow-lg font-mono">
               {project.category}
             </span>
           </div>
 
-          {/* Bottom Thumbnails */}
+          {/* Bottom Image Thumbnails Carousel */}
           {images.length > 1 && (
-            <div className="p-5 relative z-10 flex gap-2.5 overflow-x-auto bg-slate-950/40 backdrop-blur-md border-t border-white/10">
+            <div className="p-4 relative z-10 flex gap-2.5 overflow-x-auto bg-slate-950/80 backdrop-blur-md border-t border-white/10">
               {images.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveImgIdx(idx)}
-                  className={`w-12 h-12 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
-                    idx === activeImgIdx ? "border-cyan-400 scale-105 shadow-lg" : "border-white/20 opacity-70 hover:opacity-100"
+                  className={`w-14 h-14 rounded-none overflow-hidden border transition-all shrink-0 cursor-pointer ${
+                    idx === activeImgIdx ? "border-[#E5A900] opacity-100 scale-105" : "border-white/20 opacity-60 hover:opacity-100"
                   }`}
                 >
                   <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
@@ -283,96 +292,77 @@ function ProjectDetailsModal({ project, onClose }) {
         </div>
 
         {/* Right Side: Information Content */}
-        <div className="lg:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between bg-white text-slate-800">
+        <div className="lg:w-5/12 p-6 sm:p-8 sm:py-10 overflow-y-auto flex flex-col justify-between bg-white text-slate-900">
           <div>
-            {/* Client Title & Status */}
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#005ea6] block mb-1">
-                  PROJECT SPECIFICATIONS
-                </span>
-                <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">{project.client}</h2>
-              </div>
+            {/* Header & Status */}
+            <div className="mb-6 border-b border-slate-100 pb-5">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1">
+                PROJECT PROFILE
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-sans mb-3">
+                {project.client}
+              </h2>
               
-              {(() => {
-                const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
-                const dotColor = status === "Completed" ? "bg-emerald-500" : status === "Ongoing" ? "bg-[#005ea6]" : "bg-amber-500";
-                return (
-                  <div className="bg-slate-100/80 border border-slate-200/60 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
-                    <span className={`w-2 h-2 rounded-full ${dotColor} animate-pulse`}></span>
-                    {status}
-                  </div>
-                );
-              })()}
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-slate-500 font-light flex items-center gap-1.5">
+                  <MapPin size={13} className="text-[#E5A900]" />
+                  <span>{project.location}</span>
+                </p>
+
+                {(() => {
+                  const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
+                  const isDone = status === "Completed";
+                  return (
+                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-none border ${
+                      isDone ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-amber-50 text-amber-700 border-amber-200"
+                    }`}>
+                      {status}
+                    </span>
+                  );
+                })()}
+              </div>
             </div>
 
-            <p className="text-slate-600 text-xs font-light leading-relaxed mb-6">
-              {project.scope}
-            </p>
+            {/* Scope Overview */}
+            <div className="mb-6">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block mb-1.5">
+                PROJECT SCOPE
+              </span>
+              <p className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed">
+                {project.scope}
+              </p>
+            </div>
 
-            {/* Grid of Key Specs */}
+            {/* Key Specs Grid */}
             <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
-                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
-                  <MapPin size={16} />
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Location</p>
-                  <p className="text-xs font-bold text-slate-800">{project.location}</p>
-                </div>
+              <div className="bg-slate-50 p-3.5 rounded-none border-l-2 border-[#E5A900]">
+                <p className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">AREA SIZE</p>
+                <p className="text-xs font-bold text-slate-900 mt-0.5">{project.size}</p>
               </div>
 
-              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
-                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
-                  <Layout size={16} />
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Area Size</p>
-                  <p className="text-xs font-bold text-slate-800">{project.size}</p>
-                </div>
-              </div>
-
-              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
-                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
-                  <Calendar size={16} />
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Duration</p>
-                  <p className="text-xs font-bold text-slate-800">{project.duration}</p>
-                </div>
-              </div>
-
-              <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60 flex items-center gap-3">
-                <div className="p-2 bg-blue-50 text-[#005ea6] rounded-xl shrink-0">
-                  <CheckCircle size={16} />
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Status</p>
-                  <p className="text-xs font-bold text-slate-800">{project.status || "Completed"}</p>
-                </div>
+              <div className="bg-slate-50 p-3.5 rounded-none border-l-2 border-[#E5A900]">
+                <p className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">TIMELINE</p>
+                <p className="text-xs font-bold text-slate-900 mt-0.5">{project.duration}</p>
               </div>
             </div>
 
-            {/* Outcome Highlight Box */}
+            {/* Key Outcomes */}
             {project.outcomes && (
-              <div className="border border-emerald-200/80 bg-emerald-50/40 p-4 rounded-2xl mb-4">
-                <div className="flex items-center gap-2 mb-1 text-emerald-800">
-                  <CheckCircle size={15} className="text-emerald-600 shrink-0" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider font-mono">Key Delivery Outcome</span>
-                </div>
-                <p className="text-xs leading-relaxed text-slate-700 font-light">{project.outcomes}</p>
+              <div className="bg-slate-900 text-white p-4 rounded-none border-l-2 border-[#E5A900] mb-6">
+                <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-[#E5A900] block mb-1">
+                  DELIVERY OUTCOME
+                </span>
+                <p className="text-xs leading-relaxed font-light text-slate-200">
+                  {project.outcomes}
+                </p>
               </div>
             )}
           </div>
 
+          {/* Modal Footer */}
           <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-[11px] font-mono text-slate-400">ICC Project Showcase</span>
-            <button
-              onClick={onClose}
-              className="px-5 py-2.5 bg-[#005ea6] hover:bg-[#004b84] text-white rounded-xl text-xs font-bold transition-colors shadow-md"
-            >
-              Close
-            </button>
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">ICC PORTFOLIO</span>
+            <span className="text-[10px] font-mono text-slate-400">PULL TO CLOSE</span>
           </div>
         </div>
       </div>
@@ -461,25 +451,22 @@ export default function ProjectsPage() {
       {/* EXPLORER DASHBOARD BODY */}
       <main id="projects-explorer" className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 relative z-30">
 
-        {/* MINIMAL CATEGORY FILTER TABS */}
-        <div className="mb-12 border-b border-slate-200/80 pb-4">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+        {/* ROUNDED PILL CATEGORY FILTER TABS (Single Line Layout) */}
+        <div className="mb-12 flex justify-center w-full overflow-hidden">
+          <div className="flex items-center gap-3 sm:gap-4 overflow-x-auto no-scrollbar py-2 px-1 max-w-full flex-nowrap">
             {categories.map((cat) => {
               const isSelected = activeFilter === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
-                  className={`relative py-2 text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 ${
+                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap shrink-0 ${
                     isSelected
-                      ? "text-[#005ea6] font-bold"
-                      : "text-slate-500 font-medium hover:text-slate-800"
+                      ? "bg-[#E5A900] text-slate-950 shadow-md scale-105"
+                      : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
                   }`}
                 >
                   {cat.label}
-                  {isSelected && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#005ea6] rounded-full" />
-                  )}
                 </button>
               );
             })}

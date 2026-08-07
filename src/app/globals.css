@@ -6,14 +6,17 @@
   --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-serif), Georgia, serif;
 
-  /* === Primary Brand Colors === */
+  /* === Primary Brand Colors & Accents === */
+  --color-brand-yellow: #E5A900;
+  --color-brand-yellow-hover: #CA9400;
   --color-brand-logo-color: #E5A900;
   --color-[#005ea6]: #E5A900;
+  
+  /* === Background & Navy Theme Colors === */
+  --color-brand-navy: #0a1f44;
   --color-stats-banner-bg: #002347;
   --color-navy-900: #0a1f44;
-  /* Deep navy - hero bg, footer bg, dark sections */
   --color-navy-800: #0f2a52;
-  /* Slightly lighter navy - process section bg */
   --color-blue-600: #003A70;
   /* Primary CTA blue - buttons, links, accents */
   --color-blue-500: #3b82f6;

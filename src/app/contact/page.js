@@ -1,34 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { 
-  MapPin, 
-  Building2, 
-  Send, 
-  CheckCircle2, 
-  Phone, 
-  Mail, 
-  ChevronDown,
-  Sparkles
-} from "lucide-react";
-import { motion } from "framer-motion";
 import PageHero from "@/components/layout/PageHero";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    location: "Bengaluru",
-    projectType: "Corporate Offices",
-    message: ""
+    subject: "",
+    message: "",
   });
 
   const [formState, setFormState] = useState({
     isSubmitting: false,
     submitted: false,
-    error: ""
+    error: "",
   });
 
   const handleChange = (e) => {
@@ -38,7 +26,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.projectType) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
       setFormState({ isSubmitting: false, submitted: false, error: "Please fill out all required fields." });
       return;
     }
@@ -49,7 +37,7 @@ export default function ContactPage() {
       const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -58,9 +46,8 @@ export default function ContactPage() {
           name: "",
           email: "",
           phone: "",
-          location: "Bengaluru",
-          projectType: "Corporate Offices",
-          message: ""
+          subject: "",
+          message: "",
         });
       } else {
         const data = await response.json();
@@ -71,313 +58,214 @@ export default function ContactPage() {
     }
   };
 
-  // High-quality commercial interior background from services page
-  const PAGE_BG_IMAGE = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop";
-
   return (
-    <div className="w-full bg-[#f8fafc] flex flex-col font-sans">
-      {/* PAGE HERO HEADER */}
+    <div className="w-full bg-[#f8fafc] text-slate-900 pb-20 font-sans">
+      
+      {/* ── PAGE HERO ── */}
       <PageHero
         title="Contact Us"
-        subtitle="Construct & transform your perfect space. Reach out to our technical fit-out team today."
+        subtitle="We'd love to hear about your project. Get in touch with our expert fit-out team."
         breadcrumbs={[{ label: "Contact Us" }]}
       />
 
-      {/* 1. HERO & FORM SECTION WITH LIGHT BACKGROUND IMAGE */}
-      <section className="relative w-full min-h-screen bg-slate-100 text-slate-900 pt-24 pb-16 px-4 sm:px-6 lg:px-10 flex flex-col items-center justify-center overflow-hidden">
+      {/* ── FULL WIDTH CONTACT SECTION ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 lg:mt-16">
         
-        {/* LIGHT FULL-PAGE BACKGROUND IMAGE WITH SOFT GRADIENT */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={PAGE_BG_IMAGE}
-            alt="Bright Modern Office Workspace Background"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Soft vignette gradient for legibility matching services page */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/20" />
-        </div>
-
-        {/* CORE LAYOUT CONTENT CONTAINER */}
-        <div className="relative z-10 w-full max-w-5xl flex flex-col items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
-          {/* MAIN HERO CONTENT AND FORM GRID */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center w-full my-auto">
-            
-            {/* Left Text Column */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-6 text-white space-y-4 lg:pr-2"
-            >
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-bold text-white tracking-tight leading-[1.08] drop-shadow-lg">
-                Construct &amp; Transform <br />
-                <span className="text-cyan-300 font-extrabold">Your Perfect Space</span>
-              </h1>
+          {/* LEFT COLUMN: PURE IMAGE BACKGROUND (NO CARD, NO BORDER, NO OVERLAY, NO RADIUS) ── */}
+          <div className="lg:col-span-5 relative flex flex-col justify-center p-6 sm:p-8 text-slate-900 overflow-hidden">
+            {/* Pure Background Image */}
+            <img
+              src="https://images.unsplash.com/photo-1667312939978-64cf31718a6e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Background space"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            />
 
-              <p className="text-slate-100 text-xs sm:text-sm font-medium leading-relaxed max-w-md drop-shadow-md">
-                Whether you're planning a corporate office fit-out or turn-key workspace advisory, our teams are here to guide you every step of the way.
+            {/* Minimal Legibility Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/80 to-white/40 pointer-events-none" />
+
+            <div className="relative z-10">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3 drop-shadow-sm">
+                Let's Talk About <br />
+                Your Dream Space
+              </h2>
+
+              <p className="text-slate-800 text-sm font-semibold leading-relaxed mb-8 max-w-sm">
+                We'd love to hear about your project. Get in touch with us and our team will get back to you shortly.
               </p>
 
-              {/* Quick Contact Badges */}
-              <div className="pt-2 flex flex-wrap gap-3 text-xs font-medium text-slate-200">
-                <div className="flex items-center gap-2 bg-slate-900/70 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/20 text-xs shadow-lg">
-                  <Mail size={13} className="text-cyan-300" />
-                  <span>mail@example.com</span>
-                </div>
-                <div className="flex items-center gap-2 bg-slate-900/70 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/20 text-xs shadow-lg">
-                  <Phone size={13} className="text-cyan-300" />
-                  <span>+91 *** *** ****</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* RIGHT COLUMN: COMPACT FLOATING WHITE FORM CARD */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="lg:col-span-6 bg-white rounded-2xl lg:rounded-3xl p-5 sm:p-6 shadow-2xl border border-slate-200 text-slate-800 relative z-20"
-            >
-              <div className="mb-3">
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-sans tracking-tight">
-                  Connect with Us
-                </h2>
-                <p className="text-[10px] text-slate-400 mt-0.5 font-medium">
-                  Please fill in all details for a quick response.
-                </p>
-              </div>
-
-              {formState.submitted ? (
-                <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 p-5 rounded-2xl flex flex-col items-center text-center justify-center min-h-[250px]">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 animate-bounce" />
+              {/* 4 Contact Info Items with Unboxed Golden Icons */}
+              <div className="space-y-6">
+                
+                {/* Phone */}
+                <div className="flex items-start gap-4">
+                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                    <Phone size={22} strokeWidth={2.2} />
                   </div>
-                  <h3 className="text-base font-bold mb-1 font-serif text-slate-900">Enquiry Received</h3>
-                  <p className="text-xs text-slate-600 max-w-xs leading-relaxed font-light">
-                    Thank you for reaching out. Our technical project team will review your specifications and contact you shortly.
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Phone</h4>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">+91 93569 81566</p>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start gap-4">
+                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                    <Mail size={22} strokeWidth={2.2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Email</h4>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">info@iccindia.co.in</p>
+                  </div>
+                </div>
+
+                {/* Office */}
+                <div className="flex items-start gap-4">
+                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                    <MapPin size={22} strokeWidth={2.2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Office</h4>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">Pune, Maharashtra, India</p>
+                  </div>
+                </div>
+
+                {/* Timings */}
+                <div className="flex items-start gap-4">
+                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                    <Clock size={22} strokeWidth={2.2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Timings</h4>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">Mon - Sat: 10:00 AM - 7:00 PM</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: CONTACT FORM (NO CARD, NO BACKGROUND, NO RADIUS) ── */}
+          <div className="lg:col-span-7 flex flex-col justify-center py-4 px-2 sm:px-4">
+            {formState.submitted ? (
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-8 rounded-2xl flex flex-col items-center text-center justify-center min-h-[380px]">
+                <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4 text-emerald-600">
+                  <CheckCircle2 size={32} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Message Sent Successfully!</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm mb-6">
+                  Thank you for contacting ICC. Our technical spatial team will review your enquiry and reach out shortly.
+                </p>
+                <button
+                  onClick={() => setFormState({ isSubmitting: false, submitted: false, error: "" })}
+                  className="px-6 py-2.5 bg-[#0a1f44] text-white text-xs font-bold rounded-xl hover:bg-[#E5A900] hover:text-slate-950 transition-colors cursor-pointer"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                
+                {formState.error && (
+                  <p className="text-xs text-rose-600 bg-rose-50 border border-rose-100 p-3 rounded-xl font-medium">
+                    {formState.error}
                   </p>
-                  <button
-                    onClick={() => setFormState({ isSubmitting: false, submitted: false, error: "" })}
-                    className="mt-4 text-xs font-bold text-[#005ea6] hover:underline font-mono"
-                  >
-                    Submit Another Request
-                  </button>
+                )}
+
+                {/* Input: Your Name */}
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                  />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-2.5">
-                  
-                  {formState.error && (
-                    <p className="text-[10px] text-rose-500 bg-rose-50 border border-rose-100 p-2 rounded-xl font-medium">
-                      {formState.error}
-                    </p>
-                  )}
 
-                  {/* Location Dropdown Field */}
-                  <div className="space-y-0.5">
-                    <label htmlFor="location" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                      Project Location
-                    </label>
-                    <div className="relative flex items-center">
-                      <div className="absolute left-2.5 text-slate-900 p-1 bg-slate-100 rounded-full">
-                        <MapPin size={12} />
-                      </div>
-                      <select
-                        id="location"
-                        name="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        className="w-full pl-9 pr-7 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all appearance-none cursor-pointer"
-                      >
-                        <option value="Bengaluru">Bengaluru, India</option>
-                        <option value="Gurugram">Gurugram / NCR</option>
-                        <option value="Mumbai">Mumbai, India</option>
-                        <option value="Hyderabad">Hyderabad, India</option>
-                        <option value="Remote">Pan-India / Remote</option>
-                      </select>
-                      <ChevronDown size={13} className="absolute right-2.5 text-slate-400 pointer-events-none" />
-                    </div>
-                  </div>
+                {/* Input: Your Email */}
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                  />
+                </div>
 
-                  {/* Workspace Type Select */}
-                  <div className="space-y-0.5">
-                    <label htmlFor="projectType" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                      Workspace Type
-                    </label>
-                    <div className="relative flex items-center">
-                      <div className="absolute left-2.5 text-slate-900 p-1 bg-slate-100 rounded-full">
-                        <Building2 size={12} />
-                      </div>
-                      <select
-                        id="projectType"
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleChange}
-                        className="w-full pl-9 pr-7 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all appearance-none cursor-pointer"
-                      >
-                        <option value="Corporate Offices">Corporate Office Fit-Out</option>
-                        <option value="Retail Spaces">Retail &amp; Experience Store</option>
-                        <option value="Hospitality">Hospitality &amp; Commercial</option>
-                        <option value="Technical Advisory">MEP &amp; BOQ Advisory</option>
-                      </select>
-                      <ChevronDown size={13} className="absolute right-2.5 text-slate-400 pointer-events-none" />
-                    </div>
-                  </div>
+                {/* Input: Phone Number */}
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone Number"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                  />
+                </div>
 
-                  {/* Name & Phone Inputs Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div className="space-y-0.5">
-                      <label htmlFor="name" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your Name"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all placeholder-slate-400"
-                      />
-                    </div>
+                {/* Input: Subject */}
+                <div>
+                  <input
+                    type="text"
+                    name="subject"
+                    required
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                  />
+                </div>
 
-                    <div className="space-y-0.5">
-                      <label htmlFor="phone" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                        Phone *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+91 Phone"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all placeholder-slate-400"
-                      />
-                    </div>
-                  </div>
+                {/* Textarea: Your Message */}
+                <div>
+                  <textarea
+                    name="message"
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Your Message"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all resize-none font-medium"
+                  />
+                </div>
 
-                  {/* Email Input */}
-                  <div className="space-y-0.5">
-                    <label htmlFor="email" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="email@company.com"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all placeholder-slate-400"
-                    />
-                  </div>
-
-                  {/* Optional Message */}
-                  <div className="space-y-0.5">
-                    <label htmlFor="message" className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                      Project Message / Scope
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={2}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Brief description of space size or requirements..."
-                      className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium text-slate-900 focus:outline-none focus:border-[#005ea6] focus:bg-white transition-all resize-none placeholder-slate-400"
-                    />
-                  </div>
-
-                  {/* Action Button */}
-                  <button
-                    type="submit"
-                    disabled={formState.isSubmitting}
-                    className="w-full bg-[#111827] hover:bg-[#1f2937] text-white py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer mt-1"
-                  >
-                    {formState.isSubmitting ? "Submitting..." : "Send Consultation Request"}
-                    <Send size={11} />
-                  </button>
-                </form>
-              )}
-            </motion.div>
-
-          </div>
-
-          {/* HIGH CONTRAST OFFICE LOCATION DETAILS BELOW FORM */}
-          <div className="w-full mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="bg-slate-900/80 backdrop-blur-md border border-white/20 p-3.5 rounded-xl shadow-xl flex items-start gap-3 text-white">
-              <div className="p-2 bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 rounded-lg">
-                <MapPin size={16} />
-              </div>
-              <div>
-                <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Headquarters</h4>
-                <p className="text-xs font-semibold text-slate-100 mt-0.5 leading-snug">
-                  6, Apurva Apartment, CME Colony, Near Bharat Bakery, New Sangavi, Pune - 411061, Maharashtra, India
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-slate-900/80 backdrop-blur-md border border-white/20 p-3.5 rounded-xl shadow-lg flex items-start gap-3 text-white">
-              <div className="p-2 bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 rounded-lg">
-                <Mail size={16} />
-              </div>
-              <div>
-                <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Email Enquiries</h4>
-                <p className="text-xs font-semibold text-slate-100 mt-0.5">
-                  info@iccindia.co.in
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-slate-900/80 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-lg flex items-start gap-3 text-white">
-              <div className="p-2 bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 rounded-lg">
-                <Phone size={16} />
-              </div>
-              <div>
-                <h4 className="text-[9px] font-bold uppercase tracking-wider text-cyan-200 font-mono">Direct Line</h4>
-                <p className="text-xs font-semibold text-slate-100 mt-0.5">
-                  +91 93569 81566
-                </p>
-              </div>
-            </div>
+                {/* Submit Button: Send Message (Golden Yellow) */}
+                <button
+                  type="submit"
+                  disabled={formState.isSubmitting}
+                  className="w-full py-4 bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all duration-300 hover:scale-[1.01] cursor-pointer uppercase tracking-wider mt-2"
+                >
+                  {formState.isSubmitting ? "Sending..." : "Send Message"}
+                </button>
+              </form>
+            )}
           </div>
 
         </div>
 
-      </section>
-
-      {/* 2. GOOGLE MAP SECTION BELOW THE HERO & FORM */}
-      <section className="w-full bg-[#f8fafc] py-12 lg:py-16 px-4 sm:px-6 lg:px-10 border-t border-slate-200">
-        <div className="max-w-5xl mx-auto space-y-6">
-          <div className="text-center sm:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#005ea6] block font-mono">
-              OFFICE LOCATION
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 font-serif mt-1">
-              Find Us on Map
-            </h3>
-          </div>
-
-          <div className="w-full h-[380px] sm:h-[420px] rounded-3xl overflow-hidden border-2 border-slate-200 shadow-lg relative">
-            <iframe
-              src="https://maps.google.com/maps?q=Apurva+apartment%2C+Ganesh+Nagar%2C+Sant+Tukaram+Nagar%2C+New+Sangavi%2C+Pimpri-Chinchwad%2C+Maharashtra+411061&t=&z=17&ie=UTF8&iwloc=B&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="ICC Headquarters Exact Location Pin - Apurva Apartment, Pune"
-            />
-          </div>
+        {/* ── GOOGLE MAP SECTION BELOW ── */}
+        <div className="mt-14 w-full h-[380px] sm:h-[420px] rounded-3xl overflow-hidden border border-slate-200/80 shadow-md">
+          <iframe
+            src="https://maps.google.com/maps?q=Apurva+apartment%2C+Ganesh+Nagar%2C+Sant+Tukaram+Nagar%2C+New+Sangavi%2C+Pimpri-Chinchwad%2C+Maharashtra+411061&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="ICC Headquarters Location Pin"
+          />
         </div>
+
       </section>
 
     </div>
