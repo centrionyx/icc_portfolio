@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
-          <QuoteModal />
+          {/* <QuoteModal /> */}
         </div>
       </body>
     </html>
