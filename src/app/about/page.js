@@ -11,7 +11,7 @@ import {
   Star,
   Target,
 } from "lucide-react";
-import AboutHero from "@/feature/about/components/AboutHero";
+import PageHero from "@/components/layout/PageHero";
 import AboutFoundation from "@/feature/about/components/AboutFoundation";
 import AboutLeadership from "@/feature/about/components/AboutLeadership";
 import AboutPrinciples from "@/feature/about/components/AboutPrinciples";
@@ -156,10 +156,10 @@ export default function AboutPage() {
       </div>
 
       {/* 1. HERO SECTION */}
-      <AboutHero 
-        stats={stats} 
-        isHovering={isHovering} 
-        setIsHovering={setIsHovering} 
+      <PageHero
+        title="About ICC"
+        subtitle="Innovation Consultants & Contractors — Delivering seamless commercial fit-out execution from concept to completion."
+        breadcrumbs={[{ label: "About ICC" }]}
       />
 
       {/* 2. FOUNDATION SECTION */}

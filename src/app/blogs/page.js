@@ -13,6 +13,7 @@ import {
   X,
   Calendar,
 } from "lucide-react";
+import PageHero from "@/components/layout/PageHero";
 
 /* ─────────────────────────────────────────
    Smooth Auto-Carousel
@@ -578,73 +579,11 @@ export default function InsightsPage() {
     <div className="w-full bg-white text-slate-900">
 
       {/* ── HERO BANNER ── */}
-      <section className="relative overflow-hidden bg-[#0a1f44]" style={{ minHeight: "320px" }}>
-        {/* Dot grid */}
-        <div
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        {/* Glow */}
-        <div className="absolute -top-1/3 -left-1/4 w-[55vw] h-[55vw] rounded-full bg-blue-600/25 blur-[130px] pointer-events-none" />
-        <div className="absolute -bottom-1/4 right-0 w-[40vw] h-[40vw] rounded-full bg-cyan-600/15 blur-[110px] pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28 z-10">
-          {/* Eyebrow */}
-          <span className="inline-block text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 mb-6">
-             Ideas &amp; Knowledge
-          </span>
-
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 lg:gap-20">
-            <div className="flex-1 max-w-2xl">
-              <h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                Corporate{" "}
-                <span
-                  className="font-black"
-                  style={{
-                    background: "linear-gradient(135deg, #60a5fa, #22d3ee)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Blogs
-                </span>
-              </h1>
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-                Specialized articles on workspace design, MEP innovation,
-                project costing, and execution — crafted from two decades of
-                hands-on delivery experience.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="flex items-center gap-8 shrink-0 border-t lg:border-t-0 lg:border-l border-white/10 pt-8 lg:pt-0 lg:pl-12">
-              {[
-                { icon: <BookOpen className="w-5 h-5 text-cyan-400" />, label: "Expert\nInsights" },
-                { icon: <Tag className="w-5 h-5 text-cyan-400" />, label: "Curated\nTopics" },
-                { icon: <Layers className="w-5 h-5 text-cyan-400" />, label: "20+ Yrs\nExp." },
-              ].map((s, idx) => (
-                <div key={idx} className="flex flex-col items-center gap-2 text-center">
-                  <div className="w-11 h-11 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center">
-                    {s.icon}
-                  </div>
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 whitespace-pre-line">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Clean sharp bottom edge — no gradient */}
-      </section>
+      <PageHero
+        title="Corporate Blogs & Insights"
+        subtitle="Specialized articles on workspace design, MEP innovation, project costing, and execution."
+        breadcrumbs={[{ label: "Blogs" }]}
+      />
 
       {/* ── CATEGORY FILTER BAR ── */}
       {!loading && articles.length > 0 && (

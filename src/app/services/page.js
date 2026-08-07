@@ -34,6 +34,7 @@ import {
   StaggerItem,
   TiltCard,
 } from "@/components/animations";
+import PageHero from "@/components/layout/PageHero";
 
 export default function ServicesPage() {
   const [expandedService, setExpandedService] = useState("fitout-pm");
@@ -208,48 +209,13 @@ export default function ServicesPage() {
 
   return (
     <div className="w-full bg-[#f8fafc] text-[#0a1f44] pb-24 font-sans antialiased">
-
-      {/* HERO SECTION — Original Hero restored */}
-      <section className="relative w-full min-h-[580px] sm:min-h-[640px] flex items-center bg-[#f8fafc] overflow-hidden py-24 sm:py-32">
-        {/* Full-width High-Quality Interior Photo with Subtle Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
-            alt="Luxury Commercial Interior Space"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Soft vignette gradient for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/20" />
-        </div>
-
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10">
-          <div className="max-w-3xl space-y-6">
-            {/* Dark Eyebrow Tagline matching image */}
-            <p className="text-xs sm:text-sm font-sans font-extrabold uppercase tracking-[0.25em] text-white/90 drop-shadow-md">
-              LET&apos;S RECREATE YOUR WAY OF WORKING
-            </p>
-
-            {/* Massive Prominent White Title */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] drop-shadow-lg">
-              Commercial Interior <br />
-              Designers &amp; Management
-            </h1>
-
-            {/* White CTA Button with primary brand text matching image design */}
-            <div className="pt-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center bg-white hover:bg-slate-50 text-[#005EA6] font-bold text-xs sm:text-sm px-8 py-4 rounded-xl shadow-xl transition-all hover:scale-105 duration-200"
-              >
-                Book Free Consultation
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HERO SECTION */}
+      <PageHero
+        title="Commercial Interior Services"
+        subtitle="End-to-end fit-out project management, technical consultancy, and execution monitoring tailored for modern workspaces."
+        breadcrumbs={[{ label: "Services" }]}
+        bgImage="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+      />
 
       {/* OUR FOCUS SECTION */}
       <section className="max-w-[1440px] mx-auto px-5 lg:px-8 py-16">
@@ -296,54 +262,45 @@ export default function ServicesPage() {
 
 
 
-        {/* ALL 8 SERVICES GRID - 4 Cards per row */}
-        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ALL 8 SERVICES GRID - Matching Image Design */}
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {services.map((s) => (
             <StaggerItem key={s.id} direction="up">
-              <div className="relative min-h-[400px] sm:min-h-[460px] rounded-[2.5rem] overflow-hidden shadow-xl group hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-end p-6 border border-slate-200/50 select-none">
-
-                {/* Background Unsplash Image */}
-                <Image
-                  src={s.image}
-                  alt={s.title}
-                  fill
-                  unoptimized
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-
-                {/* Dark Vignette Gradient Overlay at Bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-black/20 pointer-events-none" />
-
-                {/* Number Badge Top Right */}
-                <div className="absolute top-5 right-5 z-10">
-                  <span className="bg-black/40 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] font-bold px-3 py-1 rounded-full shadow-lg">
-                    #{s.num}
-                  </span>
+              <Link
+                href={`/contact?interest=${s.id}`}
+                className="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full"
+              >
+                {/* Top Half: Image with Floating Golden Icon Pill */}
+                <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden">
+                  <Image
+                    src={s.image}
+                    alt={s.title}
+                    fill
+                    unoptimized
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  
+                  {/* Floating White Icon Pill with Golden Yellow Icon */}
+                  <div className="absolute bottom-3 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-slate-100/60 text-[#E5A900] flex items-center justify-center">
+                    {s.icon}
+                  </div>
                 </div>
 
-                {/* Card Content Overlay (White Text over Dark Gradient) */}
-                <div className="relative z-10 flex flex-col justify-end h-full pt-32">
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white mb-2 leading-snug tracking-tight font-sans">
-                    {s.title}
-                  </h3>
+                {/* Bottom Half: Clean White Content Area */}
+                <div className="p-6 flex flex-col justify-between flex-1 bg-white">
+                  <div>
+                    {/* Service Title */}
+                    <h3 className="text-base sm:text-lg font-extrabold text-slate-900 leading-snug mb-2 font-sans group-hover:text-[#005ea6] transition-colors">
+                      {s.title}
+                    </h3>
 
-                  {/* Description from services.md */}
-                  <p className="text-slate-200 text-xs leading-relaxed mb-6 font-light line-clamp-3">
-                    {s.short}
-                  </p>
-
-                  {/* Full-width Rounded White CTA Button (Exact Villa/Chalet style) */}
-                  <Link
-                    href={`/contact?interest=${s.id}`}
-                    className="w-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-xs py-3.5 rounded-full flex items-center justify-center gap-2 shadow-xl transition-all duration-200 hover:scale-[1.02]"
-                  >
-                    <span>Enquire Now</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-950" />
-                  </Link>
+                    {/* Short Description */}
+                    <p className="text-slate-500 text-xs sm:text-sm font-normal leading-relaxed line-clamp-3">
+                      {s.short}
+                    </p>
+                  </div>
                 </div>
-
-              </div>
+              </Link>
             </StaggerItem>
           ))}
         </StaggerContainer>

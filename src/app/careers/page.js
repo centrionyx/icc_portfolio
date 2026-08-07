@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CareersHero from "@/feature/careers/components/CareersHero";
+import PageHero from "@/components/layout/PageHero";
 import CareersBenefits from "@/feature/careers/components/CareersBenefits";
 import CareersOpenings from "@/feature/careers/components/CareersOpenings";
 import ApplicationForm from "@/feature/careers/components/ApplicationForm";
@@ -161,7 +161,11 @@ export default function CareersPage() {
   return (
     <div className="w-full bg-[#f8fafc] text-[#0a1f44]">
       {/* 1. HERO SECTION */}
-      <CareersHero />
+      <PageHero
+        title="Careers at ICC"
+        subtitle="Join our team of project managers, engineers, and fit-out consultants building next-generation commercial spaces."
+        breadcrumbs={[{ label: "Careers" }]}
+      />
 
       {/* 2. BENEFITS / VALUE PROPOSITION */}
       <CareersBenefits />

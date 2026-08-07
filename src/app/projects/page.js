@@ -22,6 +22,7 @@ import {
   SlidersHorizontal,
   Briefcase
 } from "lucide-react";
+import PageHero from "@/components/layout/PageHero";
 
 // Subcomponent for each project card (Clean Minimalist Design with Glass Shine Hover)
 function ProjectCard({ project, onClick }) {
@@ -450,160 +451,12 @@ export default function ProjectsPage() {
 
   return (
     <div className="w-full bg-[#f8fafc] text-slate-800 pb-20 min-h-screen relative overflow-hidden">
-
-      {/* HERO SECTION - Screen-Fit height with Scroll Down Indicator */}
-      <section className="relative w-full h-screen min-h-[640px] flex flex-col justify-between bg-[#f8fafc] overflow-hidden pt-20 sm:pt-28 pb-6">
-        {/* Full-width High-Quality Interior Photo with Vignette Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Images/workDay.jpeg"
-            alt="Commercial Fit-Out Workspaces Portfolio"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Soft vignette gradient for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
-        </div>
-
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 w-full relative z-10 my-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Eyebrow Tagline */}
-              <p className="text-xs sm:text-sm font-sans font-extrabold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-md">
-                PORTFOLIO SHOWCASE
-              </p>
-
-              {/* Large Prominent Title */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] drop-shadow-lg">
-                Our Featured Work <br />
-                &amp; Deliveries
-              </h1>
-
-              {/* Sub-headline Description */}
-              <p className="text-slate-100 text-xs sm:text-sm font-medium leading-relaxed max-w-xl drop-shadow-md">
-                A curated showcase of our interior fit-out executions, project advisory, and technical management across commercial, IT/ITES, BFSI, retail, and hospitality spaces.
-              </p>
-
-              {/* White CTA Button matching Services page */}
-              <div className="pt-2">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center bg-white hover:bg-slate-50 text-[#005ea6] font-bold text-xs sm:text-sm px-8 py-4 rounded-xl shadow-xl transition-all hover:scale-105 duration-200"
-                >
-                  Start Your Project
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Side Stats Cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-              {/* Stat Card 1 */}
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#005ea6] flex items-center justify-center font-bold shadow-inner">
-                    <Layout className="w-5 h-5" />
-                  </div>
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#005ea6] bg-blue-50/80 px-2 py-0.5 rounded-full border border-blue-100">
-                    Volume
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
-                    8M+
-                  </span>
-                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
-                    Sq. Ft. Delivered
-                  </span>
-                </div>
-              </div>
-
-              {/* Stat Card 2 */}
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center font-bold shadow-inner">
-                    <Award className="w-5 h-5" />
-                  </div>
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50/80 px-2 py-0.5 rounded-full border border-cyan-100">
-                    Excellence
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
-                    18+
-                  </span>
-                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
-                    Years Leadership
-                  </span>
-                </div>
-              </div>
-
-              {/* Stat Card 3 */}
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold shadow-inner">
-                    <CheckCircle className="w-5 h-5" />
-                  </div>
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50/80 px-2 py-0.5 rounded-full border border-emerald-100">
-                    Quality
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
-                    100%
-                  </span>
-                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
-                    Predictable Delivery
-                  </span>
-                </div>
-              </div>
-
-              {/* Stat Card 4 */}
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/50 shadow-2xl flex flex-col justify-between hover:bg-white hover:scale-[1.03] transition-all duration-300 group">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold shadow-inner">
-                    <Briefcase className="w-5 h-5" />
-                  </div>
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50/80 px-2 py-0.5 rounded-full border border-indigo-100">
-                    Portfolio
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight block font-sans">
-                    {projects.length > 0 ? `${projects.length}+` : "50+"}
-                  </span>
-                  <span className="text-xs text-slate-600 font-medium leading-snug mt-1 block">
-                    Corporate Projects
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* BOTTOM ANIMATED SCROLL DOWN ARROW BUTTON */}
-        <div className="relative z-10 flex flex-col items-center justify-center pb-2">
-          <button
-            onClick={() => {
-              const mainSection = document.getElementById("projects-explorer");
-              if (mainSection) {
-                mainSection.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="group flex flex-col items-center gap-1.5 text-white/80 hover:text-white transition-colors cursor-pointer"
-            aria-label="Scroll down to view projects"
-          >
-            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-300 group-hover:text-cyan-300 transition-colors drop-shadow-sm">
-              Explore Projects Below
-            </span>
-            <div className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center animate-bounce group-hover:bg-white/30 transition-all shadow-xl">
-              <ChevronDown className="w-5 h-5 text-white" />
-            </div>
-          </button>
-        </div>
-      </section>
+      {/* HERO SECTION */}
+      <PageHero
+        title="Projects Showcase"
+        subtitle="A curated portfolio of our commercial interior fit-out executions and project management deliveries."
+        breadcrumbs={[{ label: "Projects" }]}
+      />
 
       {/* EXPLORER DASHBOARD BODY */}
       <main id="projects-explorer" className="max-w-7xl mx-auto px-5 lg:px-8 mt-12 relative z-30">

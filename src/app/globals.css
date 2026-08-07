@@ -7,6 +7,9 @@
   --font-serif: var(--font-serif), Georgia, serif;
 
   /* === Primary Brand Colors === */
+  --color-brand-logo-color: #E5A900;
+  --color-[#005ea6]: #E5A900;
+  --color-stats-banner-bg: #002347;
   --color-navy-900: #0a1f44;
   /* Deep navy - hero bg, footer bg, dark sections */
   --color-navy-800: #0f2a52;

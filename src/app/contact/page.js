@@ -13,6 +13,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion } from "framer-motion";
+import PageHero from "@/components/layout/PageHero";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -75,7 +76,13 @@ export default function ContactPage() {
 
   return (
     <div className="w-full bg-[#f8fafc] flex flex-col font-sans">
-      
+      {/* PAGE HERO HEADER */}
+      <PageHero
+        title="Contact Us"
+        subtitle="Construct & transform your perfect space. Reach out to our technical fit-out team today."
+        breadcrumbs={[{ label: "Contact Us" }]}
+      />
+
       {/* 1. HERO & FORM SECTION WITH LIGHT BACKGROUND IMAGE */}
       <section className="relative w-full min-h-screen bg-slate-100 text-slate-900 pt-24 pb-16 px-4 sm:px-6 lg:px-10 flex flex-col items-center justify-center overflow-hidden">
         

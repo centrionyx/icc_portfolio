@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import CustomButton from "@/components/ui/CustomButton";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,15 +51,14 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER — Floating Glassmorphism Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 pt-2 sm:pt-3 px-4 sm:px-8 pointer-events-none">
-        <div className="max-w-[1440px] mx-auto">
-          {/* Glassmorphism Capsule Bar */}
-          <div className="pointer-events-auto h-16 sm:h-20 bg-slate-900/45 backdrop-blur-md border border-white/15 rounded-full px-6 sm:px-8 flex items-center justify-between shadow-lg">
+      {/* HEADER — Sticky White Navbar */}
+      <header className="sticky top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
+          <div className="h-16 sm:h-20 flex items-center justify-between">
 
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10  overflow-hidden   p-1 shadow-sm shrink-0">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden p-1 shrink-0">
                 <Image
                   src="/logo.svg"
                   alt="ICC Logo"
@@ -67,11 +67,11 @@ export default function Header() {
                 />
               </div>
 
-              <div className="hidden sm:flex flex-col ">
-                <p className="text-[10px] ml-14 font-bold uppercase tracking-widest leading-tight text-white font-sans">
+              <div className="hidden sm:flex flex-col">
+                <p className="text-[10px] ml-14 font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
                   INNOVATION
                 </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-white font-sans">
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-tight text-slate-900 font-sans">
                   Consultants &amp; Contractors
                 </p>
               </div>
@@ -94,53 +94,31 @@ export default function Header() {
                       transition-all
                       duration-300
                       ${isActive
-                        ? "text-white font-extrabold"
-                        : "text-white/80 hover:text-white"
+                        ? "text-[#003A70] font-extrabold"
+                        : "text-slate-700 hover:text-[#003A70]"
                       }
                     `}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-cyan-400 rounded-full" />
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#003A70] rounded-full" />
                     )}
                   </Link>
                 );
               })}
             </nav>
 
-            {/* ACTION BUTTON (Glassmorphism Pill) */}
+            {/* ACTION BUTTON */}
             <div className="hidden lg:flex items-center">
-              <Link
-                href="/contact"
-                className="
-                  bg-white/15
-                  hover:bg-white
-                  text-white
-                  hover:text-[#003A70]
-                  border
-                  border-white/30
-                  px-6
-                  py-2.5
-                  rounded-full
-                  text-[11px]
-                  font-extrabold
-                  uppercase
-                  tracking-[0.14em]
-                  transition-all
-                  duration-300
-                  backdrop-blur-md
-                  shadow-md
-                  hover:scale-105
-                "
-              >
+              <CustomButton href="/contact" variant="primary" size="sm" className="uppercase tracking-[0.14em] text-[11px]">
                 Book Consultation
-              </Link>
+              </CustomButton>
             </div>
 
             {/* MOBILE MENU BUTTON */}
             <button
               onClick={() => setIsOpen(true)}
-              className="ml-auto lg:hidden text-white hover:text-cyan-300 p-2 transition-colors"
+              className="ml-auto lg:hidden text-slate-800 hover:text-[#003A70] p-2 transition-colors"
               aria-label="Toggle Menu"
             >
               <Menu size={26} />

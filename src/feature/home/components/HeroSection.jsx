@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import CustomButton from "@/components/ui/CustomButton";
 
 // High-quality Unsplash images for commercial office workspace & interior design
 // const HERO_IMAGES = [
@@ -19,9 +18,9 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-screen min-h-[640px] overflow-hidden bg-[#0a1f44]"
+      className="relative w-full h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] min-h-[500px] overflow-hidden bg-[#0a1f44]"
     >
-      {/* Background Image - Single High Quality Unsplash Photo */}
+      {/* Clean Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src={SINGLE_HERO_IMAGE}
@@ -31,34 +30,25 @@ export default function HeroSection() {
           unoptimized
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/50" />
-        {/* Dark overlay for optimal text contrast */}
-        {/* <div className="absolute inset-0 bg-black/40" /> */}
       </div>
 
-      {/* Centered Content for ICC Commercial Fit-Out Workspace */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center max-w-5xl mx-auto pt-16">
-        {/* Tagline above headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-4"
-        >
-         
-        </motion.div>
+      {/* Content Container */}
+      <div className="relative z-10 flex flex-col items-center md:items-start justify-center h-full px-6 sm:px-12 md:px-16 text-center md:text-left max-w-7xl mx-auto">
+        {/* Organic Smoke / Radial Backdrop Aura (No rectangular box) */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full md:w-[700px] h-[450px] bg-black/60 rounded-full blur-[90px] pointer-events-none -z-10" />
 
         {/* Main Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] mb-6 drop-shadow-md"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.15] mb-6 max-w-3xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
         >
-          Delivering Projects From <br />
-          <span className="text-4xl sm:text-6xl md:text-7xl font-sans font-bold text-white tracking-tight leading-[1.08] mb-6 drop-shadow-md">
-            Concept to Completion
-          </span>
+          Delivering Projects <br className="hidden sm:inline" />
+          <span className="text-brand-logo-color block sm:inline my-1 sm:my-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            From Concept
+          </span>{" "}
+          to Completion
         </motion.h1>
 
         {/* Sub-headline / Description */}
@@ -66,54 +56,25 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="text-slate-200 text-sm sm:text-base md:text-lg max-w-3xl font-light leading-relaxed mb-8 drop-shadow-sm"
+          className="text-slate-100 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
         >
           Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons using reusable CustomButton */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-wrap items-center justify-center md:justify-start gap-4"
         >
-          <Link
-            href="/contact"
-            className="
-              inline-flex
-              items-center
-              gap-3
-              bg-white
-              text-[#005EA6]
-              px-8
-              py-4
-              text-xs sm:text-sm
-              font-bold
-              tracking-[0.05em]
-              rounded-xl
-              shadow-2xl
-              transition-all
-              duration-300
-              hover:bg-slate-100
-              hover:scale-105
-              group
-            "
-          >
-            <span>Get a Consultation</span>
-            <ArrowRight
-              size={16}
-              className="group-hover:translate-x-1 transition-transform duration-300"
-            />
-          </Link>
+          <CustomButton href="/contact" variant="primary">
+            Get a Consultation
+          </CustomButton>
 
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 bg-[#005EA6]/40 hover:bg-[#005EA6]/60 border border-white/25 text-white font-bold text-xs sm:text-sm px-8 py-4 rounded-xl backdrop-blur-md transition-all"
-          >
-            <span>View Our Projects</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <CustomButton href="/projects" variant="outline">
+            View Our Projects
+          </CustomButton>
         </motion.div>
       </div>
     </section>
