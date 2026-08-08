@@ -17,7 +17,7 @@ export default function AboutFoundation() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-6 relative min-h-[380px] sm:min-h-[460px] lg:min-h-0 w-full overflow-hidden shadow-md bg-slate-100 border border-slate-200/80"
+            className="lg:col-span-6 relative aspect-[4/3] lg:aspect-auto min-h-[260px] sm:min-h-[400px] lg:min-h-0 w-full overflow-hidden shadow-md bg-slate-100 border border-slate-200/80 rounded-2xl lg:rounded-none"
           >
             <img
               src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop"
@@ -39,7 +39,7 @@ export default function AboutFoundation() {
                 WHO WE ARE
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-3">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-slate-950 tracking-tight leading-[1.12] mb-3">
                 We Design Interiors <br />
                 That <span className="text-[#E5A900]">Reflect You</span>
               </h2>

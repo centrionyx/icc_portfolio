@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -9,6 +9,11 @@ import {
   Layout,
   Award,
   CheckCircle,
+  CheckCircle2,
+  Check,
+  Ruler,
+  Settings,
+  Building2,
   ArrowRight,
   RefreshCw,
   ChevronLeft,
@@ -24,6 +29,7 @@ import {
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import AnimatedCounter from "@/components/animations/AnimatedCounter";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 // Subcomponent for each project card (Clean Minimalist Design with Glass Shine Hover)
 function ProjectCard({ project, onClick }) {
@@ -230,146 +236,242 @@ function ProjectStatsDashboard({ projects }) {
   );
 }
 
-// Project Details Dialog Modal - SHARP EDGE LUXURY ARCHITECTURAL DESIGN
+// Project Details Dialog Modal - REDESIGNED EXACTLY MATCHING REFERENCE IMAGE
 function ProjectDetailsModal({ project, onClose }) {
   const [activeImgIdx, setActiveImgIdx] = useState(0);
+  const carouselRef = useRef(null);
+
   if (!project) return null;
 
   const images = project.images && project.images.length > 0
     ? project.images
     : (project.image ? [project.image] : ["/office_building_dusk.png"]);
 
-  // Automatic image slideshow timer (changes image every 3 seconds if multiple images exist)
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const interval = setInterval(() => {
-      setActiveImgIdx((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [images.length]);
+  const highlights = project.highlights || [
+    "Ergonomic workspace planning",
+    "Collaborative spaces",
+    "Premium material palette",
+    "State-of-the-art MEP systems",
+    "Sustainable & energy-efficient design",
+    "Timely delivery with zero compromise"
+  ];
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -140, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 140, behavior: "smooth" });
+    }
+  };
 
   return (
     <div
-      className="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-0 sm:p-4 md:p-8 overflow-y-auto animate-fade-in"
+      className="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-none w-full max-w-5xl shadow-2xl overflow-hidden relative flex flex-col lg:flex-row max-h-[92vh] border border-slate-200/90"
+        className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden relative border border-slate-200/90 my-auto max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Sharp Square Top Cross Icon Button */}
+        {/* Top Right Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 bg-slate-950/90 hover:bg-[#E5A900] text-white hover:text-slate-950 p-2.5 rounded-none z-30 transition-all duration-300 shadow-xl border border-white/20 cursor-pointer"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-900 p-1.5 rounded-full hover:bg-slate-100 transition-colors z-40 cursor-pointer"
           aria-label="Close Modal"
         >
-          <X size={18} />
+          <X size={20} />
         </button>
 
-        {/* Left Side: Image Showcase with Auto-Slideshow */}
-        <div className="lg:w-7/12 bg-slate-950 flex flex-col justify-between relative min-h-[320px] lg:min-h-[520px]">
-          <img
-            src={images[activeImgIdx]}
-            alt={project.client}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/20 to-black/30 pointer-events-none" />
-
-          {/* Category Badge Overlay */}
-          <div className="p-6 relative z-10">
-            <span className="bg-[#E5A900] text-slate-950 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-none shadow-lg font-mono">
-              {project.category}
-            </span>
-          </div>
-
-          {/* Bottom Image Thumbnails Carousel */}
-          {images.length > 1 && (
-            <div className="p-4 relative z-10 flex gap-2.5 overflow-x-auto bg-slate-950/80 backdrop-blur-md border-t border-white/10">
-              {images.map((img, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImgIdx(idx)}
-                  className={`w-14 h-14 rounded-none overflow-hidden border transition-all shrink-0 cursor-pointer ${idx === activeImgIdx ? "border-[#E5A900] opacity-100 scale-105" : "border-white/20 opacity-60 hover:opacity-100"
-                    }`}
-                >
-                  <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Right Side: Information Content */}
-        <div className="lg:w-5/12 p-6 sm:p-8 sm:py-10 overflow-y-auto flex flex-col justify-between bg-white text-slate-900">
-          <div>
-            {/* Header & Status */}
-            <div className="mb-6 border-b border-slate-100 pb-5">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1">
-                PROJECT PROFILE
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-sans mb-3">
-                {project.client}
-              </h2>
-
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-slate-500 font-light flex items-center gap-1.5">
-                  <MapPin size={13} className="text-[#E5A900]" />
-                  <span>{project.location}</span>
-                </p>
-
-                {(() => {
-                  const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
-                  const isDone = status === "Completed";
-                  return (
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-none border ${isDone ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-amber-50 text-amber-700 border-amber-200"
-                      }`}>
-                      {status}
-                    </span>
-                  );
-                })()}
-              </div>
-            </div>
-
-            {/* Scope Overview */}
-            <div className="mb-6">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 block mb-1.5">
-                PROJECT SCOPE
-              </span>
-              <p className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed">
-                {project.scope}
-              </p>
-            </div>
-
-            {/* Key Specs Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="bg-slate-50 p-3.5 rounded-none border-l-2 border-[#E5A900]">
-                <p className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">AREA SIZE</p>
-                <p className="text-xs font-bold text-slate-900 mt-0.5">{project.size}</p>
+        {/* Modal Scrollable Container */}
+        <div className="overflow-y-auto p-4 sm:p-6 lg:p-7">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            
+            {/* LEFT COLUMN: Main Feature Image & Thumbnail Carousel */}
+            <div className="lg:col-span-6 flex flex-col gap-3">
+              {/* Main Feature Image Container */}
+              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-sm bg-slate-100 border border-slate-200/80">
+                <img
+                  src={images[activeImgIdx]}
+                  alt={project.client}
+                  className="w-full h-full object-cover transition-all duration-500 ease-in-out"
+                />
               </div>
 
-              <div className="bg-slate-50 p-3.5 rounded-none border-l-2 border-[#E5A900]">
-                <p className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">TIMELINE</p>
-                <p className="text-xs font-bold text-slate-900 mt-0.5">{project.duration}</p>
-              </div>
+              {/* Thumbnail Carousel Row with Prev/Next Arrow Controls */}
+              {images.length > 1 && (
+                <div className="relative flex items-center gap-1.5 pt-0.5">
+                  <button
+                    onClick={scrollLeft}
+                    className="w-7 h-7 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center justify-center shrink-0 shadow-sm cursor-pointer transition-all"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+
+                  <div
+                    ref={carouselRef}
+                    className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1 scroll-smooth"
+                    style={{ scrollbarWidth: "none" }}
+                  >
+                    {images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveImgIdx(idx)}
+                        className={`relative aspect-[4/3] w-18 sm:w-22 rounded-lg overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
+                          idx === activeImgIdx
+                            ? "border-[#E5A900] ring-2 ring-[#E5A900]/30 opacity-100 scale-105"
+                            : "border-transparent opacity-70 hover:opacity-100"
+                        }`}
+                      >
+                        <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={scrollRight}
+                    className="w-7 h-7 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center justify-center shrink-0 shadow-sm cursor-pointer transition-all"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* Key Outcomes */}
-            {project.outcomes && (
-              <div className="bg-slate-900 text-white p-4 rounded-none border-l-2 border-[#E5A900] mb-6">
-                <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-[#E5A900] block mb-1">
-                  DELIVERY OUTCOME
+            {/* RIGHT COLUMN: Category Tag, Title, Subheader, Description, Specs Grid, Highlights */}
+            <div className="lg:col-span-6 flex flex-col justify-between">
+              <div>
+                {/* Category Uppercase Eyebrow */}
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1 font-sans">
+                  {project.category || "COMMERCIAL"}
                 </span>
-                <p className="text-xs leading-relaxed font-light text-slate-200">
-                  {project.outcomes}
-                </p>
-              </div>
-            )}
-          </div>
 
-          {/* Modal Footer */}
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">ICC PORTFOLIO</span>
-            <span className="text-[10px] font-mono text-slate-400">PULL TO CLOSE</span>
+                {/* Main Client Title */}
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 tracking-tight mb-1 font-sans">
+                  {project.client}
+                </h2>
+
+                {/* Location & Year Subheader */}
+                <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-500 mb-3">
+                  <span className="flex items-center gap-1">
+                    <MapPin size={13} className="text-[#E5A900]" />
+                    <span>{project.location}</span>
+                  </span>
+                  <span>|</span>
+                  <span className="flex items-center gap-1">
+                    <Calendar size={13} className="text-[#E5A900]" />
+                    <span>{project.year || project.duration || "2023"}</span>
+                  </span>
+                </div>
+
+                {/* Description Paragraph */}
+                <p className="text-slate-600 text-xs font-normal leading-relaxed mb-4">
+                  {project.outcomes || project.scope || "A contemporary workspace designed to inspire productivity and collaboration. The design reflects the brand's professionalism through a perfect blend of functionality, comfort, and modern aesthetics."}
+                </p>
+
+                {/* 6 Specs Grid matching reference design */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+                  {/* 1. Project Type */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <Building2 size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Project Type</p>
+                      <p className="text-xs font-bold text-slate-900 capitalize mt-0.5">
+                        {project.category ? `${project.category} Office` : "Corporate Office"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 2. Area */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <Ruler size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Area</p>
+                      <p className="text-xs font-bold text-slate-900 mt-0.5">
+                        {project.size || "32,000 Sq. Ft."}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 3. Scope of Work */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <Briefcase size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Scope of Work</p>
+                      <p className="text-xs font-bold text-slate-900 mt-0.5 line-clamp-1">
+                        {project.scope || "Design & Build"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 4. Duration */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <Calendar size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
+                      <p className="text-xs font-bold text-slate-900 mt-0.5">
+                        {project.duration || "6 Months"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 5. Services */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <Settings size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Services</p>
+                      <p className="text-xs font-bold text-slate-900 mt-0.5 line-clamp-1">
+                        PMC, Execution Management
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 6. Completion */}
+                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Completion</p>
+                      <p className="text-xs font-bold text-slate-900 mt-0.5">
+                        {project.year || "2023"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Key Highlights Section */}
+                <div className="pt-1">
+                  <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-2 font-sans">
+                    Key Highlights
+                  </h4>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {highlights.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-1.5">
+                        <Check size={14} className="text-[#E5A900] shrink-0" strokeWidth={2.5} />
+                        <span className="text-[11px] text-slate-600 font-medium">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -499,25 +601,27 @@ export default function ProjectsPage() {
               </p>
             </div>
           ) : layoutMode === "grid" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {processedProjects.map((project) => (
-                <ProjectCard
-                  key={project._id || project.id}
-                  project={project}
-                  onClick={setSelectedProject}
-                />
+                <StaggerItem key={project._id || project.id} direction="up">
+                  <ProjectCard
+                    project={project}
+                    onClick={setSelectedProject}
+                  />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           ) : (
-            <div className="flex flex-col gap-6">
+            <StaggerContainer staggerDelay={0.08} className="flex flex-col gap-6">
               {processedProjects.map((project) => (
-                <ProjectListCard
-                  key={project._id || project.id}
-                  project={project}
-                  onClick={setSelectedProject}
-                />
+                <StaggerItem key={project._id || project.id} direction="up">
+                  <ProjectListCard
+                    project={project}
+                    onClick={setSelectedProject}
+                  />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           )}
         </section>
 

@@ -19,7 +19,7 @@ export default function OurProcess() {
           <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#E5A900] block mb-1">
             {content.tagline}
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a1f44] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#0a1f44] tracking-tight">
             {content.titleLine1} <span className="text-[#E5A900]">{content.titleLine2}</span>
           </h2>
           <p className="text-slate-500 text-xs sm:text-sm font-light mt-1.5 max-w-md mx-auto leading-relaxed">

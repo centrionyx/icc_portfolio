@@ -11,6 +11,8 @@ import {
   Receipt 
 } from "lucide-react";
 
+import SectionHeader from "@/components/ui/SectionHeader";
+
 export default function KeyStrengths() {
   const strengths = [
     {
@@ -53,43 +55,15 @@ export default function KeyStrengths() {
 
   return (
     <section className="relative w-full bg-[#fdfcf9] py-10 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Subtle Top-Left Decorative Dots */}
-      <div className="absolute top-4 left-6 opacity-[0.2] pointer-events-none">
-        <div className="grid grid-cols-6 gap-1.5">
-          {[...Array(24)].map((_, i) => (
-            <div key={i} className="w-1 h-1 rounded-full bg-[#b8860b]" />
-          ))}
-        </div>
-      </div>
-
       <div className="max-w-[1280px] mx-auto relative z-10">
         
-        {/* Left-Aligned Header Block */}
-        <div className="text-left max-w-2xl mb-8 sm:mb-10">
-          {/* Eyebrow with left line indicator */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-8 h-[2px] bg-[#c59b27]" />
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#b8860b] uppercase font-sans">
-              KEY STRENGTHS
-            </span>
-          </div>
-
-          {/* Main Title */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#0e1e38] tracking-tight leading-tight mb-3">
-            Our <span className="text-[#b8860b]">Key Strengths</span>
-          </h2>
-
-          {/* Subtitle text */}
-          <p className="text-slate-600 text-xs sm:text-sm font-sans font-normal leading-relaxed">
-            At ICC, we support our clients in selecting the right delivery partners and provide a complete, end-to-end project delivery solution—from concept to completion.
-          </p>
-
-          {/* Left Diamond Accent */}
-          <div className="flex items-center gap-2.5 mt-4">
-            <span className="w-2 h-2 rotate-45 bg-[#b8860b]" />
-            <span className="w-16 h-[1px] bg-amber-200" />
-          </div>
-        </div>
+        {/* Reusable Section Header */}
+        <SectionHeader
+          eyebrow="KEY STRENGTHS"
+          title="Our"
+          highlight="Key Strengths"
+          description="At ICC, we support our clients in selecting the right delivery partners and provide a complete, end-to-end project delivery solution—from concept to completion."
+        />
 
         {/* 6 Strengths Compact Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">

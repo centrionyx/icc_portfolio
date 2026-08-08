@@ -2,17 +2,23 @@
 
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function HomeNewsletterBanner() {
   return (
     <section className="w-full bg-[#f8fafc] py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-brand-yellow text-slate-950 rounded-2xl sm:rounded-3xl p-8 sm:p-10 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="bg-brand-yellow text-slate-950 rounded-2xl sm:rounded-3xl p-8 sm:p-10 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6"
+        >
           {/* Left Title */}
           <div className="md:w-auto text-center md:text-left">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight font-sans text-slate-950">
+            <h2 className="text-2xl sm:text-3xl font-serif tracking-tight leading-tight text-slate-950">
               Let's Bring Your <br className="hidden sm:inline" />
               Dream Space to Life
             </h2>
@@ -35,8 +41,7 @@ export default function HomeNewsletterBanner() {
               <ArrowRight size={16} />
             </Link>
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );

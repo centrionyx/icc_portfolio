@@ -3,22 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { StaggerContainer, StaggerItem } from "@/components/animations";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function ServicesMatrix({ services }) {
   return (
     <section id="services-matrix" className="max-w-[1440px] mx-auto px-5 lg:px-8 pt-6 pb-12">
-      {/* TOP LEFT-ALIGNED HEADER SECTION */}
-      <div className="text-left max-w-2xl mb-12">
-        <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-2">
-          SOLUTIONS
-        </span>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-3">
-          Our <span className="text-[#E5A900]">Services</span>
-        </h2>
-        <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed">
-          Comprehensive interior fit-out management and technical consulting solutions.
-        </p>
-      </div>
+      {/* Reusable Section Header */}
+      <SectionHeader
+        eyebrow="SOLUTIONS"
+        title="Our"
+        highlight="Services"
+        description="Comprehensive interior fit-out management and technical consulting solutions."
+      />
 
       {/* ALL 8 SERVICES GRID */}
       <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

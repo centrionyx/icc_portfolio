@@ -1,56 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHeader from "@/components/ui/SectionHeader";
 
-export default function AboutPrinciples({ values }) {
-  // If values prop is passed, use it, else fallback to default principles list
-  const defaultPrinciples = [
+export default function AboutPrinciples() {
+  const principles = [
     {
-      title: "Thoughtful Design",
-      description: "We design with intention, creating spaces that reflect your personality and purpose.",
+      number: "01",
+      title: "Predictability First",
+      desc: "No surprises. We deliver projects on time, within budget, and to exact specifications through structured governance."
     },
     {
-      title: "Quality First",
-      description: "We never compromise on quality — from materials to craftsmanship, every detail matters.",
+      number: "02",
+      title: "Quality Without Compromise",
+      desc: "Every detail matters. From materials to execution, we maintain stringent quality benchmarks at every phase."
     },
     {
-      title: "Client-Centric Approach",
-      description: "Your vision is our starting point. We listen, understand, and build around your needs.",
+      number: "03",
+      title: "Transparent Governance",
+      desc: "Complete visibility into progress, costs, and decisions. Trust is built on open communication and joint verification."
     },
     {
-      title: "Innovation in Every Detail",
-      description: "We blend creativity with functionality to deliver spaces that are both modern and timeless.",
-    },
-    {
-      title: "Sustainable Thinking",
-      description: "We believe in responsible design choices that create a better, greener future for spaces we live in.",
-    },
-    {
-      title: "Integrity & Transparency",
-      description: "Honest communication, clear processes, and complete transparency at every stage of the journey.",
-    },
+      number: "04",
+      title: "Client-Centric Partnerships",
+      desc: "We act as an extension of your team, aligning our technical expertise with your business goals and vision."
+    }
   ];
 
-  const list = values && values.length >= 6 ? values : defaultPrinciples;
-
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden relative">
+    <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         
-        {/* ── TOP LEFT-ALIGNED HEADER SECTION ── */}
-        <div className="text-left max-w-3xl mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-3">
-            Our Principles
-          </h2>
-          <div className="w-12 h-1 bg-[#E5A900] rounded-full mb-4" />
-          <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed">
-            At ICC, our work is guided by a set of core principles that define the way we design, collaborate, and deliver.
-          </p>
-        </div>
+        {/* Reusable Section Header */}
+        <SectionHeader
+          eyebrow="CORE VALUES"
+          title="Our"
+          highlight="Principles"
+          description="At ICC, our work is guided by a set of core principles that define the way we design, collaborate, and deliver."
+        />
 
         {/* ── 6 CARDS GRID ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
-          {list.map((item, idx) => (
+          {principles.map((item, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}

@@ -909,6 +909,7 @@ export default function AdminDashboardPage() {
   };
 
   const activeProjects = projects.filter(p => (p.status ? p.status !== "Completed" : p.completion < 100));
+  const completedProjectsCount = projects.filter(p => (p.status ? p.status === "Completed" : p.completion === 100)).length;
 
   const filteredApps = applications.filter(app =>
     (app.name && app.name.toLowerCase().includes(searchQuery.toLowerCase())) ||

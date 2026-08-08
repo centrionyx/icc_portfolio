@@ -2,65 +2,72 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+:root {
+  /* ── 1. PRIMARY GOLD / YELLOW ACCENT PALETTE ── */
+  --brand-gold: #E5A900;
+  --brand-gold-hover: #CA9400;
+  --brand-gold-light: #fcfaf7;
+  --brand-gold-subtle: rgba(229, 169, 0, 0.15);
+  --brand-gold-border: rgba(229, 169, 0, 0.25);
+
+  /* ── 2. BRAND NAVY / DARK THEME PALETTE ── */
+  --brand-navy: #0a1f44;
+  --brand-navy-dark: #002347;
+  --brand-navy-light: #0f2a52;
+
+  /* ── 3. SURFACE & NEUTRAL BACKGROUNDS ── */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+
+  /* ── 4. TYPOGRAPHY TEXT COLORS ── */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-gold: #E5A900;
+  --text-muted: #94a3b8;
+  --text-on-dark: #ffffff;
+
+  /* ── 5. BORDER & DIVIDER COLORS ── */
+  --border-light: #e2e8f0;
+  --border-subtle: rgba(226, 232, 240, 0.8);
+}
+
 @theme {
   --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-serif), Georgia, serif;
 
-  /* === Primary Brand Colors & Accents === */
-  --color-brand-yellow: #E5A900;
-  --color-brand-yellow-hover: #CA9400;
-  --color-brand-logo-color: #E5A900;
-  --color-[#005ea6]: #E5A900;
-  
+  /* === Primary Brand Gold & Yellow Colors === */
+  --color-brand-yellow: var(--brand-gold);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-yellow-hover: var(--brand-gold-hover);
+  --color-brand-gold-hover: var(--brand-gold-hover);
+  --color-brand-logo-color: var(--brand-gold);
+
   /* === Background & Navy Theme Colors === */
-  --color-brand-navy: #0a1f44;
-  --color-stats-banner-bg: #002347;
-  --color-navy-900: #0a1f44;
-  --color-navy-800: #0f2a52;
-  --color-blue-600: #003A70;
-  /* Primary CTA blue - buttons, links, accents */
-  --color-blue-500: #3b82f6;
-  /* "Impact" highlight text, hover states */
-  --color-blue-100: #dbeafe;
-  /* Light blue icon circles bg */
+  --color-brand-navy: var(--brand-navy);
+  --color-stats-banner-bg: var(--brand-navy-dark);
+  --color-navy-900: var(--brand-navy);
+  --color-navy-800: var(--brand-navy-light);
 
-  /* === Neutrals === */
-  --color-white: #ffffff;
-  --color-offwhite: #f7f8fa;
-  /* Section backgrounds (What We Do, etc.) */
-  --color-gray-50: #f3f4f6;
-  /* Card backgrounds */
-  --color-gray-100: #e5e7eb;
-  /* Borders, dividers */
-  --color-gray-400: #9ca3af;
-  /* Muted icons */
-  --color-gray-600: #6b7280;
-  /* Secondary/body text on light bg */
-  --color-gray-900: #111827;
-  /* Primary heading text */
+  /* === Neutrals & Surfaces === */
+  --color-white: var(--bg-primary);
+  --color-offwhite: var(--bg-secondary);
+  --color-gray-50: #f8fafc;
+  --color-gray-100: var(--border-light);
+  --color-gray-400: var(--text-muted);
+  --color-gray-600: var(--text-secondary);
+  --color-gray-900: var(--text-primary);
 
-  /* === Text on Dark Backgrounds === */
-  --color-text-light: #ffffff;
-  --color-text-muted-light: #c5d1e6;
-  /* Paragraph text on navy bg */
-
-  /* === Accent / Numbered Steps === */
-  --color-step-blue: #2563eb;
-  /* Numbered circle badges (01-05) */
-
-  /* === Overlay / Image Tint === */
-  --color-overlay-navy: rgba(10, 31, 68, 0.7);
-  /* Image overlays on dark sections */
-
-  /* === Semantic Aliases (recommended usage) === */
-  --color-primary: var(--color-blue-600);
-  --color-primary-hover: #004B91;
-  --color-secondary: #003A70;
-  --color-background: var(--color-white);
-  --color-background-alt: var(--color-offwhite);
-  --color-foreground: var(--color-gray-900);
-  --color-muted: var(--color-gray-600);
-  --color-border: var(--color-gray-100);
+  /* === Semantic Aliases === */
+  --color-primary: var(--brand-gold);
+  --color-primary-hover: var(--brand-gold-hover);
+  --color-secondary: var(--brand-navy);
+  --color-background: var(--bg-primary);
+  --color-background-alt: var(--bg-secondary);
+  --color-foreground: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-border: var(--border-light);
 }
 
 /* === Process Section Step Flow Animation === */

@@ -5,24 +5,20 @@ import { motion } from "framer-motion";
 import { HiMail, HiBriefcase, HiChartBar } from "react-icons/hi";
 import { FaLinkedin, FaTwitter, FaGlobe } from "react-icons/fa";
 import AnimatedCounter from "@/components/animations/AnimatedCounter";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function AboutLeadership({ founder, careerDeliveries }) {
   return (
-    <section className="py-8 sm:py-10 lg:py-12 border-b border-slate-200/80 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+    <section className="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         
-        {/* ── TOP LEFT ALIGNED HEADER SECTION ── */}
-        <div className="text-left max-w-2xl mb-8 sm:mb-12">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1.5">
-            OUR FOUNDER
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-2">
-            The Vision Behind <span className="text-[#E5A900]">ICC</span>
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed">
-            Meet the founder whose passion and technical vision drive every commercial space we design and every experience we create.
-          </p>
-        </div>
+        {/* Reusable Section Header */}
+        <SectionHeader
+          eyebrow="OUR FOUNDER"
+          title="The Vision Behind"
+          highlight="ICC"
+          description="Meet the founder whose passion and technical vision drive every commercial space we design and every experience we create."
+        />
 
         {/* ── MAIN FOUNDER GRID (MATCHING REFERENCE IMAGE) ── */}
         <motion.div
@@ -32,8 +28,8 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
           transition={{ duration: 0.6 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-14"
         >
-          {/* LEFT COLUMN: Large Rounded Founder Portrait Image (Matching Reference Image) */}
-          <div className="lg:col-span-5 relative min-h-[380px] sm:min-h-[440px] lg:min-h-0 w-full rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-100">
+          {/* LEFT COLUMN: Large Rounded Founder Portrait Image */}
+          <div className="lg:col-span-5 relative aspect-[4/5] lg:aspect-auto min-h-[300px] sm:min-h-[440px] lg:min-h-0 w-full rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-100">
             <Image
               src={founder.image || "/founder.png"}
               alt={founder.name}

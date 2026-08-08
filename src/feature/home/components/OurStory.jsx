@@ -1,22 +1,29 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import CustomButton from "@/components/ui/CustomButton";
 
 export default function OurStory() {
   return (
-    <section className="w-full bg-white py-1 sm:py-24 px-6 sm:px-12 md:px-16 overflow-hidden">
+    <section className="w-full bg-white py-12 sm:py-24 px-6 sm:px-12 md:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left Column: Story Content */}
-        <div className="lg:col-span-5 flex flex-col items-start text-left">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-5 flex flex-col items-start text-left"
+        >
           {/* Eyebrow Label */}
           <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-logo-color mb-3">
             OUR STORY
           </span>
 
           {/* Main Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.2] mb-6">
-            Designing Spaces That Inspire
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-slate-900 tracking-tight leading-[1.2] mb-6">
+            Designing Spaces <span className="text-[#E5A900]">That Inspire</span>
           </h2>
 
           {/* Description Paragraph */}
@@ -31,10 +38,16 @@ export default function OurStory() {
           <CustomButton href="/about" variant="primary">
             Know More About Us
           </CustomButton>
-        </div>
+        </motion.div>
 
-        {/* Right Column: Seamless Autoplay Video (No overlay button, no modal popup) */}
-        <div className="lg:col-span-7 relative">
+        {/* Right Column: Seamless Autoplay Video */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="lg:col-span-7 relative"
+        >
           <div className="relative w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-slate-100">
             <video
               autoPlay
@@ -51,7 +64,7 @@ export default function OurStory() {
               Your browser does not support the video tag.
             </video>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

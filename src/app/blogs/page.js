@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import { BLOGS_DATA } from "@/feature/blogs/data/blogsData";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 export default function InsightsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -30,62 +31,72 @@ export default function InsightsPage() {
 
       <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 mt-10">
         
-        {/* ── PILL CATEGORY FILTER TABS (Matching Reference Image) ── */}
-        <div className="flex justify-center mb-10 overflow-x-auto no-scrollbar py-2">
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            {categories.map((cat) => {
-              const isSelected = activeCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    setActiveCategory(cat);
-                    setVisibleCount(6);
-                  }}
-                  className={`px-6 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap ${
-                    isSelected
-                      ? "bg-[#E5A900] text-slate-950 shadow-md font-bold scale-105"
-                      : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+        {/* ── PILL CATEGORY FILTER TABS ── */}
+        <FadeIn direction="up">
+          <div className="flex justify-center mb-10 overflow-x-auto no-scrollbar py-2">
+            <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+              {categories.map((cat) => {
+                const isSelected = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setActiveCategory(cat);
+                      setVisibleCount(6);
+                    }}
+                    className={`px-6 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap ${
+                      isSelected
+                        ? "bg-[#E5A900] text-slate-950 shadow-md font-bold scale-105"
+                        : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </FadeIn>
 
-        {/* ── 6 BLOG CARDS GRID (Matching Reference Image) ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14">
+        {/* ── 6 BLOG CARDS GRID ── */}
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14">
           {displayedBlogs.map((blog) => (
-            <Link
-              key={blog.id}
-              href={`/blogs/${blog.slug || blog.id}`}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/70 group cursor-pointer flex flex-col justify-between"
-            >
-              {/* Image Container with rounded top corners */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              </div>
-
-              {/* Title & Date Content */}
-              <div className="p-5 flex flex-col justify-between flex-1">
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-[#E5A900] transition-colors">
-                    {blog.title}
-                  </h3>
+            <StaggerItem key={blog.id} direction="up">
+              <Link
+                href={`/blogs/${blog.slug || blog.id}`}
+                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md flex flex-col hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full"
+              >
+                {/* Image Header */}
+                <div className="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-slate-900 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                    {blog.category}
+                  </span>
                 </div>
-                <p className="text-xs text-slate-400 font-medium mt-3">
-                  {blog.date}
-                </p>
-              </div>
-            </Link>
+
+                {/* Content Area */}
+                <div className="p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-950 mb-2 group-hover:text-[#E5A900] transition-colors leading-snug line-clamp-2">
+                      {blog.title}
+                    </h3>
+                    <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 mb-4">
+                      {blog.excerpt}
+                    </p>
+                  </div>
+
+                  <p className="text-[11px] font-medium text-slate-400">
+                    {blog.date}
+                  </p>
+                </div>
+              </Link>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* ── VIEW MORE ARTICLES BUTTON (Matching Reference Image) ── */}
         {visibleCount < filtered.length && (

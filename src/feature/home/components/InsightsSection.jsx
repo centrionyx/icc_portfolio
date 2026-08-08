@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { INSIGHTS_CONTENT, CLIENT_LOGOS } from "../constants";
 
@@ -21,8 +22,8 @@ export default function InsightsSection() {
         
         {/* HEADER BLOCK — 'Article categories' and pill CTA matching reference image */}
         <div className="flex items-center justify-between mb-10 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a1f44] tracking-tight">
-            Featured Blogs
+          <h2 className="text-3xl sm:text-4xl font-serif text-[#0a1f44] tracking-tight">
+            Featured <span className="text-[#E5A900]">Blogs</span>
           </h2>
 
           <Link
@@ -49,15 +50,21 @@ export default function InsightsSection() {
           </Link>
         </div>
 
-        {/* 3 ARTICLE CATEGORY CARDS — Rounded cards with top-right arrow badge matching reference image */}
+        {/* 3 ARTICLE CATEGORY CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
           {insights.cards.map((card, idx) => {
             const bgImage = CATEGORY_IMAGES[idx % CATEGORY_IMAGES.length];
 
             return (
-              <Link
+              <motion.div
                 key={card.id || idx}
-                href={card.href || "/blogs"}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.12 }}
+              >
+                <Link
+                  href={card.href || "/blogs"}
                 className="
                   group
                   relative
@@ -124,9 +131,10 @@ export default function InsightsSection() {
                   </p>
                 </div>
               </Link>
-            );
-          })}
-        </div>
+            </motion.div>
+          );
+        })}
+      </div>
 
         {/* CLIENT LOGOS MARQUEE */}
         <div className="w-full border-t border-slate-200/80 pt-10 overflow-hidden relative">

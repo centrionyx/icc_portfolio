@@ -4,23 +4,21 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Building2 } from "lucide-react";
 
+import SectionHeader from "@/components/ui/SectionHeader";
+
 export default function AboutClients({ clientsServed, founderEmail }) {
   return (
     <>
       {/* ── CLIENT REGISTER SECTION WITH INFINITE MARQUEE ── */}
-      <section className="py-16 sm:py-20 bg-[#f8fafc] border-b border-slate-200/80 overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-5 lg:px-8 mb-10">
-          {/* Header Block */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12]">
-                Organizations <span className="text-[#E5A900]">We've Served</span>
-              </h2>
-            </div>
-            <p className="text-slate-600 text-sm sm:text-base font-normal max-w-md leading-relaxed">
-              High-precision corporate workspace projects across India.
-            </p>
-          </div>
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#f8fafc] border-b border-slate-200/80 overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-10">
+          {/* Reusable Responsive Section Header */}
+          <SectionHeader
+            eyebrow="CLIENT REGISTER"
+            title="Organizations"
+            highlight="We've Served"
+            description="High-precision corporate workspace projects across India."
+          />
         </div>
 
         {/* Continuous Single-Line Infinite Marquee */}
