@@ -23,6 +23,7 @@ import {
   Briefcase
 } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
+import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
 // Subcomponent for each project card (Clean Minimalist Design with Glass Shine Hover)
 function ProjectCard({ project, onClick }) {
@@ -165,7 +166,9 @@ function ProjectStatsDashboard({ projects }) {
         <div className="absolute top-[-10%] right-[-10%] w-32 h-32 bg-blue-500/5 rounded-full blur-2xl transform transition-transform duration-500 group-hover:scale-110" />
         <div>
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Total Delivery Area</span>
-          <h4 className="text-3xl sm:text-4xl font-extrabold mt-3 text-slate-900">{formattedArea}</h4>
+          <h4 className="text-3xl sm:text-4xl font-extrabold mt-3 text-slate-900">
+            <AnimatedCounter value={formattedArea} />
+          </h4>
         </div>
         <p className="text-xs text-slate-500 mt-5 leading-relaxed">Calculated gross square footage of successfully executed interior & fit-out projects.</p>
       </div>
@@ -177,15 +180,21 @@ function ProjectStatsDashboard({ projects }) {
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#005ea6] block font-mono">Delivery Status Breakdown</span>
           <div className="grid grid-cols-3 gap-2 mt-3">
             <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
-              <span className="text-xl font-extrabold text-emerald-600">{completedCount}</span>
+              <span className="text-xl font-extrabold text-emerald-600">
+                <AnimatedCounter value={completedCount} />
+              </span>
               <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Completed</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
-              <span className="text-xl font-extrabold text-blue-600">{ongoingCount}</span>
+              <span className="text-xl font-extrabold text-blue-600">
+                <AnimatedCounter value={ongoingCount} />
+              </span>
               <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Ongoing</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-center">
-              <span className="text-xl font-extrabold text-amber-600">{pendingCount}</span>
+              <span className="text-xl font-extrabold text-amber-600">
+                <AnimatedCounter value={pendingCount} />
+              </span>
               <span className="block text-[8px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Pending</span>
             </div>
           </div>

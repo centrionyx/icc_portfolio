@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { HiMail, HiBriefcase, HiChartBar } from "react-icons/hi";
 import { FaLinkedin, FaTwitter, FaGlobe } from "react-icons/fa";
+import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
 export default function AboutLeadership({ founder, careerDeliveries }) {
   return (
@@ -71,7 +72,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                   </div>
                   <div>
                     <h5 className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">
-                      {founder.experience}+
+                      <AnimatedCounter value={`${founder.experience}+`} />
                     </h5>
                     <p className="text-[10px] font-medium text-slate-500 leading-tight mt-0.5">
                       Years of Exp.
@@ -86,7 +87,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                   </div>
                   <div>
                     <h5 className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">
-                      {founder.deliveredArea}+
+                      <AnimatedCounter value={`${founder.deliveredArea}+`} />
                     </h5>
                     <p className="text-[10px] font-medium text-slate-500 leading-tight mt-0.5">
                       Sq. Ft. Delivered
@@ -101,7 +102,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                   </div>
                   <div>
                     <h5 className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">
-                      50+
+                      <AnimatedCounter value="50+" />
                     </h5>
                     <p className="text-[10px] font-medium text-slate-500 leading-tight mt-0.5">
                       Major Projects
@@ -116,7 +117,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                   </div>
                   <div>
                     <h5 className="text-sm sm:text-base font-extrabold text-slate-950 leading-tight">
-                      100%
+                      <AnimatedCounter value="100%" />
                     </h5>
                     <p className="text-[10px] font-medium text-slate-500 leading-tight mt-0.5">
                       Quality Audit

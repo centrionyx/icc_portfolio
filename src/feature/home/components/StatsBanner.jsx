@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { FolderCheck, Users, Clock, Award } from "lucide-react";
+import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
 export default function StatsBanner() {
   const stats = [
@@ -52,7 +53,7 @@ export default function StatsBanner() {
 
                   <div>
                     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
-                      {item.value}
+                      <AnimatedCounter value={item.value} />
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-300 font-medium tracking-wide mt-0.5">
                       {item.label}

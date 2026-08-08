@@ -5,6 +5,7 @@ import PageHero from "@/components/layout/PageHero";
 import ServicesFocusAreas from "@/feature/services/components/ServicesFocusAreas";
 import ServicesMatrix from "@/feature/services/components/ServicesMatrix";
 import ServicesSectorsWeServe from "@/feature/services/components/ServicesSectorsWeServe";
+import KeyStrengths from "@/feature/home/components/KeyStrengths";
 import ServicesCtaBanner from "@/feature/services/components/ServicesCtaBanner";
 
 export default function ServicesPage() {
@@ -28,97 +29,97 @@ export default function ServicesPage() {
       id: "advisory",
       num: "02",
       icon: <Search className="w-5 h-5" />,
-      title: "Project Advisory & Technical Consultancy",
-      short: "Independent advisory and technical consultancy to support informed decision-making, optimize costs and reduce project risks.",
-      image: "https://images.unsplash.com/photo-1542744801-43245f175232?q=80&w=1200&auto=format&fit=crop",
+      title: "Technical Advisory & Consultancy",
+      short: "Expert technical guidance, feasibility studies, design reviews, and value engineering to optimize project outcomes.",
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "Informed strategic decision support",
-        "Value engineering & cost optimization",
-        "Pre-construction risk reduction",
-        "Technical specification audits"
-      ]
-    },
-    {
-      id: "monitoring",
-      num: "03",
-      icon: <Eye className="w-5 h-5" />,
-      title: "Interior Fit-Out Project Monitoring",
-      short: "Independent monitoring of project progress, quality, budget and schedule to ensure compliance with project objectives.",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-      points: [
-        "Independent schedule monitoring",
-        "Budget & cost variance audits",
-        "Quality compliance verification",
-        "Objective alignment tracking"
-      ]
-    },
-    {
-      id: "maintenance",
-      num: "04",
-      icon: <Wrench className="w-5 h-5" />,
-      title: "Repair & Maintenance Services",
-      short: "Planned and reactive maintenance solutions that ensure workplace functionality, asset performance and business continuity.",
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop",
-      points: [
-        "Planned preventive maintenance",
-        "Rapid reactive repair solutions",
-        "Workplace asset optimization",
-        "Business continuity assurance"
-      ]
-    },
-    {
-      id: "billing",
-      num: "05",
-      icon: <Calculator className="w-5 h-5" />,
-      title: "Billing & Joint Measurement Services",
-      short: "Accurate quantity verification, joint measurement and billing validation ensuring transparency and financial accuracy.",
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop",
-      points: [
-        "Accurate quantity verification",
-        "Site joint measurement logs",
-        "Transparent billing validation",
-        "Financial compliance accuracy"
-      ]
-    },
-    {
-      id: "quality-safety",
-      num: "06",
-      icon: <ShieldCheck className="w-5 h-5" />,
-      title: "Quality & Safety Monitoring",
-      short: "Continuous quality inspections and safety audits to ensure compliance with standards, specifications and regulations.",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
-      points: [
-        "Continuous quality inspections",
-        "EHS site safety audits",
-        "Specification & standard checks",
-        "Regulatory compliance reporting"
-      ]
-    },
-    {
-      id: "mep",
-      num: "07",
-      icon: <Settings className="w-5 h-5" />,
-      title: "MEP & Services Coordination",
-      short: "Coordination of MEP, HVAC, Fire Protection, ELV and allied services for seamless integration and efficient project delivery.",
-      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1200&auto=format&fit=crop",
-      points: [
-        "HVAC, MEP & ELV coordination",
-        "Fire protection integration",
-        "Inter-services clash checks",
-        "Efficient system commissioning"
+        "Site feasibility & due diligence",
+        "Design review & optimization",
+        "Value engineering solutions",
+        "Technical risk assessment"
       ]
     },
     {
       id: "supervision",
-      num: "08",
-      icon: <Layers className="w-5 h-5" />,
-      title: "Site Supervision & Execution Support",
-      short: "On-site supervision to monitor workmanship, contractor performance and adherence to drawings and specifications.",
+      num: "03",
+      icon: <Eye className="w-5 h-5" />,
+      title: "Execution Monitoring & Site Supervision",
+      short: "On-site quality audits, progress tracking, safety compliance, and contractor management for flawless execution.",
       image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "On-site workmanship monitoring",
+        "Daily site progress oversight",
+        "Quality control & material checks",
+        "Safety compliance monitoring",
+        "Contractor performance tracking"
+      ]
+    },
+    {
+      id: "turnkey",
+      num: "04",
+      icon: <Wrench className="w-5 h-5" />,
+      title: "Turnkey Interior Solutions",
+      short: "Single-point responsibility from initial design concepts to final handover, simplifying delivery for clients.",
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop",
+      points: [
+        "Single-point accountability",
+        "Complete design & build integration",
+        "Vendor & procurement management",
+        "Hassle-free client experience"
+      ]
+    },
+    {
+      id: "cost-management",
+      num: "05",
+      icon: <Calculator className="w-5 h-5" />,
+      title: "Commercial & Cost Management",
+      short: "BOQ auditing, variation checks, joint measurements, and billing management for complete financial transparency.",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+      points: [
+        "BOQ auditing & bill validation",
+        "Joint measurement verification",
+        "Variation claim management",
+        "Transparent cost reporting"
+      ]
+    },
+    {
+      id: "quality-audit",
+      num: "06",
+      icon: <ShieldCheck className="w-5 h-5" />,
+      title: "Quality Assurance & Snag Listing",
+      short: "Rigorous quality inspections, defect identification, snag closure tracking, and handover documentation.",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop",
+      points: [
+        "Comprehensive snag listing",
+        "Defect rectification tracking",
+        "Quality benchmark auditing",
+        "Handover documentation prep"
+      ]
+    },
+    {
+      id: "mep-coordination",
+      num: "07",
+      icon: <Settings className="w-5 h-5" />,
+      title: "MEP & Services Coordination",
+      short: "Specialized oversight of Mechanical, Electrical, Plumbing, HVAC, and Fire Safety systems integration.",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+      points: [
+        "3D clash detection reviews",
+        "HVAC, Electrical & Fire alignment",
+        "Energy efficiency optimization",
+        "Services commissioning oversight"
+      ]
+    },
+    {
+      id: "post-handover",
+      num: "08",
+      icon: <Layers className="w-5 h-5" />,
+      title: "Post-Handover & DLP Support",
+      short: "Defect liability period management, facility performance reviews, and maintenance coordination post-occupancy.",
+      image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200&auto=format&fit=crop",
+      points: [
+        "Post-occupancy evaluation",
+        "Warranty & DLP management",
         "Contractor performance tracking",
-        "Drawing & spec adherence checks",
         "Daily site progress oversight"
       ]
     }
@@ -135,13 +136,16 @@ export default function ServicesPage() {
       />
 
       {/* OUR FOCUS AREAS SECTION */}
-      <ServicesFocusAreas />
+      {/* <ServicesFocusAreas /> */}
 
       {/* CORE SERVICES MATRIX */}
       <ServicesMatrix services={services} />
 
       {/* SECTORS WE SERVE SECTION */}
       <ServicesSectorsWeServe />
+
+      {/* KEY STRENGTHS SECTION */}
+      <KeyStrengths />
 
       {/* BOTTOM CTA BANNER */}
       <ServicesCtaBanner />
