@@ -23,7 +23,7 @@ export default function InsightsSection() {
         {/* HEADER BLOCK — 'Article categories' and pill CTA matching reference image */}
         <div className="flex items-center justify-between mb-10 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl font-serif text-[#0a1f44] tracking-tight">
-            Featured <span className="text-[#E5A900]">Blogs</span>
+            Featured <span className="text-brand-accent">Blogs</span>
           </h2>
 
           <Link
@@ -32,9 +32,9 @@ export default function InsightsSection() {
               inline-flex
               items-center
               justify-center
-              bg-[#E5A900]
-              hover:bg-[#CA9400]
-              text-slate-950
+              bg-brand-accent
+              hover:bg-[#004B84]
+              text-white
               text-xs
               font-bold
               px-6
@@ -112,9 +112,9 @@ export default function InsightsSection() {
                     transition-transform
                     duration-300
                     group-hover:scale-110
-                    group-hover:bg-[#E5A900]
-                    group-hover:text-slate-950
-                    group-hover:border-[#E5A900]
+                    group-hover:bg-brand-accent
+                    group-hover:text-white
+                    group-hover:border-brand-accent
                   ">
                     <ArrowUpRight size={20} strokeWidth={2} />
                   </div>
@@ -122,7 +122,7 @@ export default function InsightsSection() {
 
                 {/* Bottom Content — Category Title & Subtext description matching reference image */}
                 <div className="relative z-10 p-6 sm:p-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight group-hover:text-[#E5A900] transition-colors">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight group-hover:text-brand-accent transition-colors">
                     {card.category || card.title}
                   </h3>
 

@@ -35,13 +35,13 @@ export default function AboutFoundation() {
             className="lg:col-span-6 flex flex-col justify-between py-1"
           >
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#E5A900] block mb-2">
+              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-brand-accent block mb-2">
                 WHO WE ARE
               </span>
 
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-slate-950 tracking-tight leading-[1.12] mb-3">
                 We Design Interiors <br />
-                That <span className="text-[#E5A900]">Reflect You</span>
+                That <span className="text-brand-accent">Reflect You</span>
               </h2>
 
               <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed mb-6">
@@ -49,12 +49,12 @@ export default function AboutFoundation() {
               </p>
             </div>
 
-            {/* 4 Feature Cards Grid with Yellow Icons (Matching Reference Image) */}
+            {/* 4 Feature Cards Grid with Blue Icons */}
             <div className="space-y-3.5">
               
               {/* 1. Personalized Designs */}
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-2xl bg-[#E5A900] text-slate-950 flex items-center justify-center shrink-0 shadow-md">
+                <div className="w-11 h-11 rounded-2xl bg-brand-accent text-white flex items-center justify-center shrink-0 shadow-md">
                   <Sparkles size={20} strokeWidth={2.2} />
                 </div>
                 <div>
@@ -65,7 +65,7 @@ export default function AboutFoundation() {
 
               {/* 2. Quality & Craftsmanship */}
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-2xl bg-[#E5A900] text-slate-950 flex items-center justify-center shrink-0 shadow-md">
+                <div className="w-11 h-11 rounded-2xl bg-brand-accent text-white flex items-center justify-center shrink-0 shadow-md">
                   <Award size={20} strokeWidth={2.2} />
                 </div>
                 <div>
@@ -76,7 +76,7 @@ export default function AboutFoundation() {
 
               {/* 3. End-to-End Solutions */}
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-2xl bg-[#E5A900] text-slate-950 flex items-center justify-center shrink-0 shadow-md">
+                <div className="w-11 h-11 rounded-2xl bg-brand-accent text-white flex items-center justify-center shrink-0 shadow-md">
                   <Layers size={20} strokeWidth={2.2} />
                 </div>
                 <div>
@@ -87,7 +87,7 @@ export default function AboutFoundation() {
 
               {/* 4. Timely Delivery */}
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-2xl bg-[#E5A900] text-slate-950 flex items-center justify-center shrink-0 shadow-md">
+                <div className="w-11 h-11 rounded-2xl bg-brand-accent text-white flex items-center justify-center shrink-0 shadow-md">
                   <Clock size={20} strokeWidth={2.2} />
                 </div>
                 <div>

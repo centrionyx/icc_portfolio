@@ -10,13 +10,13 @@ export default function SendResumeBanner({ onOpenResumeModal }) {
           Don't see the right role?
         </h3>
         <p className="text-xs sm:text-sm text-slate-300 font-normal">
-          Send us your resume at <span className="font-semibold text-[#E5A900]">careers@icc.ind.in</span>
+          Send us your resume at <span className="font-semibold text-brand-accent">careers@icc.ind.in</span>
         </p>
       </div>
 
       <button
         onClick={onOpenResumeModal}
-        className="bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs sm:text-sm px-8 py-3.5 rounded-xl transition-all duration-300 hover:scale-105 shrink-0 shadow-md cursor-pointer uppercase tracking-wider"
+        className="bg-brand-accent hover:bg-[#004B84] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-xl transition-all duration-300 hover:scale-105 shrink-0 shadow-md cursor-pointer uppercase tracking-wider"
       >
         Send Resume
       </button>

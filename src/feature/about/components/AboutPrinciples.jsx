@@ -48,10 +48,10 @@ export default function AboutPrinciples() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
-              className="bg-[#fcf8f2]/70 border border-amber-100/80 rounded-2xl p-7 sm:p-8 hover:shadow-md hover:bg-[#fcf8f2] transition-all duration-300 flex flex-col justify-start"
+              className="bg-blue-50/50 border border-blue-100/80 rounded-2xl p-7 sm:p-8 hover:shadow-md hover:bg-blue-50 transition-all duration-300 flex flex-col justify-start"
             >
-              {/* Top Golden Pill Bar */}
-              <div className="w-10 h-1 bg-[#E5A900] rounded-full mb-6" />
+              {/* Top Blue Pill Bar */}
+              <div className="w-10 h-1 bg-brand-accent rounded-full mb-6" />
 
               {/* Card Title */}
               <h3 className="text-lg sm:text-xl font-extrabold text-slate-950 mb-3 tracking-tight">
@@ -72,25 +72,25 @@ export default function AboutPrinciples() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-[#fcf8f2] border border-amber-200/80 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative overflow-hidden"
+          className="bg-blue-50/60 border border-blue-100 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative overflow-hidden"
         >
           {/* Quote Icon */}
-          <div className="text-4xl sm:text-5xl font-serif text-[#E5A900] leading-none shrink-0 select-none">
+          <div className="text-4xl sm:text-5xl font-serif text-brand-accent leading-none shrink-0 select-none">
             ““
           </div>
 
           {/* Vertical Divider */}
-          <div className="hidden sm:block w-px h-10 bg-amber-200" />
+          <div className="hidden sm:block w-px h-10 bg-blue-200" />
 
           {/* Quote Text */}
           <p className="text-base sm:text-lg font-bold text-slate-900 leading-snug tracking-tight">
             We don’t just design spaces, we build trust, relationships, and experiences that last.
           </p>
 
-          {/* Subtle Decorative Yellow Ribbon Path */}
-          <div className="absolute right-0 bottom-0 top-0 w-48 opacity-10 pointer-events-none hidden md:block">
+          {/* Subtle Decorative Blue Ribbon Path */}
+          <div className="absolute right-0 bottom-0 top-0 w-48 opacity-15 pointer-events-none hidden md:block">
             <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-              <path d="M0 50 Q 50 10, 100 50 T 200 50" stroke="#E5A900" strokeWidth="4" />
+              <path d="M0 50 Q 50 10, 100 50 T 200 50" stroke="#005EA6" strokeWidth="4" />
             </svg>
           </div>
         </motion.div>

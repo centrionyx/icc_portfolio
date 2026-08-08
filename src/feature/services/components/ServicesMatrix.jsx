@@ -34,8 +34,8 @@ export default function ServicesMatrix({ services }) {
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 
-                {/* Floating White Icon Pill with Golden Yellow Icon */}
-                <div className="absolute bottom-3 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-slate-100/60 text-[#E5A900] flex items-center justify-center">
+                {/* Floating White Icon Pill with Blue Icon */}
+                <div className="absolute bottom-3 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-slate-100/60 text-brand-accent flex items-center justify-center">
                   {s.icon}
                 </div>
               </div>
@@ -44,7 +44,7 @@ export default function ServicesMatrix({ services }) {
               <div className="p-6 flex flex-col justify-between flex-1 bg-white">
                 <div>
                   {/* Service Title */}
-                  <h3 className="text-base sm:text-lg font-extrabold text-slate-950 leading-snug mb-2 font-sans group-hover:text-[#E5A900] transition-colors">
+                  <h3 className="text-base sm:text-lg font-extrabold text-slate-950 leading-snug mb-2 font-sans group-hover:text-brand-accent transition-colors">
                     {s.title}
                   </h3>
 

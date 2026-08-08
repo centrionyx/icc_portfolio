@@ -23,7 +23,7 @@ export default function OurStory() {
 
           {/* Main Title */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-slate-900 tracking-tight leading-[1.2] mb-6">
-            Designing Spaces <span className="text-[#E5A900]">That Inspire</span>
+            Designing Spaces <span className="text-brand-accent">That Inspire</span>
           </h2>
 
           {/* Description Paragraph */}

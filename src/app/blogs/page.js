@@ -46,7 +46,7 @@ export default function InsightsPage() {
                     }}
                     className={`px-6 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap ${
                       isSelected
-                        ? "bg-[#E5A900] text-slate-950 shadow-md font-bold scale-105"
+                        ? "bg-brand-accent text-white shadow-md font-bold scale-105"
                         : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
                     }`}
                   >
@@ -81,7 +81,7 @@ export default function InsightsPage() {
                 {/* Content Area */}
                 <div className="p-6 flex flex-col justify-between flex-1">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-950 mb-2 group-hover:text-[#E5A900] transition-colors leading-snug line-clamp-2">
+                    <h3 className="text-lg font-bold text-slate-950 mb-2 group-hover:text-brand-accent transition-colors leading-snug line-clamp-2">
                       {blog.title}
                     </h3>
                     <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 mb-4">
@@ -98,12 +98,12 @@ export default function InsightsPage() {
           ))}
         </StaggerContainer>
 
-        {/* ── VIEW MORE ARTICLES BUTTON (Matching Reference Image) ── */}
+        {/* ── VIEW MORE ARTICLES BUTTON ── */}
         {visibleCount < filtered.length && (
           <div className="flex justify-center">
             <button
               onClick={() => setVisibleCount((prev) => prev + 6)}
-              className="bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs sm:text-sm px-10 py-3.5 rounded-xl shadow-md transition-all duration-300 hover:scale-105 cursor-pointer uppercase tracking-wide"
+              className="bg-brand-accent hover:bg-[#004B84] text-white font-bold text-xs sm:text-sm px-10 py-3.5 rounded-xl shadow-md transition-all duration-300 hover:scale-105 cursor-pointer uppercase tracking-wide"
             >
               View More Articles
             </button>

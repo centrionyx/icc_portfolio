@@ -95,12 +95,12 @@ export default function ContactPage() {
                 We'd love to hear about your project. Get in touch with us and our team will get back to you shortly.
               </p>
 
-              {/* 4 Contact Info Items with Unboxed Golden Icons */}
+              {/* 4 Contact Info Items with Unboxed Blue Icons */}
               <div className="space-y-6">
                 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                  <div className="text-brand-accent shrink-0 pt-0.5">
                     <Phone size={22} strokeWidth={2.2} />
                   </div>
                   <div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <div className="flex items-start gap-4">
-                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                  <div className="text-brand-accent shrink-0 pt-0.5">
                     <Mail size={22} strokeWidth={2.2} />
                   </div>
                   <div>
@@ -122,7 +122,7 @@ export default function ContactPage() {
 
                 {/* Office */}
                 <div className="flex items-start gap-4">
-                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                  <div className="text-brand-accent shrink-0 pt-0.5">
                     <MapPin size={22} strokeWidth={2.2} />
                   </div>
                   <div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
 
                 {/* Timings */}
                 <div className="flex items-start gap-4">
-                  <div className="text-[#E5A900] shrink-0 pt-0.5">
+                  <div className="text-brand-accent shrink-0 pt-0.5">
                     <Clock size={22} strokeWidth={2.2} />
                   </div>
                   <div>
@@ -146,7 +146,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: CONTACT FORM (NO CARD, NO BACKGROUND, NO RADIUS) ── */}
+          {/* RIGHT COLUMN: CONTACT FORM ── */}
           <div className="lg:col-span-7 flex flex-col justify-center py-4 px-2 sm:px-4">
             {formState.submitted ? (
               <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-8 rounded-2xl flex flex-col items-center text-center justify-center min-h-[380px]">
@@ -159,7 +159,7 @@ export default function ContactPage() {
                 </p>
                 <button
                   onClick={() => setFormState({ isSubmitting: false, submitted: false, error: "" })}
-                  className="px-6 py-2.5 bg-[#0a1f44] text-white text-xs font-bold rounded-xl hover:bg-[#E5A900] hover:text-slate-950 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-brand-accent text-white text-xs font-bold rounded-xl hover:bg-[#004B84] transition-colors cursor-pointer"
                 >
                   Send Another Message
                 </button>
@@ -182,7 +182,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all font-medium"
                   />
                 </div>
 
@@ -195,7 +195,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Your Email"
-                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all font-medium"
                   />
                 </div>
 
@@ -208,7 +208,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all font-medium"
                   />
                 </div>
 
@@ -221,7 +221,7 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Subject"
-                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all font-medium"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all font-medium"
                   />
                 </div>
 
@@ -234,15 +234,15 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Your Message"
-                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E5A900] focus:ring-1 focus:ring-[#E5A900] transition-all resize-none font-medium"
+                    className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all resize-none font-medium"
                   />
                 </div>
 
-                {/* Submit Button: Send Message (Golden Yellow) */}
+                {/* Submit Button: Send Message (Brand Blue) */}
                 <button
                   type="submit"
                   disabled={formState.isSubmitting}
-                  className="w-full py-4 bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all duration-300 hover:scale-[1.01] cursor-pointer uppercase tracking-wider mt-2"
+                  className="w-full py-4 bg-brand-accent hover:bg-[#004B84] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all duration-300 hover:scale-[1.01] cursor-pointer uppercase tracking-wider mt-2"
                 >
                   {formState.isSubmitting ? "Sending..." : "Send Message"}
                 </button>

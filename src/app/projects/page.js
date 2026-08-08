@@ -61,7 +61,7 @@ function ProjectCard({ project, onClick }) {
 
       {/* Title and Location beneath image */}
       <div className="text-center">
-        <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight mb-1 group-hover:text-[#E5A900] transition-colors">
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight mb-1 group-hover:text-brand-accent transition-colors">
           {project.client}
         </h3>
         <p className="text-xs text-slate-500 font-light tracking-wider uppercase">
@@ -345,7 +345,7 @@ function ProjectDetailsModal({ project, onClose }) {
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div>
                 {/* Category Uppercase Eyebrow */}
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1 font-sans">
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-accent block mb-1 font-sans">
                   {project.category || "COMMERCIAL"}
                 </span>
 
@@ -357,12 +357,12 @@ function ProjectDetailsModal({ project, onClose }) {
                 {/* Location & Year Subheader */}
                 <div className="flex items-center gap-2.5 text-xs font-semibold text-slate-500 mb-3">
                   <span className="flex items-center gap-1">
-                    <MapPin size={13} className="text-[#E5A900]" />
+                    <MapPin size={13} className="text-brand-accent" />
                     <span>{project.location}</span>
                   </span>
                   <span>|</span>
                   <span className="flex items-center gap-1">
-                    <Calendar size={13} className="text-[#E5A900]" />
+                    <Calendar size={13} className="text-brand-accent" />
                     <span>{project.year || project.duration || "2023"}</span>
                   </span>
                 </div>
@@ -375,8 +375,8 @@ function ProjectDetailsModal({ project, onClose }) {
                 {/* 6 Specs Grid matching reference design */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
                   {/* 1. Project Type */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <Building2 size={16} />
                     </div>
                     <div>
@@ -388,8 +388,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   </div>
 
                   {/* 2. Area */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <Ruler size={16} />
                     </div>
                     <div>
@@ -401,8 +401,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   </div>
 
                   {/* 3. Scope of Work */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <Briefcase size={16} />
                     </div>
                     <div>
@@ -414,8 +414,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   </div>
 
                   {/* 4. Duration */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <Calendar size={16} />
                     </div>
                     <div>
@@ -427,8 +427,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   </div>
 
                   {/* 5. Services */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <Settings size={16} />
                     </div>
                     <div>
@@ -440,8 +440,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   </div>
 
                   {/* 6. Completion */}
-                  <div className="bg-[#fcfaf7] border border-amber-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100/50 text-[#E5A900] flex items-center justify-center shrink-0">
+                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <CheckCircle2 size={16} />
                     </div>
                     <div>
@@ -462,7 +462,7 @@ function ProjectDetailsModal({ project, onClose }) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {highlights.map((item, idx) => (
                       <div key={idx} className="flex items-center gap-1.5">
-                        <Check size={14} className="text-[#E5A900] shrink-0" strokeWidth={2.5} />
+                        <Check size={14} className="text-brand-accent shrink-0" strokeWidth={2.5} />
                         <span className="text-[11px] text-slate-600 font-medium">{item}</span>
                       </div>
                     ))}
@@ -572,7 +572,7 @@ export default function ProjectsPage() {
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
                   className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap shrink-0 ${isSelected
-                      ? "bg-[#E5A900] text-slate-950 shadow-md scale-105"
+                      ? "bg-brand-accent text-white shadow-md scale-105"
                       : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
                     }`}
                 >

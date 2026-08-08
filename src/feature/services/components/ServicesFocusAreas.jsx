@@ -49,11 +49,11 @@ export default function ServicesFocusAreas() {
       {/* TOP LEFT-ALIGNED HEADER SECTION */}
       <FadeIn direction="up">
         <div className="text-left max-w-2xl mb-12 sm:mb-16">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-2">
+          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-brand-accent block mb-2">
             OUR FOCUS AREAS
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-slate-950 tracking-tight leading-[1.12] mb-3">
-            Our <span className="text-[#E5A900]">Focus Areas</span>
+            Our <span className="text-brand-accent">Focus Areas</span>
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed">
             We focus on designing spaces that are beautiful, functional, and timeless. <br className="hidden sm:inline" />
@@ -78,15 +78,15 @@ export default function ServicesFocusAreas() {
                 />
               </div>
 
-              {/* Overlapping Circular Golden Badge */}
-              <div className="absolute top-[33.33%] sm:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-13 h-13 rounded-full bg-amber-50 border-4 border-white text-[#E5A900] shadow-lg flex items-center justify-center z-20 group-hover:bg-[#E5A900] group-hover:text-slate-950 transition-colors">
+              {/* Overlapping Circular Blue Badge */}
+              <div className="absolute top-[33.33%] sm:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-13 h-13 rounded-full bg-blue-50 border-4 border-white text-brand-accent shadow-lg flex items-center justify-center z-20 group-hover:bg-brand-accent group-hover:text-white transition-colors">
                 {item.icon}
               </div>
 
               {/* Card Content Area */}
               <div className="pt-10 pb-6 px-4 flex flex-col items-center text-center flex-1 justify-between bg-white rounded-b-3xl">
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-950 mb-2 leading-snug font-sans group-hover:text-[#E5A900] transition-colors">
+                  <h3 className="text-base font-extrabold text-slate-950 mb-2 leading-snug font-sans group-hover:text-brand-accent transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-slate-500 text-xs leading-relaxed font-normal">
@@ -94,8 +94,8 @@ export default function ServicesFocusAreas() {
                   </p>
                 </div>
 
-                {/* Bottom Golden Accent Indicator Line */}
-                <div className="w-8 h-1 bg-[#E5A900] rounded-full mt-5 opacity-80 group-hover:w-12 transition-all" />
+                {/* Bottom Blue Accent Indicator Line */}
+                <div className="w-8 h-1 bg-brand-accent rounded-full mt-5 opacity-80 group-hover:w-12 transition-all" />
               </div>
             </div>
           </StaggerItem>

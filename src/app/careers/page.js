@@ -52,7 +52,7 @@ export default function CareersPage() {
               <X size={20} />
             </button>
 
-            <span className="bg-[#E5A900] text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-4 inline-block font-mono">
+            <span className="bg-brand-accent text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-md mb-4 inline-block font-mono">
               {selectedJob.department}
             </span>
 
@@ -76,7 +76,7 @@ export default function CareersPage() {
                   setSelectedJob(null);
                   setResumeModalOpen(true);
                 }}
-                className="px-6 py-2.5 rounded-xl bg-[#0a1f44] text-white text-xs font-bold hover:bg-[#E5A900] hover:text-slate-950 transition-colors cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-brand-accent text-white text-xs font-bold hover:bg-[#004B84] transition-colors cursor-pointer"
               >
                 Apply Now
               </button>
@@ -119,7 +119,7 @@ export default function CareersPage() {
                     setResumeModalOpen(false);
                     setEmailSubmitted(false);
                   }}
-                  className="px-6 py-2.5 bg-[#0a1f44] text-white text-xs font-bold rounded-xl cursor-pointer"
+                  className="px-6 py-2.5 bg-brand-accent text-white text-xs font-bold rounded-xl cursor-pointer"
                 >
                   Done
                 </button>
@@ -141,7 +141,7 @@ export default function CareersPage() {
                       type="text"
                       required
                       placeholder="e.g. Rahul Sharma"
-                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-brand-accent"
                     />
                   </div>
 
@@ -151,7 +151,7 @@ export default function CareersPage() {
                       type="email"
                       required
                       placeholder="name@example.com"
-                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-brand-accent"
                     />
                   </div>
 
@@ -161,14 +161,14 @@ export default function CareersPage() {
                       type="text"
                       required
                       placeholder="Google Drive link or portfolio URL"
-                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#E5A900]"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-brand-accent"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#E5A900] hover:bg-[#CA9400] text-slate-950 font-bold text-xs rounded-xl shadow-md transition-all cursor-pointer uppercase tracking-wider"
+                  className="w-full py-3 bg-brand-accent hover:bg-[#004B84] text-white font-bold text-xs rounded-xl shadow-md transition-all cursor-pointer uppercase tracking-wider"
                 >
                   Submit Application
                 </button>

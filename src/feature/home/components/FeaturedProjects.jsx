@@ -73,7 +73,7 @@ export default function FeaturedProjects() {
         {/* Header - Single Heading without duplicate text */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 pb-4 border-b border-gray-100 gap-4">
           <h2 className="text-2xl sm:text-3xl font-serif tracking-tight text-black leading-tight">
-            Featured <span className="font-serif text-[#E5A900]">Projects</span>
+            Featured <span className="font-serif text-brand-accent">Projects</span>
           </h2>
 
           <Link

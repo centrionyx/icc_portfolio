@@ -45,7 +45,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mb-0.5">
                 {founder.name}
               </h3>
-              <p className="text-xs sm:text-sm font-bold text-[#E5A900] mb-4">
+              <p className="text-xs sm:text-sm font-bold text-brand-accent mb-4">
                 {founder.role}
               </p>
 
@@ -59,11 +59,11 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
                 )}
               </div>
 
-              {/* 4 STATS ROW IN A SINGLE LINE (MATCHING REFERENCE IMAGE) */}
+              {/* 4 STATS ROW IN A SINGLE LINE */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-slate-100 mb-6">
                 {/* Stat 1 */}
                 <div className="flex items-center gap-2.5">
-                  <div className="text-[#E5A900] shrink-0">
+                  <div className="text-brand-accent shrink-0">
                     <HiBriefcase className="text-2xl" />
                   </div>
                   <div>
@@ -78,7 +78,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
 
                 {/* Stat 2 */}
                 <div className="flex items-center gap-2.5 sm:border-l sm:border-slate-100 sm:pl-3">
-                  <div className="text-[#E5A900] shrink-0">
+                  <div className="text-brand-accent shrink-0">
                     <HiChartBar className="text-2xl" />
                   </div>
                   <div>
@@ -93,7 +93,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
 
                 {/* Stat 3 */}
                 <div className="flex items-center gap-2.5 sm:border-l sm:border-slate-100 sm:pl-3">
-                  <div className="text-[#E5A900] shrink-0">
+                  <div className="text-brand-accent shrink-0">
                     <FaGlobe className="text-xl" />
                   </div>
                   <div>
@@ -108,7 +108,7 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
 
                 {/* Stat 4 */}
                 <div className="flex items-center gap-2.5 sm:border-l sm:border-slate-100 sm:pl-3">
-                  <div className="text-[#E5A900] shrink-0">
+                  <div className="text-brand-accent shrink-0">
                     <HiMail className="text-2xl" />
                   </div>
                   <div>
@@ -123,15 +123,15 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
               </div>
             </div>
 
-            {/* QUOTE CARD (MATCHING BEIGE CONTAINER IN REFERENCE IMAGE) */}
-            <div className="bg-[#fcf8f2] border border-amber-200/60 p-4 sm:p-5 rounded-2xl relative">
-              <span className="text-3xl font-serif text-[#E5A900] leading-none absolute top-2.5 left-3.5 select-none opacity-80">
+            {/* QUOTE CARD */}
+            <div className="bg-blue-50/60 border border-blue-100 p-4 sm:p-5 rounded-2xl relative">
+              <span className="text-3xl font-serif text-brand-accent leading-none absolute top-2.5 left-3.5 select-none opacity-80">
                 “
               </span>
               <p className="text-xs sm:text-sm font-medium text-slate-800 leading-relaxed pl-5 mb-1.5">
                 Design is not just what it looks like and feels like. Design is how it works and delivers predictability for organizations.
               </p>
-              <span className="text-xs font-bold text-[#E5A900] pl-5 block">
+              <span className="text-xs font-bold text-brand-accent pl-5 block">
                 — {founder.name}
               </span>
             </div>

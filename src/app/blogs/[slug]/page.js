@@ -52,7 +52,7 @@ export default async function BlogDetailPage({ params }) {
             alt={blog.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute top-4 left-4 bg-[#E5A900] text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-lg shadow-md font-mono">
+          <div className="absolute top-4 left-4 bg-brand-accent text-white text-[10px] font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-lg shadow-md font-mono">
             {blog.category}
           </div>
         </div>

@@ -78,25 +78,25 @@ export default function KeyStrengths() {
                 transition={{ duration: 0.4, delay: idx * 0.06 }}
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-amber-100 shadow-[0_2px_12px_rgba(229,169,0,0.05)] hover:shadow-[0_8px_24px_rgba(229,169,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
-                {/* Curved Gold Arch Line Accent on Card Edge */}
-                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-amber-100/40 to-transparent rounded-bl-full pointer-events-none group-hover:from-amber-200/50 transition-colors" />
+                {/* Curved Blue Arch Line Accent on Card Edge */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-blue-100/40 to-transparent rounded-bl-full pointer-events-none group-hover:from-blue-200/50 transition-colors" />
 
                 <div>
                   {/* Top-Right Number & Left Circular Icon Badge Layout */}
                   <div className="flex items-center justify-between mb-3.5">
                     {/* Circle Icon Ring Container */}
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#fdfaf2] border border-[#f5e6c4] flex items-center justify-center shrink-0 text-[#b8860b] group-hover:bg-[#b8860b] group-hover:text-white transition-colors duration-300 shadow-sm">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-[#005EA6] group-hover:bg-[#005EA6] group-hover:text-white transition-colors duration-300 shadow-sm">
                       <IconComp size={22} strokeWidth={1.75} />
                     </div>
 
-                    {/* Top-Right Golden Number */}
-                    <span className="text-lg sm:text-xl font-bold text-[#b8860b] font-sans">
+                    {/* Top-Right Blue Number */}
+                    <span className="text-lg sm:text-xl font-bold text-[#005EA6] font-sans">
                       {item.num}
                     </span>
                   </div>
 
                   {/* Card Title */}
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug font-sans group-hover:text-[#b8860b] transition-colors mb-2">
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug font-sans group-hover:text-[#005EA6] transition-colors mb-2">
                     {item.title}
                   </h3>
 

@@ -54,12 +54,12 @@ export default function OpenPositionsList({ onSelectJob }) {
           >
             {/* Left Icon + Position Info */}
             <div className="flex items-center gap-4 sm:gap-5">
-              <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 group-hover:bg-[#E5A900] group-hover:text-slate-950 flex items-center justify-center transition-colors shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 group-hover:bg-brand-accent group-hover:text-white flex items-center justify-center transition-colors shrink-0">
                 <Layers size={22} />
               </div>
 
               <div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#E5A900] transition-colors leading-tight">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-accent transition-colors leading-tight">
                   {job.title}
                 </h3>
                 <p className="text-xs text-slate-500 font-medium mt-1">
@@ -69,7 +69,7 @@ export default function OpenPositionsList({ onSelectJob }) {
             </div>
 
             {/* Right View Details CTA */}
-            <button className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#E5A900] transition-colors shrink-0 cursor-pointer">
+            <button className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-900 group-hover:text-brand-accent transition-colors shrink-0 cursor-pointer">
               <span>View Details</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>

@@ -23,7 +23,7 @@ export default function CustomButton({
 
   const variants = {
     primary:
-      "bg-brand-logo-color hover:bg-[#CA9400] text-slate-950 border border-transparent",
+      "bg-brand-logo-color hover:bg-[#004B84] text-white border border-transparent",
     outline:
       "bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 shadow-sm",
     secondary:
