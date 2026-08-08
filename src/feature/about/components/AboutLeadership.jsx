@@ -10,8 +10,8 @@ export default function AboutLeadership({ founder, careerDeliveries }) {
     <section className="py-8 sm:py-10 lg:py-12 border-b border-slate-200/80 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         
-        {/* ── TOP CENTERED HEADER SECTION (MATCHING REFERENCE IMAGE) ── */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+        {/* ── TOP LEFT ALIGNED HEADER SECTION ── */}
+        <div className="text-left max-w-2xl mb-8 sm:mb-12">
           <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-1.5">
             OUR FOUNDER
           </span>

@@ -39,9 +39,6 @@ export default function AboutPrinciples({ values }) {
         
         {/* ── TOP LEFT-ALIGNED HEADER SECTION ── */}
         <div className="text-left max-w-3xl mb-12 sm:mb-16">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#E5A900] block mb-2">
-            OUR PRINCIPLES
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.12] mb-3">
             Our Principles
           </h2>

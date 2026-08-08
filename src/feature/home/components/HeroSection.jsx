@@ -56,7 +56,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="text-slate-100 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+          className="text-slate-100 text-base sm:text-lg md:text-lg max-w-xl font-normal leading-relaxed mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
         >
           Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management
         </motion.p>

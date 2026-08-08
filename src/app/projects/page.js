@@ -42,7 +42,7 @@ function ProjectCard({ project, onClick }) {
           alt={project.client}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        
+
         {/* Glass Shine Light Beam Effect on Hover */}
         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute -top-[100%] -left-[100%] w-[300%] h-[300%] bg-gradient-to-r from-transparent via-white/25 to-transparent transform -rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -240,7 +240,7 @@ function ProjectDetailsModal({ project, onClose }) {
   }, [images.length]);
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-0 sm:p-4 md:p-8 overflow-y-auto animate-fade-in"
       onClick={onClose}
     >
@@ -280,9 +280,8 @@ function ProjectDetailsModal({ project, onClose }) {
                 <button
                   key={idx}
                   onClick={() => setActiveImgIdx(idx)}
-                  className={`w-14 h-14 rounded-none overflow-hidden border transition-all shrink-0 cursor-pointer ${
-                    idx === activeImgIdx ? "border-[#E5A900] opacity-100 scale-105" : "border-white/20 opacity-60 hover:opacity-100"
-                  }`}
+                  className={`w-14 h-14 rounded-none overflow-hidden border transition-all shrink-0 cursor-pointer ${idx === activeImgIdx ? "border-[#E5A900] opacity-100 scale-105" : "border-white/20 opacity-60 hover:opacity-100"
+                    }`}
                 >
                   <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
                 </button>
@@ -302,7 +301,7 @@ function ProjectDetailsModal({ project, onClose }) {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-sans mb-3">
                 {project.client}
               </h2>
-              
+
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-500 font-light flex items-center gap-1.5">
                   <MapPin size={13} className="text-[#E5A900]" />
@@ -313,9 +312,8 @@ function ProjectDetailsModal({ project, onClose }) {
                   const status = project.status || (project.completion === 100 ? "Completed" : "Ongoing");
                   const isDone = status === "Completed";
                   return (
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-none border ${
-                      isDone ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-amber-50 text-amber-700 border-amber-200"
-                    }`}>
+                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-none border ${isDone ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-amber-50 text-amber-700 border-amber-200"
+                      }`}>
                       {status}
                     </span>
                   );
@@ -394,7 +392,9 @@ export default function ProjectsPage() {
         const res = await fetch("/api/projects");
         if (res.ok) {
           const data = await res.json();
-          setProjects(data);
+          if (Array.isArray(data)) {
+            setProjects(data);
+          }
         }
       } catch (err) {
         console.error("Failed to load projects:", err);
@@ -460,11 +460,10 @@ export default function ProjectsPage() {
                 <button
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
-                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap shrink-0 ${
-                    isSelected
+                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap shrink-0 ${isSelected
                       ? "bg-[#E5A900] text-slate-950 shadow-md scale-105"
                       : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
-                  }`}
+                    }`}
                 >
                   {cat.label}
                 </button>

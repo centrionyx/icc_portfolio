@@ -66,10 +66,8 @@ export default function ServicesSectorsWeServe() {
             className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex items-start gap-6 group"
           >
             {/* Left Circular Yellow Badge Container */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 group-hover:bg-[#E5A900] group-hover:text-slate-950 transition-colors shadow-sm">
-              <div className="group-hover:text-slate-950 transition-colors">
-                {item.icon}
-              </div>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 group-hover:bg-[#E5A900] transition-colors shadow-sm [&>svg]:transition-colors [&>svg]:duration-300 group-hover:[&>svg]:text-slate-950">
+              {item.icon}
             </div>
 
             {/* Right Text Content */}

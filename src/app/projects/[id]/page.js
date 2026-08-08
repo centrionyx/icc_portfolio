@@ -136,13 +136,13 @@ export default async function ProjectDetailPage({ params }) {
 
   return (
     <div className="w-full bg-[#f8fafc] text-[#0a1f44] pb-24">
-      
+
       {/* 1. HERO HEADER BANNER */}
       <section className="w-full bg-[#0d2a58] text-white py-20 relative overflow-hidden">
         {/* Glowing Ambient Lights */}
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-        
+
         {/* Background Image on the right */}
         <div className="absolute inset-y-0 right-0 w-[55%] z-0 hidden md:block">
           <Image
@@ -158,12 +158,12 @@ export default async function ProjectDetailPage({ params }) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d2a58] via-[#0d2a58]/90 to-transparent z-10 pointer-events-none" />
 
         <div className="max-w-[1440px] mx-auto px-5 sm:px-8 relative z-20">
-          <Link 
-            href="/projects" 
+          <Link
+            href="/projects"
             className="inline-flex items-center gap-2 text-xs font-bold text-blue-300 uppercase tracking-widest mb-8 hover:text-white transition-colors font-mono"
           >
             <ArrowLeft size={13} />
-             Back to Portfolio
+            Back to Portfolio
           </Link>
           <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full mb-4 inline-block font-mono">
             {project.category}
@@ -202,14 +202,14 @@ export default async function ProjectDetailPage({ params }) {
       {/* 3. CASE STUDY BRIEF & METRICS */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-8 py-16">
         <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
-          
+
           {/* Narrative Block (Left Column) */}
           <div className="flex-grow space-y-12">
-            
+
             {/* The Challenge */}
             <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
-                 PROJECT CHALLENGE
+                PROJECT CHALLENGE
               </span>
               <h2 className="text-xl font-bold tracking-tight text-slate-900 font-serif mb-4">
                 The Site Challenge
@@ -222,7 +222,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* Advisory Solution */}
             <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block mb-2 font-mono">
-                 ADVISORY STRATEGY
+                ADVISORY STRATEGY
               </span>
               <h2 className="text-xl font-bold tracking-tight text-slate-900 font-serif mb-4">
                 Solutions & Execution Framework
@@ -235,7 +235,7 @@ export default async function ProjectDetailPage({ params }) {
             {/* Technical Deliveries list */}
             <div className="space-y-6">
               <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#3b82f6] block font-mono">
-                 WORKFLOW TRACKS
+                WORKFLOW TRACKS
               </span>
               <h2 className="text-xl font-bold tracking-tight text-slate-900 font-serif mb-4">
                 Key Technical Deliveries
@@ -256,12 +256,12 @@ export default async function ProjectDetailPage({ params }) {
 
           {/* Outcome & Gallery (Right Column) */}
           <div className="w-full lg:w-[420px] shrink-0 space-y-8">
-            
+
             {/* Success KPI Outcome panel */}
             <div className="bg-[#003A70] text-white p-8 rounded-2xl shadow-xl border border-white/10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl pointer-events-none" />
               <span className="text-[9px] font-extrabold text-cyan-300 uppercase tracking-widest block mb-2 font-mono">
-                 DELIVERABLE KPI
+                DELIVERABLE KPI
               </span>
               <h3 className="text-lg font-bold font-serif mb-4">Success Milestone</h3>
               <div className="flex items-start gap-3 bg-white/10 p-4 rounded-xl border border-white/15 text-xs text-slate-100">

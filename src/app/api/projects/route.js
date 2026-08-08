@@ -38,19 +38,50 @@ const defaultProjects = [
   }
 ];
 
+// In-memory cache for fast response times
+let cachedProjects = null;
+let lastFetchTime = 0;
+const CACHE_TTL_MS = 60 * 1000; // Cache for 60 seconds
+
 export async function GET(request) {
   try {
+    const now = Date.now();
+    
+    // Serve from in-memory cache if fresh
+    if (cachedProjects && now - lastFetchTime < CACHE_TTL_MS) {
+      return NextResponse.json(cachedProjects, {
+        headers: {
+          "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+        },
+      });
+    }
+
     await dbConnect();
-    let projects = await Project.find({}).sort({ createdAt: -1 });
+    let projects = await Project.find({}).sort({ createdAt: -1 }).lean();
     
     if (projects.length === 0) {
       await Project.insertMany(defaultProjects);
-      projects = await Project.find({}).sort({ createdAt: -1 });
+      projects = await Project.find({}).sort({ createdAt: -1 }).lean();
     }
     
-    return NextResponse.json(projects);
+    cachedProjects = projects;
+    lastFetchTime = now;
+
+    return NextResponse.json(projects, {
+      headers: {
+        "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+      },
+    });
   } catch (error) {
     console.error("GET projects error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    
+    // Fallback to cached projects if available during DB connection errors
+    if (cachedProjects) {
+      return NextResponse.json(cachedProjects);
+    }
+    
+    // Fallback to default static dataset if DB is unreachable
+    return NextResponse.json(defaultProjects);
   }
 }
+
