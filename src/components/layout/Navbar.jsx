@@ -154,7 +154,7 @@ export default function Header() {
           h-screen
           w-[320px]
           sm:w-[380px]
-          bg-[#003A70]
+          bg-[#0a1f44]
           shadow-2xl
           z-[70]
           transform
@@ -198,61 +198,65 @@ export default function Header() {
 
         {/* SIDEBAR NAVIGATION */}
         <nav className="flex flex-col mt-6">
-          {navLinks.map((link, index) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`
-                group
-                relative
-                px-6
-                py-4
-                text-white
-                uppercase
-                tracking-wider
-                font-medium
-                border-b
-                border-white/10
-                hover:bg-[#004B91]
-                transition-all
-                duration-500
-                ${isOpen
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-12 opacity-0"
-                }
-              `}
-              style={{
-                transitionDelay: `${150 + index * 100}ms`,
-              }}
-            >
-              <span
-                className="
-                  absolute
-                  left-0
-                  top-0
-                  h-full
-                  w-1
-                  bg-white
-                  scale-y-0
-                  group-hover:scale-y-100
-                  transition-transform
+          {navLinks.map((link, index) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`
+                  group
+                  relative
+                  px-6
+                  py-4
+                  uppercase
+                  tracking-wider
+                  font-medium
+                  border-b
+                  border-white/10
+                  transition-all
                   duration-300
-                "
-              />
-
-              <span
-                className="
-                  block
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-2
-                "
+                  ${isActive
+                    ? "text-[#E5A900] bg-white/5 font-bold"
+                    : "text-white hover:bg-white/10 hover:text-[#E5A900]"
+                  }
+                  ${isOpen
+                    ? "translate-x-0 opacity-100"
+                    : "translate-x-12 opacity-0"
+                  }
+                `}
+                style={{
+                  transitionDelay: `${150 + index * 100}ms`,
+                }}
               >
-                {link.name}
-              </span>
-            </Link>
-          ))}
+                <span
+                  className={`
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-1
+                    bg-[#E5A900]
+                    transition-transform
+                    duration-300
+                    ${isActive ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100"}
+                  `}
+                />
+
+                <span
+                  className="
+                    block
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-2
+                  "
+                >
+                  {link.name}
+                </span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* CONTACT BUTTON */}
@@ -278,18 +282,18 @@ export default function Header() {
               block
               w-full
               text-center
-              bg-white
-              text-[#03325e]
-              font-semibold
+              bg-[#E5A900]
+              hover:bg-[#CA9400]
+              text-slate-950
+              font-bold
               uppercase
               tracking-wider
-              py-4
-              rounded-md
+              py-3.5
+              rounded-xl
               transition-all
               duration-300
-              hover:bg-slate-100
+              shadow-md
               hover:scale-[1.02]
-              hover:shadow-lg
             "
           >
             Contact Us

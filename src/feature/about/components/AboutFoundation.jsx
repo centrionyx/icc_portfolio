@@ -45,7 +45,7 @@ export default function AboutFoundation() {
               </h2>
 
               <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed mb-6">
-                DesignNest is a full-service interior design studio based in India. We blend creativity, functionality and sustainability to craft spaces that are beautiful and timeless.
+                Innovation Consultants and Contractors (ICC) is a specialised project advisory and execution partner for interior fit-out projects. We support corporate offices, commercial spaces, hospitality, and high-end residential developments from design intent to handover of the projects and until completion of Defect liability Period.
               </p>
             </div>
 
