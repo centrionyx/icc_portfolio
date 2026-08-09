@@ -1,8 +1,5 @@
 export const HERO_IMAGES = [
-  "/Images/PrincipalGlobal.jpeg",
-  "/industry_trends.png",
-  "/sustainability_office.png",
-  "/workplace_strategy.png"
+  "/Images/workDay.jpeg"
 ];
 
 export const HERO_IMAGE_ROTATION_INTERVAL = 3000; // in milliseconds
@@ -12,81 +9,36 @@ export const HERO_CONTENT = {
   slides: [
     {
       id: 1,
-      titleLine1: "Better Workplaces.",
-      titleLine2: "Stronger Impact.",
-      description: "End-to-end workplace solutions that combine innovation, sustainability and precision to create lasting value.",
-      image: "/Images/PrincipalGlobal.jpeg",
+      titleLine1: "Delivering Projects",
+      titleLine2: "From Concept to Completion",
+      description: "Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management",
+      image: "/Images/workDay.jpeg",
       primaryCta: {
-        text: "Explore Our Work",
-        href: "/projects",
+        text: "Get a Consultation",
+        href: "/contact",
       },
       secondaryCta: {
-        text: "Watch Showreel",
-        href: "#",
-      },
-    },
-    {
-      id: 2,
-      titleLine1: "Innovative Design.",
-      titleLine2: "Modern Spaces.",
-      description: "Creating functional and inspiring environments tailored to the needs of modern businesses.",
-      image: "/Images/PrincipalGlobal.jpeg",
-      primaryCta: {
-        text: "Explore Our Work",
+        text: "View Our Projects",
         href: "/projects",
-      },
-      secondaryCta: {
-        text: "Watch Showreel",
-        href: "#",
-      },
-    },
-    {
-      id: 3,
-      titleLine1: "Sustainable Build.",
-      titleLine2: "Green Future.",
-      description: "Committed to eco-friendly construction and energy-efficient workplace solutions.",
-      image: "/Images/PrincipalGlobal.jpeg",
-      primaryCta: {
-        text: "Explore Our Work",
-        href: "/projects",
-      },
-      secondaryCta: {
-        text: "Watch Showreel",
-        href: "#",
-      },
-    },
-    {
-      id: 4,
-      titleLine1: "Precision Execution.",
-      titleLine2: "Lasting Value.",
-      description: "Ensuring the highest standards of craftsmanship and project management from start to finish.",
-      image: "/Images/PrincipalGlobal.jpeg",
-      primaryCta: {
-        text: "Explore Our Work",
-        href: "/projects",
-      },
-      secondaryCta: {
-        text: "Watch Showreel",
-        href: "#",
       },
     },
   ],
   stats: [
     {
-      value: "20+",
-      label: "Years of Experience",
+      value: "250+",
+      label: "Projects Completed",
     },
     {
-      value: "10M+",
-      label: "Sq. Ft. Delivered",
+      value: "120+",
+      label: "Happy Clients",
     },
     {
-      value: "100%",
-      label: "Project Predictability",
+      value: "15+",
+      label: "Years Experience",
     },
     {
-      value: "2024",
-      label: "ICC Founded",
+      value: "25+",
+      label: "Expert Designers",
     },
   ],
 };

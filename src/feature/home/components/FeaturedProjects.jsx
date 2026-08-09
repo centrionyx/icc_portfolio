@@ -6,8 +6,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// 5 High-quality projects
-const PROJECTS = [
+// Default fallback projects if API is loading or empty
+const DEFAULT_PROJECTS = [
   {
     id: 1,
     title: "Skyline Towers",
@@ -43,15 +43,39 @@ const PROJECTS = [
 export default function FeaturedProjects() {
   const scrollRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const featuredOnly = data.filter((p) => p.featured === true);
+          const listToUse = featuredOnly.length > 0 ? featuredOnly : data;
+
+          const formatted = listToUse.map((p, idx) => ({
+            id: p._id || p.id || idx + 1,
+            title: p.client || "Featured Project",
+            subtitle: p.scope || p.category || "Interior Fit-Out",
+            image:
+              (p.images && p.images.length > 0 ? p.images[0] : p.image) ||
+              DEFAULT_PROJECTS[idx % DEFAULT_PROJECTS.length].image,
+          }));
+          setProjects(formatted);
+        }
+      })
+      .catch((err) => console.error("Error fetching projects:", err));
+  }, []);
 
   // Discrete step auto-scroll: Step to next card every 2.5 seconds cleanly
   useEffect(() => {
+    if (projects.length === 0) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % PROJECTS.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
     }, 2500);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [projects.length]);
 
   // Smoothly scroll container whenever currentIndex updates
   useEffect(() => {
@@ -65,7 +89,7 @@ export default function FeaturedProjects() {
       left: offsetLeft,
       behavior: "smooth",
     });
-  }, [currentIndex]);
+  }, [currentIndex, projects.length]);
 
   return (
     <section className="w-full bg-white py-10 sm:py-14 px-5 lg:px-8 overflow-hidden">
@@ -106,7 +130,7 @@ export default function FeaturedProjects() {
           className="flex gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory scroll-smooth py-1"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {PROJECTS.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 15 }}
@@ -136,7 +160,7 @@ export default function FeaturedProjects() {
 
                 {/* View details link */}
                 <Link
-                  href={`/projects/${project.id}`}
+                  href="/projects"
                   className="
                     text-white/80
                     hover:text-white

@@ -5,15 +5,56 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import CustomButton from "@/components/ui/CustomButton";
 
-// High-quality Unsplash images for commercial office workspace & interior design
-// const HERO_IMAGES = [
-//   "https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-//  ];
-
 export default function HeroSection() {
   const heroRef = useRef(null);
+  const [heroData, setHeroData] = useState(null);
 
-  const SINGLE_HERO_IMAGE = "/Images/workDay.jpeg";
+  useEffect(() => {
+    fetch("/api/hero")
+      .then((res) => res.json())
+      .then((data) => setHeroData(data))
+      .catch((err) => console.error("Failed to fetch hero data:", err));
+  }, []);
+
+  const slide = heroData?.slides?.[0];
+  const bgImage =
+    heroData?.images && heroData.images.length > 0
+      ? heroData.images[0]
+      : slide?.image || "/Images/workDay.jpeg";
+
+  const titleLine1 = slide?.titleLine1 || "Delivering Projects";
+  const titleLine2 = slide?.titleLine2 || "From Concept to Completion";
+  const description =
+    slide?.description ||
+    "Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management";
+  const primaryCta = slide?.primaryCta || {
+    text: "Get a Consultation",
+    href: "/contact",
+  };
+  const secondaryCta = slide?.secondaryCta || {
+    text: "View Our Projects",
+    href: "/projects",
+  };
+
+  const renderTitleLine2 = (line2) => {
+    if (!line2) return null;
+    if (line2.includes("From Concept")) {
+      const parts = line2.split("From Concept");
+      return (
+        <>
+          <span className="text-brand-logo-color block sm:inline my-1 sm:my-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            From Concept
+          </span>
+          {parts[1] || ""}
+        </>
+      );
+    }
+    return (
+      <span className="text-brand-logo-color block sm:inline my-1 sm:my-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+        {line2}
+      </span>
+    );
+  };
 
   return (
     <section
@@ -23,7 +64,7 @@ export default function HeroSection() {
       {/* Clean Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={SINGLE_HERO_IMAGE}
+          src={bgImage}
           alt="Commercial Workspace Interior"
           fill
           priority
@@ -44,11 +85,8 @@ export default function HeroSection() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-bold text-white tracking-tight leading-[1.15] mb-6 max-w-3xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
         >
-          Delivering Projects <br className="hidden sm:inline" />
-          <span className="text-brand-logo-color block sm:inline my-1 sm:my-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            From Concept
-          </span>{" "}
-          to Completion
+          {titleLine1} <br className="hidden sm:inline" />
+          {renderTitleLine2(titleLine2)}
         </motion.h1>
 
         {/* Sub-headline / Description */}
@@ -58,7 +96,7 @@ export default function HeroSection() {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="text-slate-100 text-base sm:text-lg md:text-lg max-w-xl font-normal leading-relaxed mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
         >
-          Interior Fit-Out Project Advisory | Execution | Coordination | Quality Management
+          {description}
         </motion.p>
 
         {/* CTA Buttons using reusable CustomButton */}
@@ -68,13 +106,17 @@ export default function HeroSection() {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center md:justify-start gap-4"
         >
-          <CustomButton href="/contact" variant="primary">
-            Get a Consultation
-          </CustomButton>
+          {primaryCta.text && (
+            <CustomButton href={primaryCta.href || "/contact"} variant="primary">
+              {primaryCta.text}
+            </CustomButton>
+          )}
 
-          <CustomButton href="/projects" variant="outline">
-            View Our Projects
-          </CustomButton>
+          {secondaryCta.text && (
+            <CustomButton href={secondaryCta.href || "/projects"} variant="outline">
+              {secondaryCta.text}
+            </CustomButton>
+          )}
         </motion.div>
       </div>
     </section>

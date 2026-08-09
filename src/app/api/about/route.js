@@ -20,6 +20,9 @@ const DEFAULT_ABOUT = {
   ],
 };
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await dbConnect();
@@ -35,9 +38,20 @@ export async function GET() {
         await aboutData.save();
       }
     }
-    return NextResponse.json(aboutData);
+    return NextResponse.json(aboutData, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+      },
+    });
   } catch (error) {
     console.error("GET /api/about error:", error);
-    return NextResponse.json(DEFAULT_ABOUT, { status: 200 });
+    return NextResponse.json(DEFAULT_ABOUT, {
+      status: 200,
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      },
+    });
   }
 }

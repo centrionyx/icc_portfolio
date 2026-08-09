@@ -2,6 +2,15 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import Project from "@/models/Project";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
+let cachedProjects = null;
+
+export function clearProjectsCache() {
+  cachedProjects = null;
+}
+
 const defaultProjects = [
   {
     client: "J.P. Morgan Chase & Co.",
@@ -38,50 +47,38 @@ const defaultProjects = [
   }
 ];
 
-// In-memory cache for fast response times
-let cachedProjects = null;
-let lastFetchTime = 0;
-const CACHE_TTL_MS = 60 * 1000; // Cache for 60 seconds
-
 export async function GET(request) {
   try {
-    const now = Date.now();
-    
-    // Serve from in-memory cache if fresh
-    if (cachedProjects && now - lastFetchTime < CACHE_TTL_MS) {
-      return NextResponse.json(cachedProjects, {
-        headers: {
-          "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
-        },
-      });
+    const { searchParams } = new URL(request.url);
+    const categoryParam = searchParams.get("category");
+    const noCache = searchParams.get("nocache") === "true";
+
+    // Fast memory response if available and not querying specific filter
+    if (!noCache && !categoryParam && cachedProjects) {
+      return NextResponse.json(cachedProjects);
     }
 
     await dbConnect();
-    let projects = await Project.find({}).sort({ createdAt: -1 }).lean();
+
+    const filter = {};
+    if (categoryParam && categoryParam !== "all") {
+      filter.category = { $regex: new RegExp(categoryParam.trim(), "i") };
+    }
+
+    let projects = await Project.find(filter).sort({ createdAt: -1 }).lean();
     
-    if (projects.length === 0) {
+    if (projects.length === 0 && !categoryParam) {
       await Project.insertMany(defaultProjects);
       projects = await Project.find({}).sort({ createdAt: -1 }).lean();
     }
     
-    cachedProjects = projects;
-    lastFetchTime = now;
+    if (!categoryParam) {
+      cachedProjects = projects;
+    }
 
-    return NextResponse.json(projects, {
-      headers: {
-        "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
-      },
-    });
+    return NextResponse.json(projects);
   } catch (error) {
     console.error("GET projects error:", error);
-    
-    // Fallback to cached projects if available during DB connection errors
-    if (cachedProjects) {
-      return NextResponse.json(cachedProjects);
-    }
-    
-    // Fallback to default static dataset if DB is unreachable
-    return NextResponse.json(defaultProjects);
+    return NextResponse.json(cachedProjects || defaultProjects);
   }
 }
-

@@ -1,34 +1,53 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FolderCheck, Users, Clock, Award } from "lucide-react";
 import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
+const DEFAULT_STATS = [
+  {
+    icon: FolderCheck,
+    value: "250+",
+    label: "Projects Completed",
+  },
+  {
+    icon: Users,
+    value: "120+",
+    label: "Happy Clients",
+  },
+  {
+    icon: Clock,
+    value: "15+",
+    label: "Years Experience",
+  },
+  {
+    icon: Award,
+    value: "25+",
+    label: "Expert Designers",
+  },
+];
+
+const ICON_MAP = [FolderCheck, Users, Clock, Award];
+
 export default function StatsBanner() {
-  const stats = [
-    {
-      icon: FolderCheck,
-      value: "250+",
-      label: "Projects Completed",
-    },
-    {
-      icon: Users,
-      value: "120+",
-      label: "Happy Clients",
-    },
-    {
-      icon: Clock,
-      value: "15+",
-      label: "Years Experience",
-    },
-    {
-      icon: Award,
-      value: "25+",
-      label: "Expert Designers",
-    },
-  ];
+  const [stats, setStats] = useState(DEFAULT_STATS);
+
+  useEffect(() => {
+    fetch("/api/hero")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.stats && Array.isArray(data.stats) && data.stats.length > 0) {
+          const mapped = data.stats.map((s, idx) => ({
+            icon: ICON_MAP[idx % ICON_MAP.length],
+            value: s.value || "0",
+            label: s.label || "",
+          }));
+          setStats(mapped);
+        }
+      })
+      .catch((err) => console.error("Failed to load hero stats:", err));
+  }, []);
 
   return (
     <section className="w-full bg-slate-50 py-6 sm:py-8 px-4 sm:px-8">
@@ -42,7 +61,7 @@ export default function StatsBanner() {
         >
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:divide-x divide-white/15">
             {stats.map((item, idx) => {
-              const IconComponent = item.icon;
+              const IconComponent = item.icon || FolderCheck;
               return (
                 <motion.div
                   key={idx}

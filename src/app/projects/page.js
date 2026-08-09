@@ -480,31 +480,53 @@ function ProjectDetailsModal({ project, onClose }) {
 }
 
 export default function ProjectsPage() {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [allProjects, setAllProjects] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("all");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("default");
   const [layoutMode, setLayoutMode] = useState("grid");
   const [selectedProject, setSelectedProject] = useState(null);
 
+  const formatCategoryLabel = (cat) => {
+    const labels = {
+      corporate: "Corporate Offices",
+      retail: "Retail Spaces",
+      hospitality: "Hospitality",
+      residential: "Residential",
+      turnkey: "Turnkey Works",
+    };
+    if (labels[cat.toLowerCase()]) return labels[cat.toLowerCase()];
+    return cat.replace(/\b\w/g, (l) => l.toUpperCase());
+  };
+
+  const availableCategoryKeys = Array.from(
+    new Set(
+      allProjects
+        .map((p) => p.category)
+        .filter(Boolean)
+        .map((c) => c.trim().toLowerCase())
+    )
+  );
+
   const categories = [
     { id: "all", label: "All Deliveries" },
-    { id: "corporate", label: "Corporate Offices" },
-    { id: "retail", label: "Retail Spaces" },
-    { id: "hospitality", label: "Hospitality" },
-    { id: "residential", label: "Residential" },
-    { id: "turnkey", label: "Turnkey Works" }
+    ...availableCategoryKeys.map((catKey) => ({
+      id: catKey,
+      label: formatCategoryLabel(catKey),
+    })),
   ];
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchAllProjects = async () => {
       try {
+        setLoading(true);
         const res = await fetch("/api/projects");
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data)) {
-            setProjects(data);
+            setAllProjects(data);
           }
         }
       } catch (err) {
@@ -513,13 +535,32 @@ export default function ProjectsPage() {
         setLoading(false);
       }
     };
-    fetchProjects();
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const initialCategory = searchParams.get("category") || "all";
+    setActiveFilter(initialCategory);
+    fetchAllProjects();
   }, []);
 
+  const handleCategoryChange = (catId) => {
+    setActiveFilter(catId);
+    const newUrl =
+      catId === "all"
+        ? window.location.pathname
+        : `${window.location.pathname}?category=${encodeURIComponent(catId)}`;
+    window.history.pushState(null, "", newUrl);
+  };
+
   // Filter, Search, and Sort Logic
-  const processedProjects = projects
+  const processedProjects = allProjects
     .filter((project) => {
-      if (activeFilter !== "all" && project.category !== activeFilter) return false;
+      if (activeFilter !== "all") {
+        const projCat = (project.category || "").trim().toLowerCase();
+        const filterCat = activeFilter.trim().toLowerCase();
+        if (projCat !== filterCat && !projCat.includes(filterCat) && !filterCat.includes(projCat)) {
+          return false;
+        }
+      }
 
       if (searchQuery.trim() !== "") {
         const query = searchQuery.toLowerCase();
@@ -570,7 +611,7 @@ export default function ProjectsPage() {
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveFilter(cat.id)}
+                  onClick={() => handleCategoryChange(cat.id)}
                   className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-sm cursor-pointer whitespace-nowrap shrink-0 ${isSelected
                       ? "bg-brand-accent text-white shadow-md scale-105"
                       : "bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
@@ -601,9 +642,14 @@ export default function ProjectsPage() {
               </p>
             </div>
           ) : layoutMode === "grid" ? (
-            <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <StaggerContainer
+              key={`grid-${activeFilter}`}
+              once={false}
+              staggerDelay={0.08}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {processedProjects.map((project) => (
-                <StaggerItem key={project._id || project.id} direction="up">
+                <StaggerItem key={project._id || project.id || project.client} direction="up">
                   <ProjectCard
                     project={project}
                     onClick={setSelectedProject}
@@ -612,9 +658,14 @@ export default function ProjectsPage() {
               ))}
             </StaggerContainer>
           ) : (
-            <StaggerContainer staggerDelay={0.08} className="flex flex-col gap-6">
+            <StaggerContainer
+              key={`list-${activeFilter}`}
+              once={false}
+              staggerDelay={0.08}
+              className="flex flex-col gap-6"
+            >
               {processedProjects.map((project) => (
-                <StaggerItem key={project._id || project.id} direction="up">
+                <StaggerItem key={project._id || project.id || project.client} direction="up">
                   <ProjectListCard
                     project={project}
                     onClick={setSelectedProject}

@@ -9,6 +9,7 @@ const BlogPostSchema = new mongoose.Schema(
     content: { type: String },
     images: { type: [String], default: [] },
     image: { type: String }, // support backward compatibility
+    featured: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

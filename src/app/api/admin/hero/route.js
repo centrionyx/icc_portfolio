@@ -5,6 +5,9 @@ import Notification from "@/models/Notification";
 import { verifyToken } from "@/lib/auth";
 import { HERO_CONTENT, HERO_IMAGES, HERO_IMAGE_ROTATION_INTERVAL, HERO_IMAGE_TRANSITION_DURATION } from "@/feature/home/constants";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 async function isAuthorized(request) {
   const tokenCookie = request.cookies.get("admin_session");
   if (!tokenCookie) return false;
@@ -50,6 +53,13 @@ export async function PUT(request) {
     const { slides, images, stats, rotationInterval, transitionDuration } = body;
 
     let heroDoc = await Hero.findOne();
+
+    if (!images || !Array.isArray(images) || images.length === 0 || !images[0]) {
+      return NextResponse.json(
+        { error: "A background image is compulsory for the Hero Section." },
+        { status: 400 }
+      );
+    }
 
     if (!heroDoc) {
       heroDoc = new Hero({

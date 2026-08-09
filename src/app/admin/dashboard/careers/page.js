@@ -1,32 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import OverviewTab from "./components/OverviewTab";
+import CareersTab from "./CareersTab";
 
-export default function AdminOverviewPage() {
-  const [enquiryStats, setEnquiryStats] = useState({ total: 0, new: 0 });
-  const [projects, setProjects] = useState([]);
+export default function AdminCareersPage() {
+  const [applications, setApplications] = useState([]);
   const [appStats, setAppStats] = useState({
     total: 0,
     applied: 0,
     underReview: 0,
     interviewing: 0,
     hired: 0,
+    declined: 0,
   });
-  const [applications, setApplications] = useState([]);
+  const [adminJobs, setAdminJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchOverviewData = async () => {
+  const fetchCareersData = async () => {
     try {
-      const [projectsRes, appsRes, enquiriesRes] = await Promise.all([
-        fetch("/api/projects"),
+      const [appsRes, jobsRes] = await Promise.all([
         fetch("/api/admin/applications"),
-        fetch("/api/admin/enquiries"),
+        fetch("/api/admin/jobs"),
       ]);
 
-      if (projectsRes.ok) {
-        setProjects(await projectsRes.json());
-      }
       if (appsRes.ok) {
         const appsData = await appsRes.json();
         setApplications(appsData.applications || []);
@@ -37,38 +33,38 @@ export default function AdminOverviewPage() {
             underReview: 0,
             interviewing: 0,
             hired: 0,
+            declined: 0,
           }
         );
       }
-      if (enquiriesRes.ok) {
-        const enqData = await enquiriesRes.json();
-        setEnquiryStats(enqData.stats || { total: 0, new: 0 });
+      if (jobsRes.ok) {
+        setAdminJobs(await jobsRes.json());
       }
     } catch (err) {
-      console.error("Failed to fetch overview data:", err);
+      console.error("Failed to fetch careers data:", err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchOverviewData();
+    fetchCareersData();
   }, []);
 
   if (loading) {
     return (
       <div className="py-12 text-center text-xs text-slate-400 animate-pulse">
-        Loading Admin Overview...
+        Loading Careers & Candidate Pipeline...
       </div>
     );
   }
 
   return (
-    <OverviewTab
-      enquiryStats={enquiryStats}
-      projects={projects}
-      appStats={appStats}
+    <CareersTab
       applications={applications}
+      appStats={appStats}
+      adminJobs={adminJobs}
+      onRefresh={fetchCareersData}
     />
   );
 }

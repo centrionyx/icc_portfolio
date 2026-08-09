@@ -4,6 +4,9 @@ import BlogPost from "@/models/BlogPost";
 import Notification from "@/models/Notification";
 import { verifyToken } from "@/lib/auth";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export const config = {
   api: {
     bodyParser: {
@@ -27,7 +30,7 @@ export async function POST(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { title, category, readTime, summary, content, images } = body;
+    const { title, category, readTime, summary, content, images, featured } = body;
 
     if (!title || !category || !summary) {
       return NextResponse.json({ error: "Title, category, and summary are required." }, { status: 400 });
@@ -40,6 +43,7 @@ export async function POST(request) {
       summary,
       content,
       images: images || [],
+      featured: featured || false,
     });
 
     await Notification.create({
@@ -63,7 +67,7 @@ export async function PATCH(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { id, title, category, readTime, summary, content, images } = body;
+    const { id, title, category, readTime, summary, content, images, featured } = body;
 
     if (!id) {
       return NextResponse.json({ error: "Missing post ID." }, { status: 400 });
@@ -76,6 +80,7 @@ export async function PATCH(request) {
     if (summary !== undefined) updateFields.summary = summary;
     if (content !== undefined) updateFields.content = content;
     if (images !== undefined) updateFields.images = images;
+    if (featured !== undefined) updateFields.featured = featured;
 
     const updatedPost = await BlogPost.findByIdAndUpdate(id, updateFields, { new: true });
 

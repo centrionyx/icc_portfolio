@@ -14,8 +14,8 @@ const SlideSchema = new mongoose.Schema(
     titleLine2: { type: String, default: "" },
     description: { type: String, default: "" },
     image: { type: String, default: "" },
-    primaryCta: { type: CtaSchema, default: () => ({ text: "Explore Our Work", href: "/projects" }) },
-    secondaryCta: { type: CtaSchema, default: () => ({ text: "Watch Showreel", href: "#" }) },
+    primaryCta: { type: CtaSchema, default: () => ({ text: "Get a Consultation", href: "/contact" }) },
+    secondaryCta: { type: CtaSchema, default: () => ({ text: "View Our Projects", href: "/projects" }) },
   },
   { _id: true }
 );

@@ -3,6 +3,10 @@ import dbConnect from "@/lib/db";
 import Project from "@/models/Project";
 import Notification from "@/models/Notification";
 import { verifyToken } from "@/lib/auth";
+import { clearProjectsCache } from "@/app/api/projects/route";
+
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export const config = {
   api: {
@@ -27,7 +31,7 @@ export async function POST(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { client, category, location, size, scope, duration, outcomes, images, status, completion } = body;
+    const { client, category, location, size, scope, duration, outcomes, images, status, completion, featured } = body;
 
     if (!client || !category || !location || !size || !scope) {
       return NextResponse.json({ error: "Client, category, location, size, and scope are required." }, { status: 400 });
@@ -44,6 +48,7 @@ export async function POST(request) {
       images: images || [],
       status: status || "Completed",
       completion: completion !== undefined ? Number(completion) : 100,
+      featured: Boolean(featured),
     });
 
     await Notification.create({
@@ -52,6 +57,9 @@ export async function POST(request) {
       type: "success"
     });
 
+
+
+    clearProjectsCache();
     return NextResponse.json({ success: true, project: newProject }, { status: 201 });
   } catch (error) {
     console.error("POST admin project error:", error);
@@ -67,7 +75,7 @@ export async function PATCH(request) {
 
     await dbConnect();
     const body = await request.json();
-    const { id, client, category, location, size, scope, duration, outcomes, images, status, completion } = body;
+    const { id, client, category, location, size, scope, duration, outcomes, images, status, completion, featured } = body;
 
     if (!id) {
       return NextResponse.json({ error: "Missing project ID." }, { status: 400 });
@@ -84,6 +92,7 @@ export async function PATCH(request) {
     if (images !== undefined) updateFields.images = images;
     if (status !== undefined) updateFields.status = status;
     if (completion !== undefined) updateFields.completion = Number(completion);
+    if (featured !== undefined) updateFields.featured = Boolean(featured);
 
     const updatedProject = await Project.findByIdAndUpdate(id, updateFields, { new: true });
 
@@ -93,6 +102,7 @@ export async function PATCH(request) {
       type: "audit"
     });
 
+    clearProjectsCache();
     return NextResponse.json({ success: true, project: updatedProject });
   } catch (error) {
     console.error("PATCH admin project error:", error);
@@ -122,6 +132,7 @@ export async function DELETE(request) {
       type: "warning"
     });
 
+    clearProjectsCache();
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("DELETE admin project error:", error);

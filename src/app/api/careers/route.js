@@ -6,6 +6,9 @@ import JobOpening from "@/models/JobOpening";
 import { sendApplicationEmail } from "@/lib/email";
 import mongoose from "mongoose";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function POST(request) {
   try {
     await dbConnect();

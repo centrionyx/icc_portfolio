@@ -3,24 +3,36 @@ import dbConnect from "@/lib/db";
 import Hero from "@/models/Hero";
 import { HERO_CONTENT, HERO_IMAGES, HERO_IMAGE_ROTATION_INTERVAL, HERO_IMAGE_TRANSITION_DURATION } from "@/feature/home/constants";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await dbConnect();
     let heroDoc = await Hero.findOne().lean();
 
+    const headers = {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+    };
+
     if (!heroDoc) {
       // Fallback response format matching db model structure
-      return NextResponse.json({
-        slides: HERO_CONTENT.slides,
-        images: HERO_IMAGES,
-        stats: HERO_CONTENT.stats,
-        rotationInterval: HERO_IMAGE_ROTATION_INTERVAL,
-        transitionDuration: HERO_IMAGE_TRANSITION_DURATION,
-        isDefault: true,
-      });
+      return NextResponse.json(
+        {
+          slides: HERO_CONTENT.slides,
+          images: HERO_IMAGES,
+          stats: HERO_CONTENT.stats,
+          rotationInterval: HERO_IMAGE_ROTATION_INTERVAL,
+          transitionDuration: HERO_IMAGE_TRANSITION_DURATION,
+          isDefault: true,
+        },
+        { headers }
+      );
     }
 
-    return NextResponse.json(heroDoc);
+    return NextResponse.json(heroDoc, { headers });
   } catch (error) {
     console.error("GET hero error:", error);
     return NextResponse.json(

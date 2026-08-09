@@ -1,21 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import { BLOGS_DATA } from "@/feature/blogs/data/blogsData";
 import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
+import { Star } from "lucide-react";
 
 export default function InsightsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visibleCount, setVisibleCount] = useState(6);
+  const [allBlogs, setAllBlogs] = useState(BLOGS_DATA);
 
-  const categories = ["All", "Design Tips", "Trends", "Materials", "Inspiration"];
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const res = await fetch("/api/blogs");
+        if (res.ok) {
+          const dbPosts = await res.json();
+          if (Array.isArray(dbPosts) && dbPosts.length > 0) {
+            const formatted = dbPosts.map((p) => {
+              const img =
+                p.images && p.images.length > 0
+                  ? p.images[0]
+                  : p.image || "/workplace_strategy.png";
+              return {
+                id: p._id || p.id,
+                slug: p._id || p.id,
+                title: p.title,
+                category: p.category,
+                readTime: p.readTime || "5 min read",
+                excerpt: p.summary,
+                image: img,
+                featured: !!p.featured,
+                date: p.createdAt
+                  ? new Date(p.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })
+                  : "Recent",
+              };
+            });
+            setAllBlogs(formatted);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch live blogs:", err);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
+  const dynamicCategories = [
+    "All",
+    ...Array.from(new Set(allBlogs.map((b) => b.category).filter(Boolean))),
+  ];
 
   const filtered =
     activeCategory === "All"
-      ? BLOGS_DATA
-      : BLOGS_DATA.filter((b) => b.category === activeCategory);
+      ? allBlogs
+      : allBlogs.filter((b) => b.category === activeCategory);
 
   const displayedBlogs = filtered.slice(0, visibleCount);
 
@@ -35,7 +80,7 @@ export default function InsightsPage() {
         <FadeIn direction="up">
           <div className="flex justify-center mb-10 overflow-x-auto no-scrollbar py-2">
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-              {categories.map((cat) => {
+              {dynamicCategories.map((cat) => {
                 const isSelected = activeCategory === cat;
                 return (
                   <button
@@ -58,8 +103,13 @@ export default function InsightsPage() {
           </div>
         </FadeIn>
 
-        {/* ── 6 BLOG CARDS GRID ── */}
-        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14">
+        {/* ── BLOG CARDS GRID ── */}
+        <StaggerContainer
+          key={`grid-${activeCategory}`}
+          once={false}
+          staggerDelay={0.08}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14"
+        >
           {displayedBlogs.map((blog) => (
             <StaggerItem key={blog.id} direction="up">
               <Link
@@ -73,9 +123,16 @@ export default function InsightsPage() {
                     alt={blog.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-slate-900 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
-                    {blog.category}
-                  </span>
+                  <div className="absolute top-4 left-4 flex items-center gap-2">
+                    <span className="bg-white/90 backdrop-blur-md text-slate-900 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                      {blog.category}
+                    </span>
+                    {blog.featured && (
+                      <span className="bg-amber-500 text-white font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                        <Star size={10} className="fill-white" /> Featured
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Content Area */}
@@ -89,9 +146,10 @@ export default function InsightsPage() {
                     </p>
                   </div>
 
-                  <p className="text-[11px] font-medium text-slate-400">
-                    {blog.date}
-                  </p>
+                  <div className="flex items-center justify-between text-[11px] font-medium text-slate-400">
+                    <span>{blog.date}</span>
+                    <span>{blog.readTime || "5 min read"}</span>
+                  </div>
                 </div>
               </Link>
             </StaggerItem>

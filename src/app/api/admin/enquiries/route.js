@@ -4,6 +4,9 @@ import Enquiry from "@/models/Enquiry";
 import Notification from "@/models/Notification";
 import { verifyToken } from "@/lib/auth";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 async function isAuthorized(request) {
   const tokenCookie = request.cookies.get("admin_session");
   if (!tokenCookie) return false;

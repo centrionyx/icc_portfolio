@@ -13,6 +13,7 @@ const ProjectSchema = new mongoose.Schema(
     image: { type: String }, // support backward compatibility
     status: { type: String, enum: ["Completed", "Ongoing", "Pending"], default: "Completed" },
     completion: { type: Number, default: 100 },
+    featured: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

@@ -65,6 +65,9 @@ const defaultJobs = [
   }
 ];
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function GET(request) {
   try {
     await dbConnect();
@@ -75,7 +78,13 @@ export async function GET(request) {
       jobs = await JobOpening.find({ active: true }).sort({ createdAt: -1 });
     }
 
-    return NextResponse.json(jobs);
+    return NextResponse.json(jobs, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+      },
+    });
   } catch (error) {
     console.error("GET jobs error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

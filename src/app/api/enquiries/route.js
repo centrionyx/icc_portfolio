@@ -4,6 +4,9 @@ import Notification from "@/models/Notification";
 import Enquiry from "@/models/Enquiry";
 import { sendEnquiryEmail } from "@/lib/email";
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function POST(request) {
   try {
     await dbConnect();

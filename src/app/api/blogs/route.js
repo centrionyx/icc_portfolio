@@ -21,6 +21,9 @@ const defaultPosts = [
   }
 ];
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export async function GET(request) {
   try {
     await dbConnect();
@@ -31,7 +34,13 @@ export async function GET(request) {
       posts = await BlogPost.find({}).sort({ createdAt: -1 });
     }
     
-    return NextResponse.json(posts);
+    return NextResponse.json(posts, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+      },
+    });
   } catch (error) {
     console.error("GET blogs error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
