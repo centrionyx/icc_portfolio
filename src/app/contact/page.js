@@ -126,8 +126,10 @@ export default function ContactPage() {
                     <MapPin size={22} strokeWidth={2.2} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">Office</h4>
-                    <p className="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">Pune, Maharashtra, India</p>
+                    <h4 className="text-xs font-bold text-slate-900">Office Address</h4>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-0.5 max-w-xs leading-snug">
+                      6, Apurva Apartment, CME Colony, Near Bharat Bakery, New Sangavi, Pune - 411061, Maharashtra, India
+                    </p>
                   </div>
                 </div>
 

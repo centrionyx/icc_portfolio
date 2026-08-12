@@ -2,9 +2,12 @@ import mongoose from "mongoose";
 
 const BlogPostSchema = new mongoose.Schema(
   {
+    slug: { type: String },
     title: { type: String, required: true },
     category: { type: String, required: true },
     readTime: { type: String, default: "5 min read" },
+    author: { type: String, default: "ICC Editorial Team" },
+    authorRole: { type: String, default: "Interior Architecture & Workplace Advisory" },
     summary: { type: String, required: true },
     content: { type: String },
     images: { type: [String], default: [] },

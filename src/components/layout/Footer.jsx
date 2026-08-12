@@ -30,11 +30,12 @@ export const FOOTER_CONFIG = {
     { label: "Contact Us", href: "/contact" },
   ],
   servicesLinks: [
-    { label: "Residential Interior", href: "/services" },
-    { label: "Commercial Interior", href: "/services" },
-    { label: "Modular Kitchen", href: "/services" },
-    { label: "Space Planning", href: "/services" },
-    { label: "Renovation & Styling", href: "/services" },
+    { label: "Interior Fit-Out Project Management", href: "/services" },
+    { label: "Project Advisory & Consultancy", href: "/services" },
+    { label: "Fit-Out Project Monitoring", href: "/services" },
+    { label: "Design Coordination", href: "/services" },
+    { label: "Costing & BOQ Validation", href: "/services" },
+    { label: "Quality & Safety Monitoring", href: "/services" },
   ],
   companyLinks: [
     { label: "About Us", href: "/about" },

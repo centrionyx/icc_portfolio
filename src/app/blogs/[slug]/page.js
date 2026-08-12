@@ -9,17 +9,79 @@ import { BLOGS_DATA } from "@/feature/blogs/data/blogsData";
 export default async function BlogDetailPage({ params }) {
   const { slug } = await params;
   
-  // Find matching blog by slug or ID
-  const blog = BLOGS_DATA.find(
-    (b) => b.slug === slug || b.id.toString() === slug
-  );
+  let blog = null;
+  let relatedBlogs = [];
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/blogs`, {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const allDbBlogs = await res.json();
+      if (Array.isArray(allDbBlogs) && allDbBlogs.length > 0) {
+        const found = allDbBlogs.find(
+          (b) => b._id === slug || b.slug === slug || b.id?.toString() === slug
+        );
+        if (found) {
+          const img =
+            found.images && found.images.length > 0
+              ? found.images[0]
+              : found.image || "/workplace_strategy.png";
+          
+          blog = {
+            id: found._id || found.id,
+            slug: found.slug || found._id || found.id,
+            title: found.title,
+            category: found.category,
+            readTime: found.readTime || "5 min read",
+            author: found.author || "ICC Editorial Team",
+            authorRole: found.authorRole || "Interior Architecture & Workplace Advisory",
+            summary: found.summary,
+            content: typeof found.content === "string" ? [{ type: "paragraph", text: found.content }] : found.content,
+            image: img,
+            date: found.createdAt
+              ? new Date(found.createdAt).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "Recent",
+          };
+
+          relatedBlogs = allDbBlogs
+            .filter((b) => (b._id || b.id) !== (found._id || found.id))
+            .slice(0, 3)
+            .map((r) => ({
+              id: r._id || r.id,
+              slug: r.slug || r._id || r.id,
+              title: r.title,
+              image: (r.images && r.images[0]) || r.image || "/workplace_strategy.png",
+              date: r.createdAt
+                ? new Date(r.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })
+                : "Recent",
+            }));
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Failed to fetch blog detail from DB:", err);
+  }
+
+  // Fallback to BLOGS_DATA if not found from DB
+  if (!blog) {
+    blog = BLOGS_DATA.find((b) => b.slug === slug || b.id.toString() === slug);
+    if (blog) {
+      relatedBlogs = BLOGS_DATA.filter((b) => b.id !== blog.id).slice(0, 3);
+    }
+  }
 
   if (!blog) {
     notFound();
   }
-
-  // Get related blogs (excluding current)
-  const relatedBlogs = BLOGS_DATA.filter((b) => b.id !== blog.id).slice(0, 3);
 
   return (
     <div className="w-full bg-[#f8fafc] text-slate-900 pb-20 font-sans antialiased">

@@ -43,7 +43,8 @@ const DEFAULT_PROJECTS = [
 export default function FeaturedProjects() {
   const scrollRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/projects")
@@ -59,12 +60,13 @@ export default function FeaturedProjects() {
             subtitle: p.scope || p.category || "Interior Fit-Out",
             image:
               (p.images && p.images.length > 0 ? p.images[0] : p.image) ||
-              DEFAULT_PROJECTS[idx % DEFAULT_PROJECTS.length].image,
+              "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
           }));
           setProjects(formatted);
         }
       })
-      .catch((err) => console.error("Error fetching projects:", err));
+      .catch((err) => console.error("Error fetching projects:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   // Discrete step auto-scroll: Step to next card every 2.5 seconds cleanly
@@ -125,69 +127,83 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Carousel Slider Row — Exactly 3 full cards visible at once on md/lg screens */}
-        <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory scroll-smooth py-1"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative aspect-[4/3] w-full min-w-[280px] md:min-w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-2.5rem)/3)] flex-shrink-0 overflow-hidden group cursor-pointer snap-start"
-            >
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-              {/* Project info & View Details - Cleanly Aligned at Bottom */}
-              <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between z-10">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-medium tracking-tight text-white mb-0.5">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs text-white/80 font-light tracking-wide">
-                    {project.subtitle}
-                  </p>
-                </div>
-
-                {/* View details link */}
-                <Link
-                  href="/projects"
-                  className="
-                    text-white/80
-                    hover:text-white
-                    text-xs
-                    font-medium
-                    uppercase
-                    tracking-wider
-                    flex
-                    items-center
-                    gap-1.5
-                    transition-colors
-                    duration-300
-                    group/link
-                    shrink-0
-                    ml-2
-                  "
-                >
-                  <span>Details</span>
-                  <ArrowRight
-                    size={14}
-                    className="group-hover/link:translate-x-1 transition-transform duration-300"
-                  />
-                </Link>
+        {loading ? (
+          <div className="flex gap-5 overflow-hidden py-1">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="relative aspect-[4/3] w-full min-w-[280px] md:min-w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-2.5rem)/3)] flex-shrink-0 rounded-2xl bg-slate-200/80 animate-pulse overflow-hidden p-5 flex flex-col justify-end"
+              >
+                <div className="w-2/3 h-5 bg-slate-300 rounded mb-2" />
+                <div className="w-1/3 h-3 bg-slate-300 rounded" />
               </div>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            ref={scrollRef}
+            className="flex gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory scroll-smooth py-1"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative aspect-[4/3] w-full min-w-[280px] md:min-w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-2.5rem)/3)] flex-shrink-0 overflow-hidden group cursor-pointer snap-start"
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                {/* Project info & View Details - Cleanly Aligned at Bottom */}
+                <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between z-10">
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-medium tracking-tight text-white mb-0.5">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-white/80 font-light tracking-wide">
+                      {project.subtitle}
+                    </p>
+                  </div>
+
+                  {/* View details link */}
+                  <Link
+                    href="/projects"
+                    className="
+                      text-white/80
+                      hover:text-white
+                      text-xs
+                      font-medium
+                      uppercase
+                      tracking-wider
+                      flex
+                      items-center
+                      gap-1.5
+                      transition-colors
+                      duration-300
+                      group/link
+                      shrink-0
+                      ml-2
+                    "
+                  >
+                    <span>Details</span>
+                    <ArrowRight
+                      size={14}
+                      className="group-hover/link:translate-x-1 transition-transform duration-300"
+                    />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -112,7 +112,7 @@ function ProjectListCard({ project, onClick }) {
           </div>
           <p className="text-xs text-slate-500 mb-4 font-semibold">{project.scope}</p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-slate-100 mb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 py-4 border-y border-slate-100 mb-4">
             <div>
               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Location</p>
               <p className="text-xs font-semibold text-slate-700">{project.location}</p>
@@ -120,10 +120,6 @@ function ProjectListCard({ project, onClick }) {
             <div>
               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Area Size</p>
               <p className="text-xs font-semibold text-slate-700">{project.size}</p>
-            </div>
-            <div>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
-              <p className="text-xs font-semibold text-slate-700">{project.duration}</p>
             </div>
             <div>
               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Status</p>
@@ -372,7 +368,7 @@ function ProjectDetailsModal({ project, onClose }) {
                   {project.outcomes || project.scope || "A contemporary workspace designed to inspire productivity and collaboration. The design reflects the brand's professionalism through a perfect blend of functionality, comfort, and modern aesthetics."}
                 </p>
 
-                {/* 6 Specs Grid matching reference design */}
+                {/* 4 Specs Grid matching reference design */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
                   {/* 1. Project Type */}
                   <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
@@ -413,33 +409,7 @@ function ProjectDetailsModal({ project, onClose }) {
                     </div>
                   </div>
 
-                  {/* 4. Duration */}
-                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
-                      <Calendar size={16} />
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
-                      <p className="text-xs font-bold text-slate-900 mt-0.5">
-                        {project.duration || "6 Months"}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* 5. Services */}
-                  <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
-                      <Settings size={16} />
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Services</p>
-                      <p className="text-xs font-bold text-slate-900 mt-0.5 line-clamp-1">
-                        PMC, Execution Management
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* 6. Completion */}
+                  {/* 4. Completion */}
                   <div className="bg-blue-50/50 border border-blue-100/80 rounded-xl p-2.5 sm:p-3 flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-blue-100/60 text-brand-accent flex items-center justify-center shrink-0">
                       <CheckCircle2 size={16} />

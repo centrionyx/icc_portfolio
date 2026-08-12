@@ -199,21 +199,21 @@ export default function BlogModal({
           )}
         </div>
 
-        <div className="flex items-center gap-2 pt-1">
+        <div className="flex items-center gap-2 bg-amber-50/70 border border-amber-200 p-3 rounded-xl">
           <input
             type="checkbox"
             id="blog-featured"
-            checked={blogFormData.featured || false}
+            checked={!!blogFormData.featured}
             onChange={(e) =>
               setBlogFormData({ ...blogFormData, featured: e.target.checked })
             }
-            className="w-4 h-4 text-[#005ea6] rounded focus:ring-blue-500 cursor-pointer"
+            className="w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 cursor-pointer"
           />
           <label
             htmlFor="blog-featured"
-            className="text-xs font-semibold text-slate-700 cursor-pointer select-none"
+            className="text-xs font-bold text-[#0a1f44] cursor-pointer select-none"
           >
-            Featured Article (Highlight on website insights page)
+            Mark as Featured Article (Showcase on Homepage & Highlights)
           </label>
         </div>
 

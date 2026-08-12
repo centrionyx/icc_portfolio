@@ -1,12 +1,34 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Building2 } from "lucide-react";
 
 import SectionHeader from "@/components/ui/SectionHeader";
 
-export default function AboutClients({ clientsServed, founderEmail }) {
+export default function AboutClients({ clientsServed: fallbackClients, founderEmail }) {
+  const [clients, setClients] = useState(fallbackClients || []);
+
+  useEffect(() => {
+    async function fetchClients() {
+      try {
+        const res = await fetch("/api/clients");
+        if (res.ok) {
+          const dbClients = await res.json();
+          if (Array.isArray(dbClients) && dbClients.length > 0) {
+            setClients(dbClients.map((c) => c.text || c.name));
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch clients for About page:", err);
+      }
+    }
+    fetchClients();
+  }, []);
+
+  const displayList = clients.length > 0 ? clients : (fallbackClients || []);
+
   return (
     <>
       {/* ── CLIENT REGISTER SECTION WITH INFINITE MARQUEE ── */}
@@ -36,7 +58,7 @@ export default function AboutClients({ clientsServed, founderEmail }) {
               repeat: Infinity,
             }}
           >
-            {[...clientsServed, ...clientsServed, ...clientsServed, ...clientsServed].map((client, idx) => (
+            {[...displayList, ...displayList, ...displayList, ...displayList].map((client, idx) => (
               <div
                 key={idx}
                 className="bg-white border border-slate-200/90 rounded-2xl px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-800 transition-all duration-900 shadow-sm flex items-center gap-2.5 shrink-0 hover:bg-[#0a1f44] hover:text-white hover:border-[#0a1f44] cursor-default group"
@@ -56,10 +78,10 @@ export default function AboutClients({ clientsServed, founderEmail }) {
             
             {/* Left Content */}
             <div className="text-center lg:text-left max-w-xl">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-slate-950 font-sans mb-3">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-sans mb-3">
                 Ready to bring predictability to your next fit-out?
               </h2>
-              <p className="text-xs sm:text-sm font-medium leading-relaxed text-slate-900/90">
+              <p className="text-xs sm:text-sm font-medium leading-relaxed text-white/90">
                 ICC delivers workspace projects with zero-delay benchmarks, thorough governance, and measurable outcomes.
               </p>
             </div>

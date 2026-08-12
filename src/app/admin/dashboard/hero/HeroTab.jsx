@@ -12,6 +12,7 @@ import {
   Trash2,
   AlertTriangle
 } from "lucide-react";
+import ClientsSection from "./ClientsSection";
 
 const FIXED_DEFAULT_STATS = [
   { value: "250+", label: "Projects Completed" },
@@ -25,6 +26,7 @@ export default function HeroTab({
   setHeroData,
   initialHeroData,
   setInitialHeroData,
+  clients = [],
   onRefresh,
 }) {
   const [isSavingHero, setIsSavingHero] = useState(false);
@@ -435,6 +437,9 @@ export default function HeroTab({
           ))}
         </div>
       </div>
+
+      {/* 4. Client Logos Marquee CRUD Section */}
+      <ClientsSection clients={clients} onRefresh={onRefresh} />
     </div>
   );
 }

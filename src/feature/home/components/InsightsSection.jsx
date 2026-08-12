@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -14,7 +15,59 @@ const CATEGORY_IMAGES = [
 ];
 
 export default function InsightsSection() {
-  const insights = INSIGHTS_CONTENT;
+  const [cards, setCards] = useState(INSIGHTS_CONTENT.cards);
+  const [clientLogos, setClientLogos] = useState(CLIENT_LOGOS);
+
+  useEffect(() => {
+    async function fetchFeaturedBlogs() {
+      try {
+        const res = await fetch("/api/blogs");
+        if (res.ok) {
+          const posts = await res.json();
+          if (Array.isArray(posts) && posts.length > 0) {
+            // Pick featured posts first, or fall back to recent posts
+            const featuredPosts = posts.filter((p) => p.featured);
+            const displayPosts = featuredPosts.length > 0 ? featuredPosts : posts;
+            
+            const formattedCards = displayPosts.slice(0, 3).map((p, idx) => {
+              const img = (p.images && p.images.length > 0) ? p.images[0] : p.image;
+              return {
+                id: p._id || p.id || idx,
+                category: p.category,
+                title: p.title,
+                href: `/blogs/${p.slug || p._id || p.id}`,
+                image: img || CATEGORY_IMAGES[idx % CATEGORY_IMAGES.length],
+                summary: p.summary,
+              };
+            });
+
+            if (formattedCards.length > 0) {
+              setCards(formattedCards);
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch homepage featured blogs:", err);
+      }
+    }
+
+    async function fetchClientLogos() {
+      try {
+        const res = await fetch("/api/clients");
+        if (res.ok) {
+          const dbClients = await res.json();
+          if (Array.isArray(dbClients) && dbClients.length > 0) {
+            setClientLogos(dbClients);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch client logos:", err);
+      }
+    }
+
+    fetchFeaturedBlogs();
+    fetchClientLogos();
+  }, []);
 
   return (
     <section className="w-full bg-[#f1f3f5] py-16 sm:py-24 px-5 lg:px-8 border-b border-slate-200/80">
@@ -52,8 +105,8 @@ export default function InsightsSection() {
 
         {/* 3 ARTICLE CATEGORY CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
-          {insights.cards.map((card, idx) => {
-            const bgImage = CATEGORY_IMAGES[idx % CATEGORY_IMAGES.length];
+          {cards.map((card, idx) => {
+            const bgImage = card.image || CATEGORY_IMAGES[idx % CATEGORY_IMAGES.length];
 
             return (
               <motion.div
@@ -120,14 +173,14 @@ export default function InsightsSection() {
                   </div>
                 </div>
 
-                {/* Bottom Content — Category Title & Subtext description matching reference image */}
+                {/* Bottom Content — Article Title & Subtext description matching reference image */}
                 <div className="relative z-10 p-6 sm:p-8">
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight group-hover:text-brand-accent transition-colors">
-                    {card.category || card.title}
+                    {card.title}
                   </h3>
 
                   <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed line-clamp-3">
-                    {card.title}. Comprehensive workplace strategy and commercial fit-out execution insights.
+                    {card.summary || `${card.title}. Comprehensive workplace strategy and commercial fit-out execution insights.`}
                   </p>
                 </div>
               </Link>
@@ -139,20 +192,20 @@ export default function InsightsSection() {
         {/* CLIENT LOGOS MARQUEE */}
         <div className="w-full border-t border-slate-200/80 pt-10 overflow-hidden relative">
           <div className="animate-marquee flex items-center gap-16 md:gap-24 opacity-60">
-            {CLIENT_LOGOS.map((logo, idx) => (
+            {clientLogos.map((logo, idx) => (
               <div 
-                key={`logo-1-${idx}`} 
+                key={`logo-1-${logo._id || logo.id || idx}`} 
                 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight select-none font-sans filter grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0"
               >
-                {logo.text}
+                {logo.text || logo.name}
               </div>
             ))}
-            {CLIENT_LOGOS.map((logo, idx) => (
+            {clientLogos.map((logo, idx) => (
               <div 
-                key={`logo-2-${idx}`} 
+                key={`logo-2-${logo._id || logo.id || idx}`} 
                 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight select-none font-sans filter grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0"
               >
-                {logo.text}
+                {logo.text || logo.name}
               </div>
             ))}
           </div>

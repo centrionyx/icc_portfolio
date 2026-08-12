@@ -10,7 +10,8 @@ import { Star } from "lucide-react";
 export default function InsightsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visibleCount, setVisibleCount] = useState(6);
-  const [allBlogs, setAllBlogs] = useState(BLOGS_DATA);
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -26,7 +27,7 @@ export default function InsightsPage() {
                   : p.image || "/workplace_strategy.png";
               return {
                 id: p._id || p.id,
-                slug: p._id || p.id,
+                slug: p.slug || p._id || p.id,
                 title: p.title,
                 category: p.category,
                 readTime: p.readTime || "5 min read",
@@ -43,10 +44,17 @@ export default function InsightsPage() {
               };
             });
             setAllBlogs(formatted);
+          } else {
+            setAllBlogs(BLOGS_DATA);
           }
+        } else {
+          setAllBlogs(BLOGS_DATA);
         }
       } catch (err) {
         console.error("Failed to fetch live blogs:", err);
+        setAllBlogs(BLOGS_DATA);
+      } finally {
+        setLoading(false);
       }
     }
     fetchBlogs();
@@ -54,13 +62,23 @@ export default function InsightsPage() {
 
   const dynamicCategories = [
     "All",
-    ...Array.from(new Set(allBlogs.map((b) => b.category).filter(Boolean))),
+    ...Array.from(
+      new Set(
+        allBlogs
+          .map((b) => (b.category ? b.category.trim() : null))
+          .filter(Boolean)
+      )
+    ),
   ];
 
   const filtered =
     activeCategory === "All"
       ? allBlogs
-      : allBlogs.filter((b) => b.category === activeCategory);
+      : allBlogs.filter(
+          (b) =>
+            b.category &&
+            b.category.trim().toLowerCase() === activeCategory.trim().toLowerCase()
+        );
 
   const displayedBlogs = filtered.slice(0, visibleCount);
 
@@ -104,57 +122,81 @@ export default function InsightsPage() {
         </FadeIn>
 
         {/* ── BLOG CARDS GRID ── */}
-        <StaggerContainer
-          key={`grid-${activeCategory}`}
-          once={false}
-          staggerDelay={0.08}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14"
-        >
-          {displayedBlogs.map((blog) => (
-            <StaggerItem key={blog.id} direction="up">
-              <Link
-                href={`/blogs/${blog.slug || blog.id}`}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md flex flex-col hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full"
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div
+                key={i}
+                className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md flex flex-col h-[380px] animate-pulse"
               >
-                {/* Image Header */}
-                <div className="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden">
-                  <img
-                    src={blog.image}
-                    alt={blog.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="bg-white/90 backdrop-blur-md text-slate-900 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
-                      {blog.category}
-                    </span>
-                    {blog.featured && (
-                      <span className="bg-amber-500 text-white font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
-                        <Star size={10} className="fill-white" /> Featured
+                <div className="aspect-[16/10] w-full bg-slate-200" />
+                <div className="p-6 flex flex-col justify-between flex-1 space-y-3">
+                  <div className="space-y-2">
+                    <div className="h-5 bg-slate-200 rounded w-3/4" />
+                    <div className="h-3 bg-slate-200 rounded w-full" />
+                    <div className="h-3 bg-slate-200 rounded w-2/3" />
+                  </div>
+                  <div className="flex justify-between items-center pt-4">
+                    <div className="h-3 bg-slate-200 rounded w-1/4" />
+                    <div className="h-3 bg-slate-200 rounded w-1/4" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <StaggerContainer
+            key={`grid-${activeCategory}`}
+            once={false}
+            staggerDelay={0.08}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-14"
+          >
+            {displayedBlogs.map((blog) => (
+              <StaggerItem key={blog.id} direction="up">
+                <Link
+                  href={`/blogs/${blog.slug || blog.id}`}
+                  className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md flex flex-col hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 h-full"
+                >
+                  {/* Image Header */}
+                  <div className="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute top-4 left-4 flex items-center gap-2">
+                      <span className="bg-white/90 backdrop-blur-md text-slate-900 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                        {blog.category}
                       </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Content Area */}
-                <div className="p-6 flex flex-col justify-between flex-1">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-950 mb-2 group-hover:text-brand-accent transition-colors leading-snug line-clamp-2">
-                      {blog.title}
-                    </h3>
-                    <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 mb-4">
-                      {blog.excerpt}
-                    </p>
+                      {blog.featured && (
+                        <span className="bg-amber-500 text-white font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                          <Star size={10} className="fill-white" /> Featured
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] font-medium text-slate-400">
-                    <span>{blog.date}</span>
-                    <span>{blog.readTime || "5 min read"}</span>
+                  {/* Content Area */}
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-950 mb-2 group-hover:text-brand-accent transition-colors leading-snug line-clamp-2">
+                        {blog.title}
+                      </h3>
+                      <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 mb-4">
+                        {blog.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] font-medium text-slate-400">
+                      <span>{blog.date}</span>
+                      <span>{blog.readTime || "5 min read"}</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        )}
 
         {/* ── VIEW MORE ARTICLES BUTTON ── */}
         {visibleCount < filtered.length && (

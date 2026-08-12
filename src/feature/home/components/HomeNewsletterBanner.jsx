@@ -18,7 +18,7 @@ export default function HomeNewsletterBanner() {
         >
           {/* Left Title */}
           <div className="md:w-auto text-center md:text-left">
-            <h2 className="text-2xl sm:text-3xl font-serif tracking-tight leading-tight text-slate-950">
+            <h2 className="text-2xl sm:text-3xl font-serif tracking-tight leading-tight text-white">
               Let's Bring Your <br className="hidden sm:inline" />
               Dream Space to Life
             </h2>
@@ -26,7 +26,7 @@ export default function HomeNewsletterBanner() {
 
           {/* Center Description */}
           <div className="md:flex-1 text-center md:text-left max-w-md">
-            <p className="text-xs sm:text-sm font-medium leading-relaxed text-slate-900/90">
+            <p className="text-xs sm:text-sm font-medium leading-relaxed text-white/90">
               Connect with our technical team to discuss your project scope, budget benchmarks, and execution timeline.
             </p>
           </div>

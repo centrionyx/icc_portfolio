@@ -12,15 +12,24 @@ export default function AdminHeroPage() {
     transitionDuration: 1000,
   });
   const [initialHeroData, setInitialHeroData] = useState(null);
+  const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchHeroData = async () => {
     try {
-      const res = await fetch("/api/admin/hero");
-      if (res.ok) {
-        const data = await res.json();
+      const [heroRes, clientsRes] = await Promise.all([
+        fetch("/api/admin/hero"),
+        fetch("/api/admin/clients"),
+      ]);
+
+      if (heroRes.ok) {
+        const data = await heroRes.json();
         setHeroData(data);
         setInitialHeroData(data);
+      }
+      if (clientsRes.ok) {
+        const clientsData = await clientsRes.json();
+        setClients(clientsData);
       }
     } catch (err) {
       console.error("Failed to load hero data:", err);
@@ -47,6 +56,7 @@ export default function AdminHeroPage() {
       setHeroData={setHeroData}
       initialHeroData={initialHeroData}
       setInitialHeroData={setInitialHeroData}
+      clients={clients}
       onRefresh={fetchHeroData}
     />
   );

@@ -13,7 +13,7 @@ export default function ServicesCtaBanner() {
             
             {/* Left Title */}
             <div className="md:w-auto text-center md:text-left">
-              <h2 className="text-2xl sm:text-3xl font-serif tracking-tight leading-tight text-slate-950">
+              <h2 className="text-2xl sm:text-3xl font-serif tracking-tight leading-tight text-white">
                 Ready to Start Your <br className="hidden sm:inline" />
                 Fit-Out Project?
               </h2>
@@ -21,7 +21,7 @@ export default function ServicesCtaBanner() {
 
             {/* Center Description */}
             <div className="md:flex-1 text-center md:text-left max-w-md">
-              <p className="text-xs sm:text-sm font-medium leading-relaxed text-slate-900/90">
+              <p className="text-xs sm:text-sm font-medium leading-relaxed text-white/90">
                 Reach out to our experts to discuss your requirements, project scope, budget, and timelines.
               </p>
             </div>

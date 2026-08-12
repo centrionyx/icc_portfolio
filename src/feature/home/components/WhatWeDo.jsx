@@ -60,8 +60,8 @@ export default function WhatWeDo() {
           </Link>
         </div>
 
-        {/* RIGHT PANEL (6 Service Columns) - Left-aligned items with responsive borders */}
-        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[1px] bg-gray-250">
+        {/* RIGHT PANEL (8 Service Columns) - Left-aligned items with responsive borders */}
+        <div className="flex-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-[1px] bg-gray-250">
           {content.services.map((service, index) => {
             const IconComponent = iconMap[service.iconName];
             return (

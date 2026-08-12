@@ -9,7 +9,7 @@ import KeyStrengths from "@/feature/home/components/KeyStrengths";
 import ServicesCtaBanner from "@/feature/services/components/ServicesCtaBanner";
 
 export default function ServicesPage() {
-  // 8 Core Services from services.md with matching Unsplash imagery
+  // 8 Core Services matching exact specification
   const services = [
     {
       id: "fitout-pm",
@@ -29,8 +29,8 @@ export default function ServicesPage() {
       id: "advisory",
       num: "02",
       icon: <Search className="w-5 h-5" />,
-      title: "Technical Advisory & Consultancy",
-      short: "Expert technical guidance, feasibility studies, design reviews, and value engineering to optimize project outcomes.",
+      title: "Project Advisory & Technical Consultancy",
+      short: "Independent advisory and technical consultancy to support informed decision-making, optimize costs, and reduce project risks.",
       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
       points: [
         "Site feasibility & due diligence",
@@ -40,87 +40,87 @@ export default function ServicesPage() {
       ]
     },
     {
-      id: "supervision",
+      id: "monitoring",
       num: "03",
       icon: <Eye className="w-5 h-5" />,
-      title: "Execution Monitoring & Site Supervision",
-      short: "On-site quality audits, progress tracking, safety compliance, and contractor management for flawless execution.",
+      title: "Interior Fit-Out Project Monitoring",
+      short: "Independent monitoring of project progress, quality, budget, and schedule to ensure complete compliance with project objectives.",
       image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "Daily site progress oversight",
-        "Quality control & material checks",
-        "Safety compliance monitoring",
-        "Contractor performance tracking"
+        "Independent progress tracking",
+        "Budget & schedule compliance",
+        "Quality benchmark auditing",
+        "Risk mitigation reporting"
       ]
     },
     {
-      id: "turnkey",
+      id: "design-coordination",
       num: "04",
       icon: <Wrench className="w-5 h-5" />,
-      title: "Turnkey Interior Solutions",
-      short: "Single-point responsibility from initial design concepts to final handover, simplifying delivery for clients.",
+      title: "Design Coordination",
+      short: "Structured alignment between architects, interior designers, MEP engineers, and trade contractors for clash-free execution.",
       image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "Single-point accountability",
-        "Complete design & build integration",
-        "Vendor & procurement management",
-        "Hassle-free client experience"
+        "Designer–Vendor–MEP interface",
+        "Drawing reviews & as-built validation",
+        "Sample approval coordination",
+        "Services clash resolution"
       ]
     },
     {
-      id: "cost-management",
+      id: "costing-boq",
       num: "05",
       icon: <Calculator className="w-5 h-5" />,
-      title: "Commercial & Cost Management",
-      short: "BOQ auditing, variation checks, joint measurements, and billing management for complete financial transparency.",
+      title: "Costing, BOQ Validation & Joint Measurement Services",
+      short: "Accurate quantity verification, joint measurement audits, BOQ validation, and billing verification for complete financial transparency.",
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "BOQ auditing & bill validation",
-        "Joint measurement verification",
-        "Variation claim management",
-        "Transparent cost reporting"
+        "BOQ auditing & quantity verification",
+        "Joint measurement certification",
+        "Variation claim validation",
+        "Financial billing management"
       ]
     },
     {
-      id: "quality-audit",
+      id: "quality-safety",
       num: "06",
       icon: <ShieldCheck className="w-5 h-5" />,
-      title: "Quality Assurance & Snag Listing",
-      short: "Rigorous quality inspections, defect identification, snag closure tracking, and handover documentation.",
+      title: "Quality & Safety Monitoring",
+      short: "Continuous quality inspections and site safety audits to ensure strict compliance with standards, drawings, and regulations.",
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop",
       points: [
+        "Daily site safety supervision",
+        "Material quality verification",
         "Comprehensive snag listing",
-        "Defect rectification tracking",
-        "Quality benchmark auditing",
-        "Handover documentation prep"
+        "Defect rectification tracking"
       ]
     },
     {
-      id: "mep-coordination",
+      id: "mep-services",
       num: "07",
       icon: <Settings className="w-5 h-5" />,
       title: "MEP & Services Coordination",
-      short: "Specialized oversight of Mechanical, Electrical, Plumbing, HVAC, and Fire Safety systems integration.",
+      short: "Specialized oversight of Mechanical, Electrical, Plumbing, HVAC, Fire Protection, and ELV services integration.",
       image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "3D clash detection reviews",
         "HVAC, Electrical & Fire alignment",
-        "Energy efficiency optimization",
-        "Services commissioning oversight"
+        "Services line-out review",
+        "Clash detection & resolution",
+        "Testing & commissioning oversight"
       ]
     },
     {
-      id: "post-handover",
+      id: "site-supervision",
       num: "08",
       icon: <Layers className="w-5 h-5" />,
-      title: "Post-Handover & DLP Support",
-      short: "Defect liability period management, facility performance reviews, and maintenance coordination post-occupancy.",
+      title: "Site Supervision & Execution Support",
+      short: "Direct on-site supervision monitoring workmanship, contractor performance, site safety, and strict adherence to specifications.",
       image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200&auto=format&fit=crop",
       points: [
-        "Post-occupancy evaluation",
-        "Warranty & DLP management",
+        "On-site workmanship oversight",
         "Contractor performance tracking",
-        "Daily site progress oversight"
+        "Daily progress reporting",
+        "Handover & close-out assistance"
       ]
     }
   ];
